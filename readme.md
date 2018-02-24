@@ -2,8 +2,7 @@
   <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" height="120" />
 </div>
  
-<h2 align="center">❯ Prompts</h1>
-<img src="https://github.com/terkelg/prompts/raw/master/media/split.png">
+<h1 align="center">❯ Prompts</h1>
 
 <div align="center">
   <a href="https://npmjs.org/package/prompts">
@@ -38,6 +37,8 @@
 ```
 $ npm install --save prompts
 ```
+
+> This package uses async/await and requires Node.js 7.6
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
@@ -538,9 +539,6 @@ const suggestByTitle = (input, choices) =>
 
 ## ❯ Credit
 Many of the prompts are based on the work of [derhuerst](https://github.com/derhuerst).
-
-
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 
 ## ❯ License

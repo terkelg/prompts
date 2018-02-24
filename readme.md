@@ -2,7 +2,8 @@
   <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" height="120" />
 </div>
  
-<h1 align="center">Prompts</h1>
+<h2 align="center">❯ Prompts</h1>
+<img src="https://github.com/terkelg/prompts/raw/master/media/split.png">
 
 <div align="center">
   <a href="https://npmjs.org/package/prompts">
@@ -18,15 +19,18 @@
 
 <div align="center">
   <b>Lightweight, beautiful and user-friendly interactive prompts</b></br>
-  <sub>>_ Easy to use CLI prompts to inquire users for information ▌<sub> 
+  <sub>>_ Easy to use CLI prompts to enquire users for information▌<sub> 
 </div>
 
 <br />
 
 * **Simple**: prompts has no big dependencies nor is it broken into a dozen tiny modules that only work well together.
 * **User friendly**: prompt uses layout and colors to create beautiful cli interfaces.
-* **Promised**: Uses promises and `async`/`await`. No callback hell.
-* **Flexible**: All prompts are independet and can be used on their own.
+* **Promised**: uses promises and `async`/`await`. No callback hell.
+* **Flexible**: all prompts are independent and can be used on their own.
+
+
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 
 ## ❯ Install
@@ -35,6 +39,7 @@
 $ npm install --save prompts
 ```
 
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 ## ❯ Usage
 
@@ -53,6 +58,9 @@ console.log(response);
 ```
 
 
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+
+
 ## ❯ Examples
 
 ### Single Prompt
@@ -68,7 +76,7 @@ let response = await prompts({
     message: 'What is the meaning of life?'
 });
 
-// response => { name }
+console.log(response.meaning);
 ```
 
 ### Prompt Chain
@@ -118,7 +126,7 @@ let questions = [
         message: 'Do you like pizza?'
     },
     {
-        type: prev => prev.type == 'pizza' ? 'text' : null,
+        type: prev => prev == 'pizza' ? 'text' : null,
         name: 'topping',
         message: 'Name a topping'
     }
@@ -128,6 +136,9 @@ let response = await prompts(questions);
 ```
 
 
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+
+
 ## ❯ API
 
 ### prompts(prompts, options)
@@ -135,7 +146,7 @@ let response = await prompts(questions);
 Type: `Function`<br>
 Returns: `Object`
 
-Prompter function which takes your [prompt objects](#-prompt-objects) and returns an object with answers
+Prompter function which takes your [prompt objects](#-prompt-objects) and returns an object with responses.
 
 
 #### prompts
@@ -152,14 +163,14 @@ Type: `Function`<br>
 Default: `() => {}`
 
 Callback that's invoked after each prompt submission.
-Its signature is `(prompt, answer)` where `prompt` is the current prompt object.
+Its signature is `(prompt, response)` where `prompt` is the current prompt object.
 
-Return `true` to quit the prompt loop and return all collected answers so far, otherwise continue to iterate prompt objects.
+Return `true` to quit the prompt chain and return all collected responses so far, otherwise continue to iterate prompt objects.
 
 **Example:**
-```
+```js
 let questions = [{ ... }];
-let onSubmit = (prompt, answer) => console.log(`Thanks I got ${answer} from ${prompt.name}`);
+let onSubmit = (prompt, response) => console.log(`Thanks I got ${response} from ${prompt.name}`);
 let response = await prompts(questions, { onSubmit });
 ```
 
@@ -168,13 +179,13 @@ let response = await prompts(questions, { onSubmit });
 Type: `Function`<br>
 Default: `() => {}`
 
-Callback that's invoked after when the user cancel/exit the prompt.
+Callback that's invoked when the user cancel/exit the prompt.
 Its signature is `(prompt)` where `prompt` is the current prompt object.
 
-Return `true` to quit the prompt loop and return all collected answers so far, otherwise continue to iterate prompt objects.
+Return `true` to quit the prompt loop and return all collected responses so far, otherwise continue to iterate prompt objects.
 
 **Example:**
-```
+```js
 let questions = [{ ... }];
 let onCancel = prompt => {
   console.log('Lets stop prompting');
@@ -182,6 +193,9 @@ let onCancel = prompt => {
 }
 let response = await prompts(questions, { onCancel });
 ```
+
+
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 
 ## ❯ Prompt Objects
@@ -216,6 +230,12 @@ Each property can also be of type `function` and will be invoked right before pr
     message: (prev, values) => `Please confirm that you eat ${values.dish} times ${prev} a day?`
 }
 ```
+
+Its signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt, 
+`values` is all values collected so far and `prompt` is the provious prompt object.
+
+
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 
 ## ❯ Types
@@ -271,8 +291,8 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 ### invisible(message, [initial])
 > Prompts user for invisible text input.
 
-This prompt is similar to what you know from `sudo`.
-This prompt is a simular to a prompt of type `'text'` with style set to `'invisible'`.
+This prompt is working like `sudo` where the input is invisible.
+This prompt is a similar to a prompt of type `'text'` with style set to `'invisible'`.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/invisible.gif" alt="invisible prompt" width="499" height="103" />
@@ -475,8 +495,8 @@ If you want to predefine selected values, give the choice object an `selected` p
 
 The prompt will list options based on user input. 
 
-The default suggets/filter function is based on the `title` property.
-You can overwrite this by passing your own filter function.
+The default suggets function is sorting based on the `title` property of the choices.
+You can overwrite how choices are being filtered by passing your own suggest function.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/autocomplete.gif" alt="auto complete prompt" width="499" height="163" />
@@ -501,7 +521,7 @@ You can overwrite this by passing your own filter function.
 | --- | --- | --- | --- |
 | message | <code>string</code> |  | Prompt message to display |
 | choices | <code>Array</code> |  | Array of auto-complete choices objects `[{ title, value }, ...]` |
-| suggest | <code>function</code> | By `title` string | Filter function. Defaults to stort by `title` property |
+| suggest | <code>function</code> | By `title` string | Filter function. Defaults to stort by `title` property. Suggest should always return a promise |
 | limit | <code>number</code> | <code>10</code> | Max number of results to show |
 | style | <code>string</code> | `'default'` | Render style (`default`, `password`, `invisible`) |
 
@@ -513,8 +533,14 @@ const suggestByTitle = (input, choices) =>
 ```
 
 
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+
+
 ## ❯ Credit
 Many of the prompts are based on the work of [derhuerst](https://github.com/derhuerst).
+
+
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 
 ## ❯ License

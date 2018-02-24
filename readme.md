@@ -382,7 +382,7 @@ string separated by `separator`.
   name: 'keywords',
   message: 'Enter keywords',
   initial: '',
-  separator: ', '
+  separator: ','
 }
 ```
 
@@ -393,7 +393,7 @@ string separated by `separator`.
 | --- | --- | --- | --- |
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>boolean</code> | <code>false</code> | Default value |
-| seperator | <code>string</code> | <code>", "</code> | String seperator |
+| seperator | <code>string</code> | <code>','</code> | String seperator. Will trim all white-spaces from start and end of string |
 
 
 ### toggle(message, [initial], [active], [inactive])

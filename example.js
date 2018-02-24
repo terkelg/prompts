@@ -25,11 +25,7 @@ const { prompt } = require('./lib');
             message: 'How old are you?'
         },
         {
-            type: (prev, ans, prompt) => {
-              console.log()
-              console.log(prev, ans, prompt)
-              return 'confirm'
-            },
+            type: 'confirm',
             name: 'confirmed',
             message: 'Can you confirm?' 
         },

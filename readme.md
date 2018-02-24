@@ -1,0 +1,522 @@
+<div align="center">
+  <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" height="120" />
+</div>
+ 
+<h1 align="center">Prompts</h1>
+
+<div align="center">
+  <a href="https://npmjs.org/package/prompts">
+    <img src="https://img.shields.io/npm/v/prompts.svg" alt="version" />
+  </a>
+  <a href="https://travis-ci.org/terkelg/prompts">
+    <img src="https://img.shields.io/travis/terkelg/prompts.svg" alt="travis" />
+  </a>
+  <a href="https://npmjs.org/package/prompts">
+    <img src="https://img.shields.io/npm/dm/prompts.svg" alt="downloads" />
+  </a>
+</div>
+
+<div align="center">
+  <b>Lightweight, beautiful and user-friendly interactive prompts</b></br>
+  <sub>>_ Easy to use CLI prompts to inquire users for information ▌<sub> 
+</div>
+
+<br />
+
+* **Simple**: prompts has no big dependencies nor is it broken into a dozen tiny modules that only work well together.
+* **User friendly**: prompt uses layout and colors to create beautiful cli interfaces.
+* **Promised**: Uses promises and `async`/`await`. No callback hell.
+* **Flexible**: All prompts are independet and can be used on their own.
+
+
+## ❯ Install
+
+```
+$ npm install --save prompts
+```
+
+
+## ❯ Usage
+
+<img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="example prompt" width="499" height="103" />
+
+```js
+const prompts = require('prompts');
+
+let response = await prompts({
+    type: 'number',
+    name: 'age',
+    message: 'How old are you?'
+});
+
+console.log(response);
+```
+
+
+## ❯ Examples
+
+### Single Prompt
+
+Prompt with a single prompt object. Returns object with repsonse.
+
+```js
+const prompts = require('prompts');
+
+let response = await prompts({
+    type: 'text',
+    name: 'meaning',
+    message: 'What is the meaning of life?'
+});
+
+// response => { name }
+```
+
+### Prompt Chain
+
+Prompt with a list of prompt objects. Returns object with response.
+Make sure to give each prompt a unique `name` property to prevent overwriting values.
+
+```js
+const prompt = require('prompts');
+
+let questions = [
+    {
+        type: 'text',
+        name: 'username',
+        message: 'What is your GitHub username?'
+    },
+    {
+        type: 'age',
+        name: 'age',
+        message: 'How old are you?'
+    },
+    {
+        type: 'text',
+        name: 'about',
+        message: 'Tell somethign about yourself',
+        initial: 'Why should I?'
+    }
+];
+
+let response = await prompts(questions);
+
+// => response => { username, age, about }
+```
+
+### Dynamic Prompts
+
+Prompt properties can be functions too.
+Prompt Objects with `type` set to `null` are skipped.
+
+```js
+const prompts = require('prompts');
+
+let questions = [
+    {
+        type: 'text',
+        name: 'dish',
+        message: 'Do you like pizza?'
+    },
+    {
+        type: prev => prev.type == 'pizza' ? 'text' : null,
+        name: 'topping',
+        message: 'Name a topping'
+    }
+];
+
+let response = await prompts(questions);
+```
+
+
+## ❯ API
+
+### prompts(prompts, options)
+
+Type: `Function`<br>
+Returns: `Object`
+
+Prompter function which takes your [prompt objects](#-prompt-objects) and returns an object with answers
+
+
+#### prompts
+
+Type: `Array|Object`<br>
+
+Array of [prompt objects](#-prompt-objects).
+ These are the qustions the user will be prompted. You can see the list of supported [prompt types here](#-types).
+
+
+#### options.onSubmit
+
+Type: `Function`<br>
+Default: `() => {}`
+
+Callback that's invoked after each prompt submission.
+Its signature is `(prompt, answer)` where `prompt` is the current prompt object.
+
+Return `true` to quit the prompt loop and return all collected answers so far, otherwise continue to iterate prompt objects.
+
+**Example:**
+```
+let questions = [{ ... }];
+let onSubmit = (prompt, answer) => console.log(`Thanks I got ${answer} from ${prompt.name}`);
+let response = await prompts(questions, { onSubmit });
+```
+
+#### options.onCancel
+
+Type: `Function`<br>
+Default: `() => {}`
+
+Callback that's invoked after when the user cancel/exit the prompt.
+Its signature is `(prompt)` where `prompt` is the current prompt object.
+
+Return `true` to quit the prompt loop and return all collected answers so far, otherwise continue to iterate prompt objects.
+
+**Example:**
+```
+let questions = [{ ... }];
+let onCancel = prompt => {
+  console.log('Lets stop prompting');
+  return true;
+}
+let response = await prompts(questions, { onCancel });
+```
+
+
+## ❯ Prompt Objects
+
+Prompts Objects are JavaScript objects that define the "questions" and the [type of prompt](#-types).
+Almost all prompt objects have the following properties:
+
+```js
+{
+  type: String || Function,
+  name: String || Function,
+  message: String || Function,
+  initial String || Function || Async Function
+}
+```
+
+If `type` is `null` the prompter will skip that qustion.
+```js
+{
+  type: null,
+  name: 'forgetme',
+  message: 'I\'ll never be shown anyway',
+}
+```
+
+Each property can also be of type `function` and will be invoked right before prompting the user.
+
+```js
+{
+    type: prev => prev >= 3 ? 'confirm' : null,
+    name: 'confirm',
+    message: (prev, values) => `Please confirm that you eat ${values.dish} times ${prev} a day?`
+}
+```
+
+
+## ❯ Types
+
+### text(message, [initial], [style])
+> Text prompt for free text input.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/text.gif" alt="text prompt" width="499" height="103" />
+
+```js
+{
+  type: 'text',
+  name: 'dish',
+  message: `What's your twitter handle?`,
+  style: 'default',
+  initial: ''
+}
+```
+
+#### Options
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| message | <code>string</code> |  | Prompt message to display |
+| initial | <code>string</code> | <code>''</code> | Default string value |
+| style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
+
+
+### password(message, [initial])
+> Password prompt with masked input.
+
+This prompt is a similar to a prompt of type `'text'` with `style` set to `'password'`.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/password.gif" alt="password prompt" width="499" height="103" />
+
+```js
+{
+  type: 'password',
+  name: 'secret',
+  message: 'Tell me a secret',
+  initial '',
+}
+```
+
+#### Options
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | Prompt message to display |
+| initial | <code>string</code> | Default string value |
+
+
+### invisible(message, [initial])
+> Prompts user for invisible text input.
+
+This prompt is similar to what you know from `sudo`.
+This prompt is a simular to a prompt of type `'text'` with style set to `'invisible'`.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/invisible.gif" alt="invisible prompt" width="499" height="103" />
+
+```js
+{
+  type: 'invisible',
+  name: 'secret',
+  message: 'Enter password',
+  initial: ''
+}
+```
+
+#### Options
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | Prompt message to display |
+| initial | <code>string</code> | Default string value |
+
+
+### number(message, initial, [max], [min], [style])
+> Prompts user for number input. 
+
+You can use `up`/`down` to increase/decrease the value.
+Only numbers are allowed as input. Default resolve value is `null`.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="number prompt" width="499" height="103" />
+
+```js
+{
+  type: 'number'
+  name: 'count',
+  message: 'How old are you?',
+  initial: 0,
+  style: 'default',
+  min: 2,
+  max: 10
+}
+```
+
+#### Options
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| message | <code>string</code> |  | Prompt message to display |
+| initial | <code>number</code> | `null` | Default number value |
+| max | <code>number</code> | `Infinity` | Max value |
+| min | <code>number</code> | `-infinity` | Min value |
+| style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
+
+
+### confirm(message, [initial])
+> Classic yes/no prompt.
+
+Hit `y` or `n` to confirm/reject.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/confirm.gif" alt="confirm prompt" width="499" height="103" />
+
+```js
+{
+  type: 'confirm'
+  name: 'favorite',
+  message: 'Can you confirm?',
+  initial: true
+}
+```
+
+
+#### Options
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| message | <code>string</code> |  | Prompt message to display |
+| initial | <code>boolean</code> | <code>false</code> | Default value |
+
+
+#### list(message, [initial])
+> List prompt that return an array.
+
+Similar to the `text` prompt, but the output is an `Array` containing the
+string separated by `separator`.
+
+```js
+{
+  type: 'list'
+  name: 'keywords',
+  message: 'Enter keywords',
+  initial: '',
+  separator: ', '
+}
+```
+
+<img src="https://github.com/terkelg/prompts/raw/master/media/list.gif" alt="list prompt" width="499" height="103" />
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| message | <code>string</code> |  | Prompt message to display |
+| initial | <code>boolean</code> | <code>false</code> | Default value |
+| seperator | <code>string</code> | <code>", "</code> | String seperator |
+
+
+### toggle(message, [initial], [active], [inactive])
+> Interactive toggle/switch prompt.
+
+Use tab or arrow keys to switch between options.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/toggle.gif" alt="toggle prompt" width="499" height="103" />
+
+```js
+{
+  type: 'toggle'
+  name: 'bacon',
+  message: 'Can you confirm?',
+  initial: true,
+  active: 'yes',
+  inactive: 'no'
+}
+```
+
+#### Options
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| message | <code>string</code> |  | Prompt message to display |
+| initial | <code>boolean</code> | <code>false</code> | Default value |
+| active | <code>string</code> | <code>'on'</code> | Text for `active` state |
+| inactive | <code>string</code> | <code>'off'</code> | Text for `inactive` state |
+
+
+### select(message, choices, [initial])
+> Interactive select prompt.
+
+Use space to select/unselect and arrow keys to navigate the list.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/select.gif" alt="select prompt" width="499" height="130" />
+
+```js
+{
+    type: 'select',
+    name: 'actor',
+    message: 'Pick a color',
+    choices: [
+        { title: 'Red', value: '#ff0000' },
+        { title: 'Green', value: '#00ff00' },
+        { title: 'Blue', value: '#0000ff' }
+    ],
+    initial: 1
+}
+```
+
+#### Options
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | Prompt message to display |
+| initial | <code>number</code> | Index of default value |
+| choices | <code>Array</code> | Array of choices objects `[{ title, value }, ...]` |
+
+
+### multiselect(message, choices, [initial], [max], [hint])
+> Interactive multi-select prompt.
+
+Use space to select/unselect and arrow keys to navigate the list. 
+By default this prompt returns an `array` containing the **values** of the selected items - not their display title.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/multiselect.gif" alt="multiselect prompt" width="499" height="130" />
+
+```js
+{
+    type: 'multiselect',
+    name: 'colors',
+    message: 'Pick colors',
+    choices: [
+        { title: 'Red', value: '#ff0000' },
+        { title: 'Green', value: '#00ff00' },
+        { title: 'Blue', value: '#0000ff', selected: true }
+    ],
+    initial: 1,
+    max: 2,
+    hint: '- Space to select. Return to submit'
+}
+```
+
+#### Options
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | Prompt message to display |
+| choices | <code>Array</code> | Array of choices objects `[{ title, value, [selected] }, ...]` |
+| max | <code>number</code> | Max select |
+| hint | <code>string</code> | Hint to display user |
+
+This is one of the few prompts that don't take a initial value.
+If you want to predefine selected values, give the choice object an `selected` property of `true`.
+
+
+### autocomplete(message, choices, [initial], [suggest], [limit], style)
+> Interactive auto complete prompt. 
+
+The prompt will list options based on user input. 
+
+The default suggets/filter function is based on the `title` property.
+You can overwrite this by passing your own filter function.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/autocomplete.gif" alt="auto complete prompt" width="499" height="163" />
+
+```js
+{
+    type: 'autocomplete',
+    name: 'actor',
+    message: 'Pick your favorite color',
+    choices: [
+        { title: 'Brad Pitt' },
+        { title: 'George Clooney', value: 'silver-fox' },
+        { title: 'Ana de Armas' },
+        { title: 'Arnold' },
+        { title: 'Felicity Jones' },
+    ]
+}
+```
+
+#### Options
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| message | <code>string</code> |  | Prompt message to display |
+| choices | <code>Array</code> |  | Array of auto-complete choices objects `[{ title, value }, ...]` |
+| suggest | <code>function</code> | By `title` string | Filter function. Defaults to stort by `title` property |
+| limit | <code>number</code> | <code>10</code> | Max number of results to show |
+| style | <code>string</code> | `'default'` | Render style (`default`, `password`, `invisible`) |
+
+
+Example on what a `suggest` function might look like:
+```js
+const suggestByTitle = (input, choices) =>
+  Promise.resolve(choices.filter(i => i.title.slice(0, input.length) === input))
+```
+
+
+## ❯ Credit
+Many of the prompts are based on the work of [derhuerst](https://github.com/derhuerst).
+
+
+## ❯ License
+
+MIT © [Terkel Gjervig](https://terkel.com)

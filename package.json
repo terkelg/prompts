@@ -1,0 +1,37 @@
+{
+  "name": "prompts",
+  "version": "0.1.0-1",
+  "description": "Lightweight, beautiful and user-friendly prompts",
+  "homepage": "https://github.com/terkelg/prompts",
+  "repository": "terkelg/prompts",
+  "main": "lib/index.js",
+  "author": {
+    "name": "Terkel Gjervig",
+    "email": "terkel@terkel.com",
+    "url": "https://terkel.com"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "start": "node lib/index.js",
+    "test": "tape test/*.js | tap-spec"
+  },
+  "keywords": [
+    "ui",
+    "prompts",
+    "cli",
+    "prompt",
+    "interface",
+    "command-line",
+    "input"
+  ],
+  "dependencies": {
+    "clorox": "^1.0.1",
+    "sisteransi": "^0.1.0"
+  },
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0"
+  }
+}

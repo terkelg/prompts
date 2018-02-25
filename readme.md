@@ -51,11 +51,11 @@ const prompts = require('prompts');
 
 let response = await prompts({
     type: 'number',
-    name: 'age',
+    name: 'value',
     message: 'How old are you?'
 });
 
-console.log(response);
+console.log(response.value); // => 23
 ```
 
 
@@ -157,6 +157,7 @@ Type: `Array|Object`<br>
 Array of [prompt objects](#-prompt-objects).
  These are the qustions the user will be prompted. You can see the list of supported [prompt types here](#-types).
 
+Prompts can be submitted (<kbd>return</kbd>, <kbd>enter</kbd>) or cancled (<kbd>esc</kbd>, <kbd>abort</kbd>, <kbd>ctrl</kbd>+<kbd>c</kbd>, <kbd>ctrl</kbd>+<kbd>d</kbd>). No property is being defined on the returned response object when a prompt is cancled.
 
 #### options.onSubmit
 
@@ -491,7 +492,7 @@ This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
 
 
-### autocomplete(message, choices, [initial], [suggest], [limit], style)
+### autocomplete(message, choices, [initial], [suggest], [limit], [style])
 > Interactive auto complete prompt. 
 
 The prompt will list options based on user input. 

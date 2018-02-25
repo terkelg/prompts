@@ -157,7 +157,7 @@ Type: `Array|Object`<br>
 Array of [prompt objects](#-prompt-objects).
  These are the qustions the user will be prompted. You can see the list of supported [prompt types here](#-types).
 
-Prompts can be submitted (<kbd>return</kbd>, <kbd>enter</kbd>) or cancled (<kbd>esc</kbd>, <kbd>abort</kbd>, <kbd>ctrl</kbd>+<kbd>c</kbd>, <kbd>ctrl</kbd>+<kbd>d</kbd>). No property is being defined on the returned response object when a prompt is cancled.
+Prompts can be submitted (<kbd>return</kbd>, <kbd>enter</kbd>) or canceled (<kbd>esc</kbd>, <kbd>abort</kbd>, <kbd>ctrl</kbd>+<kbd>c</kbd>, <kbd>ctrl</kbd>+<kbd>d</kbd>). No property is being defined on the returned response object when a prompt is cancled.
 
 #### options.onSubmit
 

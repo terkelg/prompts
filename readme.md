@@ -66,7 +66,7 @@ console.log(response.value); // => 23
 
 ### Single Prompt
 
-Prompt with a single prompt object. Returns object with repsonse.
+Prompt with a single prompt object. Returns object with the response.
 
 ```js
 const prompts = require('prompts');
@@ -155,9 +155,9 @@ Prompter function which takes your [prompt objects](#-prompt-objects) and return
 Type: `Array|Object`<br>
 
 Array of [prompt objects](#-prompt-objects).
- These are the qustions the user will be prompted. You can see the list of supported [prompt types here](#-types).
+ These are the questions the user will be prompted. You can see the list of supported [prompt types here](#-types).
 
-Prompts can be submitted (<kbd>return</kbd>, <kbd>enter</kbd>) or canceled (<kbd>esc</kbd>, <kbd>abort</kbd>, <kbd>ctrl</kbd>+<kbd>c</kbd>, <kbd>ctrl</kbd>+<kbd>d</kbd>). No property is being defined on the returned response object when a prompt is cancled.
+Prompts can be submitted (<kbd>return</kbd>, <kbd>enter</kbd>) or canceled (<kbd>esc</kbd>, <kbd>abort</kbd>, <kbd>ctrl</kbd>+<kbd>c</kbd>, <kbd>ctrl</kbd>+<kbd>d</kbd>). No property is being defined on the returned response object when a prompt is canceled.
 
 #### options.onSubmit
 
@@ -181,7 +181,7 @@ let response = await prompts(questions, { onSubmit });
 Type: `Function`<br>
 Default: `() => {}`
 
-Callback that's invoked when the user cancel/exit the prompt.
+Callback that's invoked when the user cancels/exits the prompt.
 Its signature is `(prompt)` where `prompt` is the current prompt object.
 
 Return `true` to quit the prompt loop and return all collected responses so far, otherwise continue to iterate prompt objects.
@@ -214,7 +214,7 @@ Almost all prompt objects have the following properties:
 }
 ```
 
-If `type` is `null` the prompter will skip that qustion.
+If `type` is `null` the prompter will skip that question.
 ```js
 {
   type: null,
@@ -497,7 +497,7 @@ If you want to predefine selected values, give the choice object an `selected` p
 
 The prompt will list options based on user input. 
 
-The default suggets function is sorting based on the `title` property of the choices.
+The default suggests function is sorting based on the `title` property of the choices.
 You can overwrite how choices are being filtered by passing your own suggest function.
 
 #### Example

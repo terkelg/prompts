@@ -1,10 +1,10 @@
-<div align="center">
+<p align="center">
   <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" height="120" />
-</div>
+</p>
  
 <h1 align="center">❯ Prompts</h1>
 
-<div align="center">
+<p align="center">
   <a href="https://npmjs.org/package/prompts">
     <img src="https://img.shields.io/npm/v/prompts.svg" alt="version" />
   </a>
@@ -14,12 +14,12 @@
   <a href="https://npmjs.org/package/prompts">
     <img src="https://img.shields.io/npm/dm/prompts.svg" alt="downloads" />
   </a>
-</div>
+</p>
 
-<div align="center">
+<p align="center">
   <b>Lightweight, beautiful and user-friendly interactive prompts</b></br>
   <sub>>_ Easy to use CLI prompts to enquire users for information▌<sub> 
-</div>
+</p>
 
 <br />
 

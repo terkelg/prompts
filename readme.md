@@ -371,7 +371,7 @@ Hit `y` or `n` to confirm/reject.
 | initial | <code>boolean</code> | <code>false</code> | Default value |
 
 
-#### list(message, [initial])
+### list(message, [initial])
 > List prompt that return an array.
 
 Similar to the `text` prompt, but the output is an `Array` containing the

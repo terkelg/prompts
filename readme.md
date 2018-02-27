@@ -251,7 +251,7 @@ Its signature is `(prev, values, prompt)`, where `prev` is the value from the pr
 ```js
 {
   type: 'text',
-  name: 'dish',
+  name: 'value',
   message: `What's your twitter handle?`,
   style: 'default',
   initial: ''
@@ -277,7 +277,7 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 ```js
 {
   type: 'password',
-  name: 'secret',
+  name: 'value',
   message: 'Tell me a secret',
   initial '',
 }
@@ -302,7 +302,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 ```js
 {
   type: 'invisible',
-  name: 'secret',
+  name: 'value',
   message: 'Enter password',
   initial: ''
 }
@@ -327,7 +327,7 @@ Only numbers are allowed as input. Default resolve value is `null`.
 ```js
 {
   type: 'number'
-  name: 'count',
+  name: 'value',
   message: 'How old are you?',
   initial: 0,
   style: 'default',
@@ -357,7 +357,7 @@ Hit `y` or `n` to confirm/reject.
 ```js
 {
   type: 'confirm'
-  name: 'favorite',
+  name: 'value',
   message: 'Can you confirm?',
   initial: true
 }
@@ -380,7 +380,7 @@ string separated by `separator`.
 ```js
 {
   type: 'list'
-  name: 'keywords',
+  name: 'value',
   message: 'Enter keywords',
   initial: '',
   separator: ','
@@ -408,7 +408,7 @@ Use tab or arrow keys to switch between options.
 ```js
 {
   type: 'toggle'
-  name: 'bacon',
+  name: 'value',
   message: 'Can you confirm?',
   initial: true,
   active: 'yes',
@@ -436,7 +436,7 @@ Use space to select/unselect and arrow keys to navigate the list.
 ```js
 {
     type: 'select',
-    name: 'actor',
+    name: 'value',
     message: 'Pick a color',
     choices: [
         { title: 'Red', value: '#ff0000' },
@@ -467,7 +467,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 ```js
 {
     type: 'multiselect',
-    name: 'colors',
+    name: 'value',
     message: 'Pick colors',
     choices: [
         { title: 'Red', value: '#ff0000' },
@@ -506,14 +506,14 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 ```js
 {
     type: 'autocomplete',
-    name: 'actor',
-    message: 'Pick your favorite color',
+    name: 'value',
+    message: 'Pick your favorite actor',
     choices: [
-        { title: 'Brad Pitt' },
-        { title: 'George Clooney', value: 'silver-fox' },
-        { title: 'Ana de Armas' },
-        { title: 'Arnold' },
-        { title: 'Felicity Jones' },
+        { title: 'Cage' },
+        { title: 'Clooney', value: 'silver-fox' },
+        { title: 'Gyllenhaal' },
+        { title: 'Gibson' },
+        { title: 'Grant' },
     ]
 }
 ```

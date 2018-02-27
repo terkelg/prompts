@@ -63,14 +63,14 @@ const { prompt } = require('./lib');
         },
         {
             type: 'autocomplete',
-            name: 'actor',
-            message: 'Pick your favorite color',
+            name: 'value',
+            message: 'Pick your favorite actor',
             choices: [
-                { title: 'Brad Pitt' },
-                { title: 'George Clooney', value: 'silver-fox' },
-                { title: 'Ana de Armas' },
-                { title: 'Arnold' },
-                { title: 'Felicity Jones' },
+                { title: 'Cage' },
+                { title: 'Clooney', value: 'silver-fox' },
+                { title: 'Gyllenhaal' },
+                { title: 'Gibson' },
+                { title: 'Grant' },
             ]
         }
     ];

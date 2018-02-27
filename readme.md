@@ -49,13 +49,13 @@ $ npm install --save prompts
 ```js
 const prompts = require('prompts');
 
-let response = await prompts({
+const response = await prompts({
     type: 'number',
     name: 'value',
     message: 'How old are you?'
 });
 
-console.log(response.value); // => 23
+console.log(response); // => { value: 23 }
 ```
 
 

@@ -115,7 +115,7 @@ let response = await prompts(questions);
 ### Dynamic Prompts
 
 Prompt properties can be functions too.
-Prompt Objects with `type` set to `null` are skipped.
+Prompt Objects with `type` set to `falsy` values are skipped.
 
 ```js
 const prompts = require('prompts');
@@ -218,7 +218,7 @@ Almost all prompt objects have the following properties:
 Each property be of type `function` and will be invoked right before prompting the user.
 
 The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt, 
-`values` is the response object all values collected so far and `prompt` is the previous prompt object.
+`values` is the response object with all values collected so far and `prompt` is the previous prompt object.
 
 **Function example:**
 ```js

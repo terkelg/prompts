@@ -115,7 +115,7 @@ let response = await prompts(questions);
 ### Dynamic Prompts
 
 Prompt properties can be functions too.
-Prompt Objects with `type` set to `null` are skipped.
+Prompt Objects with `type` set to `falsy` values are skipped.
 
 ```js
 const prompts = require('prompts');
@@ -210,31 +210,72 @@ Almost all prompt objects have the following properties:
   type: String || Function,
   name: String || Function,
   message: String || Function,
-  initial String || Function || Async Function
+  initial: String || Function || Async Function
+  format: Function
 }
 ```
 
-If `type` is `null` the prompter will skip that question.
+Each property be of type `function` and will be invoked right before prompting the user.
+
+The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt, 
+`values` is the response object with all values collected so far and `prompt` is the previous prompt object.
+
+**Function example:**
 ```js
 {
-  type: null,
-  name: 'forgetme',
-  message: 'I\'ll never be shown anyway',
-}
-```
-
-Each property can also be of type `function` and will be invoked right before prompting the user.
-
-```js
-{
-    type: prev => prev >= 3 ? 'confirm' : null,
+    type: prev => prev > 3 ? 'confirm' : null,
     name: 'confirm',
     message: (prev, values) => `Please confirm that you eat ${values.dish} times ${prev} a day?`
 }
 ```
 
-Its signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt, 
-`values` is all values collected so far and `prompt` is the provious prompt object.
+The above prompt will be skipped if the value of the previous prompt is less than 3.
+
+### type
+
+Defines the type of prompt to display. See the list of [prompt types](#-types) for valid values.
+
+If `type` is a falsy value the prompter will skip that question.
+```js
+{
+  type: null,
+  name: 'forgetme',
+  message: `I'll never be shown anyway`,
+}
+```
+
+### name
+
+The response will be saved under this key/property in the returned response object.
+In case you have multiple prompts with the same name only the latest response will be stored.
+
+> Make sure to give prompts unique names if you don't want to overwrite previous values.
+
+### message
+
+The message to be displayed to the user.
+
+### initial
+
+Optional default prompt value.
+
+### format
+
+Receive the user input and return the formatted value to be used inside the program.
+The value returned will be added to the response object.
+
+The function signature is `(val, values)`, where `val` is the value from the current prompt and
+`values` is the current response object in case you need to format based on previous responses.
+
+**Example:**
+```js
+{
+    type: 'number',
+    name: 'price',
+    message: 'Enter price',
+    format: val => Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' }).format(val);
+}
+```
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -264,6 +305,7 @@ Its signature is `(prev, values, prompt)`, where `prev` is the value from the pr
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>string</code> | <code>''</code> | Default string value |
 | style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
+| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 
 
 ### password(message, [initial])
@@ -288,6 +330,7 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | --- | --- | --- |
 | message | <code>string</code> | Prompt message to display |
 | initial | <code>string</code> | Default string value |
+| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
 
 
 ### invisible(message, [initial])
@@ -313,6 +356,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 | --- | --- | --- |
 | message | <code>string</code> | Prompt message to display |
 | initial | <code>string</code> | Default string value |
+| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
 
 
 ### number(message, initial, [max], [min], [style])
@@ -341,6 +385,7 @@ Only numbers are allowed as input. Default resolve value is `null`.
 | --- | --- | --- | --- |
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>number</code> | `null` | Default number value |
+| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | max | <code>number</code> | `Infinity` | Max value |
 | min | <code>number</code> | `-infinity` | Min value |
 | style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
@@ -369,6 +414,7 @@ Hit `y` or `n` to confirm/reject.
 | --- | --- | --- | --- |
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>boolean</code> | <code>false</code> | Default value |
+| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 
 
 ### list(message, [initial])
@@ -394,6 +440,7 @@ string separated by `separator`.
 | --- | --- | --- | --- |
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>boolean</code> | <code>false</code> | Default value |
+| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | seperator | <code>string</code> | <code>','</code> | String seperator. Will trim all white-spaces from start and end of string |
 
 
@@ -421,6 +468,7 @@ Use tab or arrow keys to switch between options.
 | --- | --- | --- | --- |
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>boolean</code> | <code>false</code> | Default value |
+| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | active | <code>string</code> | <code>'on'</code> | Text for `active` state |
 | inactive | <code>string</code> | <code>'off'</code> | Text for `inactive` state |
 
@@ -452,6 +500,7 @@ Use space to select/unselect and arrow keys to navigate the list.
 | --- | --- | --- |
 | message | <code>string</code> | Prompt message to display |
 | initial | <code>number</code> | Index of default value |
+| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
 | choices | <code>Array</code> | Array of choices objects `[{ title, value }, ...]` |
 
 
@@ -484,6 +533,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | Param | Type | Description |
 | --- | --- | --- |
 | message | <code>string</code> | Prompt message to display |
+| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
 | choices | <code>Array</code> | Array of choices objects `[{ title, value, [selected] }, ...]` |
 | max | <code>number</code> | Max select |
 | hint | <code>string</code> | Hint to display user |
@@ -522,6 +572,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | message | <code>string</code> |  | Prompt message to display |
+| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | choices | <code>Array</code> |  | Array of auto-complete choices objects `[{ title, value }, ...]` |
 | suggest | <code>function</code> | By `title` string | Filter function. Defaults to stort by `title` property. Suggest should always return a promise |
 | limit | <code>number</code> | <code>10</code> | Max number of results to show |

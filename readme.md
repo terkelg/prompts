@@ -95,7 +95,7 @@ let questions = [
         message: 'What is your GitHub username?'
     },
     {
-        type: 'age',
+        type: 'number',
         name: 'age',
         message: 'How old are you?'
     },

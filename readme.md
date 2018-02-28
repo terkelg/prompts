@@ -87,7 +87,7 @@ Prompt with a list of prompt objects. Returns object with response.
 Make sure to give each prompt a unique `name` property to prevent overwriting values.
 
 ```js
-const prompt = require('prompts');
+const prompts = require('prompts');
 
 let questions = [
     {

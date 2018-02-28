@@ -103,7 +103,7 @@ let questions = [
     {
         type: 'text',
         name: 'about',
-        message: 'Tell somethign about yourself',
+        message: 'Tell something about yourself',
         initial: 'Why should I?'
     }
 ];

@@ -47,9 +47,9 @@ $ npm install --save prompts
 <img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="example prompt" width="499" height="103" />
 
 ```js
-const prompts = require('prompts');
+const { prompt } = require('prompts');
 
-const response = await prompts({
+const response = await prompt({
     type: 'number',
     name: 'value',
     message: 'How old are you?'
@@ -69,9 +69,9 @@ console.log(response); // => { value: 23 }
 Prompt with a single prompt object. Returns object with the response.
 
 ```js
-const prompts = require('prompts');
+const { prompt } = require('prompts');
 
-let response = await prompts({
+let response = await prompt({
     type: 'text',
     name: 'meaning',
     message: 'What is the meaning of life?'
@@ -86,7 +86,7 @@ Prompt with a list of prompt objects. Returns object with response.
 Make sure to give each prompt a unique `name` property to prevent overwriting values.
 
 ```js
-const prompt = require('prompts');
+const { prompt } = require('prompts');
 
 let questions = [
     {
@@ -107,7 +107,7 @@ let questions = [
     }
 ];
 
-let response = await prompts(questions);
+let response = await prompt(questions);
 
 // => response => { username, age, about }
 ```
@@ -118,7 +118,7 @@ Prompt properties can be functions too.
 Prompt Objects with `type` set to `falsy` values are skipped.
 
 ```js
-const prompts = require('prompts');
+const { prompt } = require('prompts');
 
 let questions = [
     {
@@ -133,7 +133,7 @@ let questions = [
     }
 ];
 
-let response = await prompts(questions);
+let response = await prompt(questions);
 ```
 
 
@@ -142,7 +142,7 @@ let response = await prompts(questions);
 
 ## ❯ API
 
-### prompts(prompts, options)
+### prompt(prompts, options)
 
 Type: `Function`<br>
 Returns: `Object`
@@ -173,7 +173,7 @@ Return `true` to quit the prompt chain and return all collected responses so far
 ```js
 let questions = [{ ... }];
 let onSubmit = (prompt, response) => console.log(`Thanks I got ${response} from ${prompt.name}`);
-let response = await prompts(questions, { onSubmit });
+let response = await prompt(questions, { onSubmit });
 ```
 
 #### options.onCancel
@@ -193,7 +193,7 @@ let onCancel = prompt => {
   console.log('Lets stop prompting');
   return true;
 }
-let response = await prompts(questions, { onCancel });
+let response = await prompt(questions, { onCancel });
 ```
 
 

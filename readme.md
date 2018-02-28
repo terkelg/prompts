@@ -27,6 +27,7 @@
 * **User friendly**: prompt uses layout and colors to create beautiful cli interfaces.
 * **Promised**: uses promises and `async`/`await`. No callback hell.
 * **Flexible**: all prompts are independent and can be used on their own.
+* **Testable**: provides a way to submit answers programmatically.
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

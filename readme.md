@@ -455,7 +455,7 @@ Use tab or arrow keys to switch between options.
 
 ```js
 {
-  type: 'toggle'
+  type: 'toggle',
   name: 'value',
   message: 'Can you confirm?',
   initial: true,

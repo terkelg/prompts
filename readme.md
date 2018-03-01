@@ -23,11 +23,12 @@
 
 <br />
 
-* **Simple**: prompts has no big dependencies nor is it broken into a dozen tiny modules that only work well together.
+* **Simple**: prompts has [no big dependencies](http://npm.anvaka.com/#/view/2d/prompts) nor is it broken into a [dozen](http://npm.anvaka.com/#/view/2d/inquirer) tiny modules that only work well together.
 * **User friendly**: prompt uses layout and colors to create beautiful cli interfaces.
 * **Promised**: uses promises and `async`/`await`. No callback hell.
 * **Flexible**: all prompts are independent and can be used on their own.
 * **Testable**: provides a way to submit answers programmatically.
+* **Unified**: consistent experience across all prompts. 
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

@@ -199,6 +199,38 @@ let response = await prompts(questions, { onCancel });
 ```
 
 
+### inject(values)
+
+Type: `Function`<br>
+
+Programmatically inject responses. This enables you to prepare the responses ahead of time.
+If any injected values are found the prompt is immediately resolved with the injected value.
+This feature is inteded for testing only.
+
+#### values
+
+Type: `Object`
+
+Object with key/values to inject. Resolved values are deleted from the internel inject object.
+
+**Example:**
+```js
+const prompts = require('prompts');
+
+prompts.inject({ q1: 'a1', q2: 'q2' });
+let response = await prompts({
+  type: 'text',
+  name: 'q1',
+  message: 'Question 1'
+});
+
+// => { q1: 'a1' }
+
+```
+
+> When `q1` resolves it's wiped. `q2` doesn't resolve and is left untouched.
+
+
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 

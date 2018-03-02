@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib/elements/number.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">lib/elements</a> number.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.27% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>8/71</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">13.11% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>8/61</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const color = require('clorox');
+const Prompt = require('./prompt');
+const { cursor, erase } = require('sisteransi');
+const { style: stl, clear } = require('../util');
+&nbsp;
+const isNumber = /[0-9]/;
+const isDef = <span class="fstat-no" title="function not covered" >an</span>y =&gt; <span class="cstat-no" title="statement not covered" >any !== undefined;</span>
+const isNull = <span class="fstat-no" title="function not covered" >an</span>y =&gt; <span class="cstat-no" title="statement not covered" >any === null;</span>
+&nbsp;
+class NumberPrompt extends Prompt {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor({ message, initial = <span class="branch-0 cbranch-no" title="branch not covered" >null,</span> min, max, style = <span class="branch-0 cbranch-no" title="branch not covered" >'default' </span>}) {
+<span class="cstat-no" title="statement not covered" >    super();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.msg = message;</span>
+<span class="cstat-no" title="statement not covered" >    this.transform = stl.render(style);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.min = isDef(min) ? min : -Infinity;</span>
+<span class="cstat-no" title="statement not covered" >    this.max = isDef(max) ? max : Infinity;</span>
+<span class="cstat-no" title="statement not covered" >    this.value = initial;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.typed = '';</span>
+<span class="cstat-no" title="statement not covered" >    this.lastHit = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.initialValue = this.value;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>set() {
+<span class="cstat-no" title="statement not covered" >    this.typed = '';</span>
+<span class="cstat-no" title="statement not covered" >    this.value = this.initialValue;</span>
+<span class="cstat-no" title="statement not covered" >    this.fire();</span>
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  ab</span>ort() {
+<span class="cstat-no" title="statement not covered" >    this.done = this.aborted = true;</span>
+<span class="cstat-no" title="statement not covered" >    this.fire();</span>
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+<span class="cstat-no" title="statement not covered" >    this.out.write('\n');</span>
+<span class="cstat-no" title="statement not covered" >    this.close();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  su</span>bmit() {
+<span class="cstat-no" title="statement not covered" >    this.done = true;</span>
+<span class="cstat-no" title="statement not covered" >    this.aborted = false;</span>
+<span class="cstat-no" title="statement not covered" >    this.fire();</span>
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+<span class="cstat-no" title="statement not covered" >    this.out.write('\n');</span>
+<span class="cstat-no" title="statement not covered" >    this.close();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  up</span>() {
+<span class="cstat-no" title="statement not covered" >    this.typed = '';</span>
+<span class="cstat-no" title="statement not covered" >    if (this.value &gt;= this.max) <span class="cstat-no" title="statement not covered" >return this.bell();</span></span>
+<span class="cstat-no" title="statement not covered" >    this.value++;</span>
+<span class="cstat-no" title="statement not covered" >    this.fire();</span>
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  do</span>wn() {
+<span class="cstat-no" title="statement not covered" >    this.typed = '';</span>
+<span class="cstat-no" title="statement not covered" >    if (this.value &lt;= this.min) <span class="cstat-no" title="statement not covered" >return this.bell();</span></span>
+<span class="cstat-no" title="statement not covered" >    this.value--;</span>
+<span class="cstat-no" title="statement not covered" >    this.fire();</span>
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  de</span>lete() {
+    let val = <span class="cstat-no" title="statement not covered" >this.value.toString();</span>
+<span class="cstat-no" title="statement not covered" >    if (val.length === 0) <span class="cstat-no" title="statement not covered" >return this.bell();</span></span>
+<span class="cstat-no" title="statement not covered" >    this.value = parseInt((val = val.slice(0, -1))) || '';</span>
+<span class="cstat-no" title="statement not covered" >    this.fire();</span>
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _(</span>c, key) {
+<span class="cstat-no" title="statement not covered" >    if (!isNumber.test(c)) <span class="cstat-no" title="statement not covered" >return this.bell();</span></span>
+&nbsp;
+    const now = <span class="cstat-no" title="statement not covered" >Date.now();</span>
+<span class="cstat-no" title="statement not covered" >    if (now - this.lastHit &gt; 1000) <span class="cstat-no" title="statement not covered" >this.typed = ''; </span></span>// 1s elapsed
+<span class="cstat-no" title="statement not covered" >    this.typed += c;</span>
+<span class="cstat-no" title="statement not covered" >    this.lastHit = now;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.value = Math.min(parseInt(this.typed), this.max);</span>
+<span class="cstat-no" title="statement not covered" >    if (this.value &gt; this.max) <span class="cstat-no" title="statement not covered" >this.value = this.max;</span></span>
+<span class="cstat-no" title="statement not covered" >    if (this.value &lt; this.min) <span class="cstat-no" title="statement not covered" >this.value = this.min;</span></span>
+<span class="cstat-no" title="statement not covered" >    this.fire();</span>
+<span class="cstat-no" title="statement not covered" >    this.render();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
+    let value = <span class="cstat-no" title="statement not covered" >this.transform(this.value !== null ? this.value : '');</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.done) <span class="cstat-no" title="statement not covered" >value = color.cyan.underline(value);</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.out.write(</span>
+      erase.line +
+        cursor.to(0) +
+        [
+          stl.symbol(this.done, this.aborted),
+          color.bold(this.msg),
+          stl.delimiter(this.done),
+          value
+        ].join(' ')
+    );
+  }
+}
+&nbsp;
+module.exports = NumberPrompt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Mar 02 2018 12:48:41 GMT+0200 (EET)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

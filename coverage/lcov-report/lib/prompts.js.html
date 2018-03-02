@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib/prompts.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">lib</a> prompts.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.71% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/70</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.84% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/51</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+const el = require('./elements');
+&nbsp;
+/**
+ * Text prompt
+ * @param {string} message Prompt message to display
+ * @param {string} [initial] Default string value
+ * @param {string} [style="default"] Render style ('default', 'password', 'invisible')
+ * @returns {Promise} Promise with user input
+ */
+function <span class="fstat-no" title="function not covered" >text(</span>{ message, initial, style }) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.TextPrompt({ message, initial, style });</span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', resolve);</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', reject);</span>
+  });
+}
+&nbsp;
+/**
+ * Password prompt with masked input
+ * @param {string} message Prompt message to display
+ * @param {string} [initial] Default string value
+ * @returns {Promise} Promise with user input
+ */
+const password = <span class="fstat-no" title="function not covered" >({</span> message, initial }) =&gt; <span class="cstat-no" title="statement not covered" >text({ message, initial, style: 'password' });</span>
+&nbsp;
+/**
+ * Prompt where input is invisible, like sudo
+ * @param {string} message Prompt message to display
+ * @param {string} [initial] Default string value
+ * @returns {Promise} Promise with user input
+ */
+const invisible = <span class="fstat-no" title="function not covered" >({</span> message, initial }) =&gt; <span class="cstat-no" title="statement not covered" >text({ message, initial, style: 'invisible' });</span>
+&nbsp;
+/**
+ * Number prompt
+ * @param {string} message Prompt message to display
+ * @param {number} initial Default number value
+ * @param {number} [max] Max value
+ * @param {number} [min] Min value
+ * @param {string} [style="default"] Render style ('default', 'password', 'invisible')
+ * @returns {Promise} Promise with user input
+ */
+function <span class="fstat-no" title="function not covered" >number(</span>{ message, initial, max, min, style }) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.NumberPrompt({ message, initial, max, min, style });</span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', resolve);</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', reject);</span>
+  });
+}
+&nbsp;
+/**
+ * Classic yes/no prompt
+ * @param {string} message Prompt message to display
+ * @param {boolean} [initial=false] Default value
+ * @returns {Promise} Promise with user input
+ */
+function <span class="fstat-no" title="function not covered" >confirm(</span>{ message, initial }) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.ConfirmPrompt({ message, initial });</span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', resolve);</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', reject);</span>
+  });
+}
+&nbsp;
+/**
+ * List prompt, split intput string by `seperator`
+ * @param {string} message Prompt message to display
+ * @param {string} [initial] Default string value
+ * @param {string} [style="default"] Render style ('default', 'password', 'invisible')
+ * @param {string} [separator] String separator
+ * @returns {Promise} Promise with user input, in form of an `Array`
+ */
+function <span class="fstat-no" title="function not covered" >list(</span>{ message, initial, style, separator = <span class="branch-0 cbranch-no" title="branch not covered" >',' </span>}) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.TextPrompt({ message, initial, style });</span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', <span class="fstat-no" title="function not covered" >st</span>r =&gt; <span class="cstat-no" title="statement not covered" >resolve(str.split(separator).map(<span class="fstat-no" title="function not covered" >s </span>=&gt; <span class="cstat-no" title="statement not covered" >s.trim())</span>))</span>;</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', reject);</span>
+  });
+}
+&nbsp;
+/**
+ * Toggle/switch prompt
+ * @param {string} message Prompt message to display
+ * @param {boolean} [initial=false] Default value
+ * @param {string} [active="on"] Text for `active` state
+ * @param {string} [inactive="off"] Text for `inactive` state
+ * @returns {Promise} Promise with user input
+ */
+function <span class="fstat-no" title="function not covered" >toggle(</span>{ message, initial, active, inactive }) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.TogglePrompt({ message, initial, active, inactive });</span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', resolve);</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', reject);</span>
+  });
+}
+&nbsp;
+/**
+ * Interactive select prompt
+ * @param {string} message Prompt message to display
+ * @param {Array} choices Array of choices objects `[{ title, value }, ...]`
+ * @param {number} [initial] Index of default value
+ * @returns {Promise} Promise with user input
+ */
+function <span class="fstat-no" title="function not covered" >select(</span>{ message, choices, initial }) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.SelectPrompt({ message, choices, initial });</span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', resolve);</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', reject);</span>
+  });
+}
+&nbsp;
+/**
+ * Interactive multi-select prompt
+ * @param {string} message Prompt message to display
+ * @param {Array} choices Array of choices objects `[{ title, value, [selected] }, ...]`
+ * @param {number} [max] Max select
+ * @param {string} [hint] Hint to display user
+ * @returns {Promise} Promise with user input
+ */
+function <span class="fstat-no" title="function not covered" >multiselect(</span>{ message, choices, max, hint }) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  if (!Array.isArray(choices)) <span class="cstat-no" title="statement not covered" >throw new Error('choices array is required');</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.MultiselectPrompt({ message, choices, max, hint });</span>
+    const selected = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >it</span>ems =&gt; <span class="cstat-no" title="statement not covered" >items.filter(<span class="fstat-no" title="function not covered" >it</span>em =&gt; <span class="cstat-no" title="statement not covered" >item.selected)</span>.map(<span class="fstat-no" title="function not covered" >it</span>em =&gt; <span class="cstat-no" title="statement not covered" >item.value)</span>;</span></span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', <span class="fstat-no" title="function not covered" >it</span>ems =&gt; <span class="cstat-no" title="statement not covered" >resolve(selected(items)))</span>;</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', <span class="fstat-no" title="function not covered" >it</span>ems =&gt; <span class="cstat-no" title="statement not covered" >reject(selected(items)))</span>;</span>
+  });
+}
+&nbsp;
+/**
+ * Interactive multi-select prompt
+ * @param {string} message Prompt message to display
+ * @param {Array} choices Array of auto-complete choices objects `[{ title, value }, ...]`
+ * @param {Function} [suggest] Function to filter results based on user input. Defaults to stort by `title`
+ * @param {number} [limit=10] Max number of results to show
+ * @param {string} [style="default"] Render style ('default', 'password', 'invisible')
+ * @returns {Promise} Promise with user input
+ */
+function <span class="fstat-no" title="function not covered" >autocomplete(</span>{ message, choices, suggest, limit, style }) {
+<span class="cstat-no" title="statement not covered" >  if (typeof message !== 'string') <span class="cstat-no" title="statement not covered" >throw new Error('message is required');</span></span>
+<span class="cstat-no" title="statement not covered" >  if (!Array.isArray(choices)) <span class="cstat-no" title="statement not covered" >throw new Error('choices array is required');</span></span>
+  const suggestByTitle = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(i</span>nput, choices) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >    Promise.resolve(</span>
+      choices.filter(
+<span class="fstat-no" title="function not covered" >        it</span>em =&gt; <span class="cstat-no" title="statement not covered" >item.title.slice(0, input.length).toLowerCase() === input.toLowerCase()</span>
+      )
+    );
+<span class="cstat-no" title="statement not covered" >  suggest = suggest ? suggest : suggestByTitle;</span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const p = <span class="cstat-no" title="statement not covered" >new el.AutocompletePrompt({ message, choices, suggest, limit, style });</span>
+<span class="cstat-no" title="statement not covered" >    p.on('submit', resolve);</span>
+<span class="cstat-no" title="statement not covered" >    p.on('abort', reject);</span>
+  });
+}
+&nbsp;
+module.exports = {
+  text,
+  password,
+  invisible,
+  number,
+  confirm,
+  list,
+  toggle,
+  select,
+  multiselect,
+  autocomplete
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Mar 02 2018 12:48:41 GMT+0200 (EET)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

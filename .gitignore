@@ -1,3 +1,10 @@
 node_modules
 .DS_Store
 *.lock
+*.log
+coverage
+.nyc_output
+package-lock.json
+lcov.info
+.env
+.pem

@@ -60,6 +60,8 @@ const response = await prompts({
 console.log(response); // => { value: 23 }
 ```
 
+> Examples are meant to be illustrative. `await` calls need to be run within an async function. See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js).
+
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 

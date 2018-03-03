@@ -247,7 +247,8 @@ Almost all prompt objects have the following properties:
   name: String || Function,
   message: String || Function,
   initial: String || Function || Async Function
-  format: Function
+  format: Function,
+  onState: Function
 }
 ```
 
@@ -269,6 +270,8 @@ The above prompt will be skipped if the value of the previous prompt is less tha
 
 ### type
 
+Type: `String|Function`
+
 Defines the type of prompt to display. See the list of [prompt types](#-types) for valid values.
 
 If `type` is a falsy value the prompter will skip that question.
@@ -282,6 +285,8 @@ If `type` is a falsy value the prompter will skip that question.
 
 ### name
 
+Type: `String|Function`
+
 The response will be saved under this key/property in the returned response object.
 In case you have multiple prompts with the same name only the latest response will be stored.
 
@@ -289,13 +294,19 @@ In case you have multiple prompts with the same name only the latest response wi
 
 ### message
 
+Type: `String|Function`
+
 The message to be displayed to the user.
 
 ### initial
 
-Optional default prompt value.
+Type: `String|Function`
+
+Optional default prompt value. Async functions are suported too.
 
 ### format
+
+Type: `Function`
 
 Receive the user input and return the formatted value to be used inside the program.
 The value returned will be added to the response object.
@@ -312,6 +323,14 @@ The function signature is `(val, values)`, where `val` is the value from the cur
     format: val => Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' }).format(val);
 }
 ```
+
+### onState
+
+Type: `Function`
+
+Callback for when the state of the current prompt changes.
+The function signature is `(state)` where `state` is an object with a snapshot of the current state.
+The state object have two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

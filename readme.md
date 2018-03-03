@@ -247,7 +247,8 @@ Almost all prompt objects have the following properties:
   name: String || Function,
   message: String || Function,
   initial: String || Function || Async Function
-  format: Function
+  format: Function,
+  onState: Function
 }
 ```
 
@@ -269,6 +270,8 @@ The above prompt will be skipped if the value of the previous prompt is less tha
 
 ### type
 
+Type: `String|Function`
+
 Defines the type of prompt to display. See the list of [prompt types](#-types) for valid values.
 
 If `type` is a falsy value the prompter will skip that question.
@@ -282,6 +285,8 @@ If `type` is a falsy value the prompter will skip that question.
 
 ### name
 
+Type: `String|Function`
+
 The response will be saved under this key/property in the returned response object.
 In case you have multiple prompts with the same name only the latest response will be stored.
 
@@ -289,13 +294,19 @@ In case you have multiple prompts with the same name only the latest response wi
 
 ### message
 
+Type: `String|Function`
+
 The message to be displayed to the user.
 
 ### initial
 
-Optional default prompt value.
+Type: `String|Function`
+
+Optional default prompt value. Async functions are suported too.
 
 ### format
+
+Type: `Function`
 
 Receive the user input and return the formatted value to be used inside the program.
 The value returned will be added to the response object.
@@ -312,6 +323,14 @@ The function signature is `(val, values)`, where `val` is the value from the cur
     format: val => Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' }).format(val);
 }
 ```
+
+### onState
+
+Type: `Function`
+
+Callback for when the state of the current prompt changes.
+The function signature is `(state)` where `state` is an object with a snapshot of the current state.
+The state object have two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -342,6 +361,7 @@ The function signature is `(val, values)`, where `val` is the value from the cur
 | initial | <code>string</code> | <code>''</code> | Default string value |
 | style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
+| onState | <code>function</code> |  | On state change callback |
 
 
 ### password(message, [initial])
@@ -367,6 +387,7 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | message | <code>string</code> | Prompt message to display |
 | initial | <code>string</code> | Default string value |
 | format | <code>function</code> | Receive user input. The returned value will be added to the response object |
+| onState | <code>function</code> | On state change callback | 
 
 
 ### invisible(message, [initial])
@@ -393,6 +414,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 | message | <code>string</code> | Prompt message to display |
 | initial | <code>string</code> | Default string value |
 | format | <code>function</code> | Receive user input. The returned value will be added to the response object |
+| onState | <code>function</code> | On state change callback |
 
 
 ### number(message, initial, [max], [min], [style])
@@ -424,7 +446,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | max | <code>number</code> | `Infinity` | Max value |
 | min | <code>number</code> | `-infinity` | Min value |
 | style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
-
+| onState | <code>function</code> |  | On state change callback | 
 
 ### confirm(message, [initial])
 > Classic yes/no prompt.
@@ -450,7 +472,7 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>boolean</code> | <code>false</code> | Default value |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-
+| onState | <code>function</code> |  | On state change callback | 
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -477,6 +499,7 @@ string separated by `separator`.
 | initial | <code>boolean</code> | <code>false</code> | Default value |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | seperator | <code>string</code> | <code>','</code> | String seperator. Will trim all white-spaces from start and end of string |
+| onState | <code>function</code> |  | On state change callback |
 
 
 ### toggle(message, [initial], [active], [inactive])
@@ -506,7 +529,7 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | active | <code>string</code> | <code>'on'</code> | Text for `active` state |
 | inactive | <code>string</code> | <code>'off'</code> | Text for `inactive` state |
-
+| onState | <code>function</code> |  | On state change callback |
 
 ### select(message, choices, [initial])
 > Interactive select prompt.
@@ -537,6 +560,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | initial | <code>number</code> | Index of default value |
 | format | <code>function</code> | Receive user input. The returned value will be added to the response object |
 | choices | <code>Array</code> | Array of choices objects `[{ title, value }, ...]` |
+| onState | <code>function</code> | On state change callback |
 
 
 ### multiselect(message, choices, [initial], [max], [hint])
@@ -572,6 +596,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | choices | <code>Array</code> | Array of choices objects `[{ title, value, [selected] }, ...]` |
 | max | <code>number</code> | Max select |
 | hint | <code>string</code> | Hint to display user |
+| onState | <code>function</code> | On state change callback | 
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
@@ -613,7 +638,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | suggest | <code>function</code> | By `title` string | Filter function. Defaults to stort by `title` property. `suggest` should always return a promise |
 | limit | <code>number</code> | <code>10</code> | Max number of results to show |
 | style | <code>string</code> | `'default'` | Render style (`default`, `password`, `invisible`) |
-
+| onState | <code>function</code> |  | On state change callback |
 
 Example on what a `suggest` function might look like:
 ```js

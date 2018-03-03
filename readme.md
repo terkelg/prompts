@@ -429,7 +429,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 ### confirm(message, [initial])
 > Classic yes/no prompt.
 
-Hit `y` or `n` to confirm/reject.
+Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/confirm.gif" alt="confirm prompt" width="499" height="103" />
@@ -542,7 +542,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 ### multiselect(message, choices, [initial], [max], [hint])
 > Interactive multi-select prompt.
 
-Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list. You can also use <kbd>right</kbd> select and <kbd>left</kbd> to deselect.
+Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list. You can also use <kbd>right</kbd> to select and <kbd>left</kbd> to deselect.
 By default this prompt returns an `array` containing the **values** of the selected items - not their display title.
 
 #### Example

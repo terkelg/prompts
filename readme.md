@@ -398,8 +398,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 ### number(message, initial, [max], [min], [style])
 > Prompts user for number input. 
 
-You can use `up`/`down` to increase/decrease the value.
-Only numbers are allowed as input. Default resolve value is `null`.
+You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrease the value. Only numbers are allowed as input.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="number prompt" width="499" height="103" />
@@ -483,7 +482,7 @@ string separated by `separator`.
 ### toggle(message, [initial], [active], [inactive])
 > Interactive toggle/switch prompt.
 
-Use tab or arrow keys to switch between options.
+Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch between options.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/toggle.gif" alt="toggle prompt" width="499" height="103" />
@@ -512,7 +511,7 @@ Use tab or arrow keys to switch between options.
 ### select(message, choices, [initial])
 > Interactive select prompt.
 
-Use space to select/unselect and arrow keys to navigate the list.
+Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/select.gif" alt="select prompt" width="499" height="130" />
@@ -543,7 +542,7 @@ Use space to select/unselect and arrow keys to navigate the list.
 ### multiselect(message, choices, [initial], [max], [hint])
 > Interactive multi-select prompt.
 
-Use space to select/unselect and arrow keys to navigate the list. 
+Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list. You can also use <kbd>right</kbd> select and <kbd>left</kbd> to deselect.
 By default this prompt returns an `array` containing the **values** of the selected items - not their display title.
 
 #### Example
@@ -581,7 +580,8 @@ If you want to predefine selected values, give the choice object an `selected` p
 ### autocomplete(message, choices, [initial], [suggest], [limit], [style])
 > Interactive auto complete prompt. 
 
-The prompt will list options based on user input. 
+The prompt will list options based on user input. Type to filter the list.
+Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Hit <kbd>enter</kbd> to select the highlighted item below the prompt. 
 
 The default suggests function is sorting based on the `title` property of the choices.
 You can overwrite how choices are being filtered by passing your own suggest function.

@@ -207,7 +207,7 @@ Type: `Function`<br>
 
 Programmatically inject responses. This enables you to prepare the responses ahead of time.
 If any injected values are found the prompt is immediately resolved with the injected value.
-This feature is inteded for testing only.
+This feature is intended for testing only.
 
 #### values
 

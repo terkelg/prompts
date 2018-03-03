@@ -361,6 +361,7 @@ The state object have two properties `value` and `aborted`. E.g `{ value: 'This 
 | initial | <code>string</code> | <code>''</code> | Default string value |
 | style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
+| onState | <code>function</code> |  | On state change callback |
 
 
 ### password(message, [initial])
@@ -386,6 +387,7 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | message | <code>string</code> | Prompt message to display |
 | initial | <code>string</code> | Default string value |
 | format | <code>function</code> | Receive user input. The returned value will be added to the response object |
+| onState | <code>function</code> | On state change callback | 
 
 
 ### invisible(message, [initial])
@@ -412,6 +414,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 | message | <code>string</code> | Prompt message to display |
 | initial | <code>string</code> | Default string value |
 | format | <code>function</code> | Receive user input. The returned value will be added to the response object |
+| onState | <code>function</code> | On state change callback |
 
 
 ### number(message, initial, [max], [min], [style])
@@ -444,7 +447,7 @@ Only numbers are allowed as input. Default resolve value is `null`.
 | max | <code>number</code> | `Infinity` | Max value |
 | min | <code>number</code> | `-infinity` | Min value |
 | style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
-
+| onState | <code>function</code> |  | On state change callback | 
 
 ### confirm(message, [initial])
 > Classic yes/no prompt.
@@ -470,7 +473,7 @@ Hit `y` or `n` to confirm/reject.
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>boolean</code> | <code>false</code> | Default value |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-
+| onState | <code>function</code> |  | On state change callback | 
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -497,6 +500,7 @@ string separated by `separator`.
 | initial | <code>boolean</code> | <code>false</code> | Default value |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | seperator | <code>string</code> | <code>','</code> | String seperator. Will trim all white-spaces from start and end of string |
+| onState | <code>function</code> |  | On state change callback |
 
 
 ### toggle(message, [initial], [active], [inactive])
@@ -526,7 +530,7 @@ Use tab or arrow keys to switch between options.
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | active | <code>string</code> | <code>'on'</code> | Text for `active` state |
 | inactive | <code>string</code> | <code>'off'</code> | Text for `inactive` state |
-
+| onState | <code>function</code> |  | On state change callback |
 
 ### select(message, choices, [initial])
 > Interactive select prompt.
@@ -557,6 +561,7 @@ Use space to select/unselect and arrow keys to navigate the list.
 | initial | <code>number</code> | Index of default value |
 | format | <code>function</code> | Receive user input. The returned value will be added to the response object |
 | choices | <code>Array</code> | Array of choices objects `[{ title, value }, ...]` |
+| onState | <code>function</code> | On state change callback |
 
 
 ### multiselect(message, choices, [initial], [max], [hint])
@@ -592,6 +597,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | choices | <code>Array</code> | Array of choices objects `[{ title, value, [selected] }, ...]` |
 | max | <code>number</code> | Max select |
 | hint | <code>string</code> | Hint to display user |
+| onState | <code>function</code> | On state change callback | 
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
@@ -632,7 +638,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | suggest | <code>function</code> | By `title` string | Filter function. Defaults to stort by `title` property. Suggest should always return a promise |
 | limit | <code>number</code> | <code>10</code> | Max number of results to show |
 | style | <code>string</code> | `'default'` | Render style (`default`, `password`, `invisible`) |
-
+| onState | <code>function</code> |  | On state change callback |
 
 Example on what a `suggest` function might look like:
 ```js

@@ -7,7 +7,8 @@ const { prompt } = require('./lib');
         {
             type: 'text',
             name: 'twitter',
-            message: `What's your twitter handle?`
+            message: `What's your twitter handle?`,
+            defaulter: '@prompt'
         },
         {
             type: 'password',
@@ -27,12 +28,12 @@ const { prompt } = require('./lib');
         {
             type: 'confirm',
             name: 'confirmed',
-            message: 'Can you confirm?' 
+            message: 'Can you confirm?'
         },
         {
             type: 'list',
             name: 'keywords',
-            message: 'Enter keywords' 
+            message: 'Enter keywords'
         },
         {
             type: 'toggle',
@@ -46,7 +47,7 @@ const { prompt } = require('./lib');
             name: 'color',
             message: 'Pick a color',
             choices: [
-              { title: 'Red', value: '#ff0000' }, 
+              { title: 'Red', value: '#ff0000' },
               { title: 'Green', value: '#00ff00' },
               { title: 'Blue', value: '#0000ff' }
             ]

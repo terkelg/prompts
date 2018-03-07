@@ -247,7 +247,7 @@ Almost all prompt objects have the following properties:
   name: String || Function,
   message: String || Function,
   initial: String || Function || Async Function
-  format: Function,
+  format: Function || Async Function,
   onState: Function
 }
 ```

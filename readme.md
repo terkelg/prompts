@@ -188,13 +188,14 @@ Default: `() => {}`
 Callback that's invoked when the user cancels/exits the prompt.
 Its signature is `(prompt)` where `prompt` is the current prompt object.
 
-Return `true` to quit the prompt loop and return all collected responses so far, otherwise continue to iterate prompt objects.
+Return `true` to continue and prevent the prompt loop from aborting.
+On cancel responses collected so far are returned.
 
 **Example:**
 ```js
 let questions = [{ ... }];
 let onCancel = prompt => {
-  console.log('Lets stop prompting');
+  console.log('Never stop prompting!');
   return true;
 }
 let response = await prompts(questions, { onCancel });

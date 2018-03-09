@@ -31,16 +31,16 @@ const { prompt } = require('./lib');
             message: 'Can you confirm?' 
         },
         {
+            type: prev => prev && 'toggle',
+            name: 'confirmtoggle',
+            message: 'Can you confirm again?',
+            active: 'yes',
+            inactive: 'no'
+        },
+        {
             type: 'list',
             name: 'keywords',
             message: 'Enter keywords' 
-        },
-        {
-            type: 'toggle',
-            name: 'confirmtoggle',
-            message: 'Can you confirm?',
-            active: 'yes',
-            inactive: 'no'
         },
         {
             type: 'select',

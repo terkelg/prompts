@@ -8,6 +8,7 @@ const { prompt } = require('./lib');
             type: 'text',
             name: 'twitter',
             message: `What's your twitter handle?`,
+            initial: 'terkelg',
             format: v => `@${v}`
         },
         {

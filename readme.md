@@ -428,7 +428,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 
 ```js
 {
-  type: 'number'
+  type: 'number',
   name: 'value',
   message: 'How old are you?',
   initial: 0,
@@ -459,7 +459,7 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 
 ```js
 {
-  type: 'confirm'
+  type: 'confirm',
   name: 'value',
   message: 'Can you confirm?',
   initial: true
@@ -483,7 +483,7 @@ string separated by `separator`.
 
 ```js
 {
-  type: 'list'
+  type: 'list',
   name: 'value',
   message: 'Enter keywords',
   initial: '',

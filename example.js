@@ -67,6 +67,7 @@ const { prompt } = require('./lib');
             type: 'autocomplete',
             name: 'value',
             message: 'Pick your favorite actor',
+            initial: 1,
             choices: [
                 { title: 'Cage' },
                 { title: 'Clooney', value: 'silver-fox' },

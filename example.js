@@ -8,6 +8,7 @@ const { prompt } = require('./lib');
             type: 'text',
             name: 'twitter',
             message: `What's your twitter handle?`,
+            initial: 'terkelg',
             format: v => `@${v}`
         },
         {
@@ -66,6 +67,7 @@ const { prompt } = require('./lib');
             type: 'autocomplete',
             name: 'value',
             message: 'Pick your favorite actor',
+            initial: 1,
             choices: [
                 { title: 'Cage' },
                 { title: 'Clooney', value: 'silver-fox' },

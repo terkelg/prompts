@@ -41,13 +41,21 @@ test('injects', async t => {
   prompt.inject(obj);
   t.same(prompt._map, obj, 'injects key:val object of answers');
 
-  let foo = await prompt({ name:'a' });
+  let foo = await prompt({ name:'a', message:'a' });
   t.same(foo, { a:1 }, 'immediately returns object with injected answer');
   t.same(prompt._map, { b:2, c:3 }, 'deletes the `a` key from internal map');
 
-  let bar = await prompt([{ name:'b' }, { name:'c' }]);
+  let bar = await prompt([{ name:'b', message:'b' }, { name:'c', message:'b' }]);
   t.same(bar, { b:2, c:3 }, 'immediately handles two prompts at once');
   t.same(prompt._map, {}, 'leaves behind empty internal mapping when exhausted');
 
+  t.end();
+})
+
+test('can use a function for message', async t => {
+  let obj = { foo:'foo' };
+  prompt.inject(obj);
+  let foo = await prompt([{type:'text', name:'foo', message:() => 'functional message'}])
+  t.same(foo, { foo:'foo' });
   t.end();
 })

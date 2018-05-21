@@ -636,7 +636,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | message | <code>string</code> |  | Prompt message to display |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
 | choices | <code>Array</code> |  | Array of auto-complete choices objects `[{ title, value }, ...]` |
-| suggest | <code>function</code> | By `title` string | Filter function. Defaults to stort by `title` property. `suggest` should always return a promise |
+| suggest | <code>function</code> | By `title` string | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise |
 | limit | <code>number</code> | <code>10</code> | Max number of results to show |
 | style | <code>string</code> | `'default'` | Render style (`default`, `password`, `invisible`) |
 | onState | <code>function</code> |  | On state change callback |

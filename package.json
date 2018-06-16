@@ -12,7 +12,8 @@
   },
   "files": [
     "lib",
-    "dist"
+    "dist",
+    "index.js"
   ],
   "scripts": {
     "start": "node lib/index.js",

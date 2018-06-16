@@ -4,17 +4,19 @@
   "description": "Lightweight, beautiful and user-friendly prompts",
   "homepage": "https://github.com/terkelg/prompts",
   "repository": "terkelg/prompts",
-  "main": "lib/index.js",
+  "main": "index.js",
   "author": {
     "name": "Terkel Gjervig",
     "email": "terkel@terkel.com",
     "url": "https://terkel.com"
   },
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ],
   "scripts": {
     "start": "node lib/index.js",
+    "build": "babel lib -d dist",
     "test": "tape test/*.js | tap-spec"
   },
   "keywords": [
@@ -31,10 +33,13 @@
     "sisteransi": "^0.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.8.0"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">= 6"
   }
 }

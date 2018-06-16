@@ -43,7 +43,7 @@
 $ npm install --save prompts
 ```
 
-> This package uses async/await and requires Node.js 7.6
+> This package supports Node 6 and above
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 

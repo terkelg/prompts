@@ -4,7 +4,7 @@
       "targets": {
         "node": "6"
       }
-    }],
-    "stage-2"
-  ]
+    }]
+  ],
+  "plugins": ["transform-object-rest-spread"]
 }

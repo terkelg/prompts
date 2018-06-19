@@ -18,6 +18,7 @@
   "scripts": {
     "start": "node lib/index.js",
     "build": "babel lib -d dist",
+    "prepublish": "npm run build",
     "test": "tape test/*.js | tap-spec"
   },
   "keywords": [

@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const prompt = require('../lib');
+const prompt = require('../');
 const { prompts } = prompt;
 
 test('basics', t => {
@@ -36,18 +36,21 @@ test('prompts', t => {
   t.equal(Object.keys(prompts).length, types.length, 'all prompts are exported');
 });
 
-test('injects', async t => {
+test('injects', t => {
   let obj = { a:1, b:2, c:3 };
   prompt.inject(obj);
   t.same(prompt._map, obj, 'injects key:val object of answers');
 
-  let foo = await prompt({ name:'a' });
-  t.same(foo, { a:1 }, 'immediately returns object with injected answer');
-  t.same(prompt._map, { b:2, c:3 }, 'deletes the `a` key from internal map');
-
-  let bar = await prompt([{ name:'b' }, { name:'c' }]);
-  t.same(bar, { b:2, c:3 }, 'immediately handles two prompts at once');
-  t.same(prompt._map, {}, 'leaves behind empty internal mapping when exhausted');
-
-  t.end();
+  prompt({ name:'a' })
+    .then(foo => {
+      t.same(foo, { a:1 }, 'immediately returns object with injected answer');
+      t.same(prompt._map, { b:2, c:3 }, 'deletes the `a` key from internal map');
+    
+      prompt([{ name:'b' }, { name:'c' }])
+        .then(bar => {
+          t.same(bar, { b:2, c:3 }, 'immediately handles two prompts at once');
+          t.same(prompt._map, {}, 'leaves behind empty internal mapping when exhausted');
+          t.end();
+    })
+  })
 })

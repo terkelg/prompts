@@ -217,7 +217,7 @@ This feature is intended for testing only.
 
 Type: `Object`
 
-Object with key/values to inject. Resolved values are deleted from the internel inject object.
+Object with key/values to inject. Resolved values are deleted from the internal inject object.
 
 **Example:**
 ```js
@@ -306,7 +306,7 @@ The message to be displayed to the user.
 
 Type: `String|Function`
 
-Optional default prompt value. Async functions are suported too.
+Optional default prompt value. Async functions are supported too.
 
 ### format
 
@@ -502,7 +502,7 @@ string separated by `separator`.
 | message | <code>string</code> |  | Prompt message to display |
 | initial | <code>boolean</code> | <code>false</code> | Default value |
 | format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| seperator | <code>string</code> | <code>','</code> | String seperator. Will trim all white-spaces from start and end of string |
+| separator | <code>string</code> | <code>','</code> | String separator. Will trim all white-spaces from start and end of string |
 | onState | <code>function</code> |  | On state change callback |
 
 

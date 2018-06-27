@@ -31,15 +31,15 @@
     "input"
   ],
   "dependencies": {
-    "clorox": "^1.0.1",
-    "sisteransi": "^0.1.0"
+    "clorox": "^1.0.3",
+    "sisteransi": "^0.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.8.0"
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1"
   },
   "engines": {
     "node": ">= 6"

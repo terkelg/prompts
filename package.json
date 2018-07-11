@@ -31,7 +31,7 @@
     "input"
   ],
   "dependencies": {
-    "clorox": "^1.0.3",
+    "kleur": "^1.0.0",
     "sisteransi": "^0.1.1"
   },
   "devDependencies": {

@@ -57,10 +57,11 @@ const prompts = require('prompts');
 const response = await prompts({
     type: 'number',
     name: 'value',
-    message: 'How old are you?'
+    message: 'How old are you?',
+    validate: value => value < 18 ? `Nightclub is 18+ only` : true
 });
 
-console.log(response); // => { value: 23 }
+console.log(response); // => { value: 24 }
 ```
 
 > Examples are meant to be illustrative. `await` calls need to be run within an async function. See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js).
@@ -345,6 +346,8 @@ The state object have two properties `value` and `aborted`. E.g `{ value: 'This 
 ### text(message, [initial], [style])
 > Text prompt for free text input.
 
+Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
+
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/text.gif" alt="text prompt" width="499" height="103" />
 
@@ -359,13 +362,14 @@ The state object have two properties `value` and `aborted`. E.g `{ value: 'This 
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>string</code> | <code>''</code> | Default string value |
-| style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `string` | Default string value |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onState | `function` | On state change callback |
 
 
 ### password(message, [initial])
@@ -388,10 +392,11 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| initial | <code>string</code> | Default string value |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> | On state change callback | 
+| message | `string` | Prompt message to display |
+| initial | `string` | Default string value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onState | `function` | On state change callback | 
 
 
 ### invisible(message, [initial])
@@ -415,16 +420,17 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| initial | <code>string</code> | Default string value |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> | On state change callback |
+| message | `string` | Prompt message to display |
+| initial | `string` | Default string value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onState | `function` | On state change callback |
 
 
 ### number(message, initial, [max], [min], [style])
 > Prompts user for number input. 
 
-You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrease the value. Only numbers are allowed as input.
+You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrease the value. Only numbers are allowed as input. Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="number prompt" width="499" height="103" />
@@ -442,15 +448,19 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>number</code> | `null` | Default number value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| max | <code>number</code> | `Infinity` | Max value |
-| min | <code>number</code> | `-infinity` | Min value |
-| style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
-| onState | <code>function</code> |  | On state change callback | 
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `number` | Default number value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| max | `number` | Max value. Defaults to `Infinity` |
+| min | `number` | Min value. Defaults to `-infinity` |
+| float | `boolean` | Allow floating point inputs. Defaults to `false` |
+| round | `number` | Round `float` values to x decimals. Defaults to `2` |
+| increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
+| onState | `function` | On state change callback | 
 
 ### confirm(message, [initial])
 > Classic yes/no prompt.
@@ -471,12 +481,12 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>boolean</code> | <code>false</code> | Default value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> |  | On state change callback | 
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `boolean` | Default value. Default is `false` |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| onState | `function` | On state change callback | 
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -497,13 +507,13 @@ string separated by `separator`.
 <img src="https://github.com/terkelg/prompts/raw/master/media/list.gif" alt="list prompt" width="499" height="103" />
 
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>boolean</code> | <code>false</code> | Default value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| separator | <code>string</code> | <code>','</code> | String separator. Will trim all white-spaces from start and end of string |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `boolean` | Default value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| separator | `string` | String separator. Will trim all white-spaces from start and end of string. Defaults to `','`  |
+| onState | `function` | On state change callback |
 
 
 ### toggle(message, [initial], [active], [inactive])
@@ -526,14 +536,14 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>boolean</code> | <code>false</code> | Default value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| active | <code>string</code> | <code>'on'</code> | Text for `active` state |
-| inactive | <code>string</code> | <code>'off'</code> | Text for `inactive` state |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `boolean` | Default value. Defaults to `false` |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| active | `string` | Text for `active` state. Defaults to `'on'` |
+| inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
+| onState | `function` | On state change callback |
 
 ### select(message, choices, [initial])
 > Interactive select prompt.
@@ -560,11 +570,11 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| initial | <code>number</code> | Index of default value |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| choices | <code>Array</code> | Array of choices objects `[{ title, value }, ...]` |
-| onState | <code>function</code> | On state change callback |
+| message | `string` | Prompt message to display |
+| initial | `number` | Index of default value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| choices | `Array` | Array of choices objects `[{ title, value }, ...]` |
+| onState | `function` | On state change callback |
 
 
 ### multiselect(message, choices, [initial], [max], [hint])
@@ -595,12 +605,12 @@ By default this prompt returns an `array` containing the **values** of the selec
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| choices | <code>Array</code> | Array of choices objects `[{ title, value, [selected] }, ...]` |
-| max | <code>number</code> | Max select |
-| hint | <code>string</code> | Hint to display user |
-| onState | <code>function</code> | On state change callback | 
+| message | `string` | Prompt message to display |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| choices | `Array` | Array of choices objects `[{ title, value, [selected] }, ...]` |
+| max | `number` | Max select |
+| hint | `string` | Hint to display user |
+| onState | `function` | On state change callback | 
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
@@ -634,15 +644,15 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| choices | <code>Array</code> |  | Array of auto-complete choices objects `[{ title, value }, ...]` |
-| suggest | <code>function</code> | By `title` string | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise |
-| limit | <code>number</code> | <code>10</code> | Max number of results to show |
-| style | <code>string</code> | `'default'` | Render style (`default`, `password`, `invisible`) |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| choices | `Array` | Array of auto-complete choices objects `[{ title, value }, ...]` |
+| suggest | `function` | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise. Filters using `title` by default  |
+| limit | `number` | Max number of results to show. Defaults to `10` |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
+| onState | `function` | On state change callback |
 
 Example on what a `suggest` function might look like:
 ```js

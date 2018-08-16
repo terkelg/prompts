@@ -652,6 +652,8 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | suggest | `function` | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise. Filters using `title` by default  |
 | limit | `number` | Max number of results to show. Defaults to `10` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
+| initial | Default initial value | 
+| fallback | Fallback message when no match is found. Defaults to `initial` value if provided | 
 | onState | `function` | On state change callback |
 
 Example on what a `suggest` function might look like:

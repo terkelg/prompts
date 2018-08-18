@@ -49,7 +49,7 @@ $ npm install --save prompts
 
 ## ❯ Usage
 
-<img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="example prompt" width="499" height="103" />
+<img src="https://github.com/terkelg/prompts/raw/master/media/example.gif" alt="example prompt" width="499" height="103" />
 
 ```js
 const prompts = require('prompts');

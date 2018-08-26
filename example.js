@@ -1,6 +1,6 @@
 'use strict';
 
-const { prompt } = require('./lib');
+const { prompt } = require('./');
 
 (async function(){
     const questions = [

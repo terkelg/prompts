@@ -1,6 +1,6 @@
 {
   "name": "prompts",
-  "version": "0.1.14",
+  "version": "1.0.0",
   "description": "Lightweight, beautiful and user-friendly prompts",
   "license": "MIT",
   "repository": "terkelg/prompts",

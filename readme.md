@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" height="120" />
 </p>
- 
+
 <h1 align="center">❯ Prompts</h1>
 
 <p align="center">
@@ -23,7 +23,7 @@
 
 <p align="center">
   <b>Lightweight, beautiful and user-friendly interactive prompts</b></br>
-  <sub>>_ Easy to use CLI prompts to enquire users for information▌<sub> 
+  <sub>>_ Easy to use CLI prompts to enquire users for information▌<sub>
 </p>
 
 <br />
@@ -33,7 +33,7 @@
 * **Promised**: uses promises and `async`/`await`. No callback hell.
 * **Flexible**: all prompts are independent and can be used on their own.
 * **Testable**: provides a way to submit answers programmatically.
-* **Unified**: consistent experience across all prompts. 
+* **Unified**: consistent experience across all prompts.
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -175,7 +175,7 @@ Type: `Function`<br>
 Default: `() => {}`
 
 Callback that's invoked after each prompt submission.
-Its signature is `(prompt, response)` where `prompt` is the current prompt object.
+Its signature is `(prompt, answer, answers)` where `prompt` is the current prompt object, `answer` the user answer to the current question and `answers` the user answers so far.
 
 Return `true` to quit the prompt chain and return all collected responses so far, otherwise continue to iterate prompt objects.
 
@@ -192,7 +192,7 @@ Type: `Function`<br>
 Default: `() => {}`
 
 Callback that's invoked when the user cancels/exits the prompt.
-Its signature is `(prompt)` where `prompt` is the current prompt object.
+Its signature is `(prompt, answers)` where `prompt` is the current prompt object and `answers` the user answers so far.
 
 Return `true` to continue and prevent the prompt loop from aborting.
 On cancel responses collected so far are returned.
@@ -261,7 +261,7 @@ Almost all prompt objects have the following properties:
 
 Each property be of type `function` and will be invoked right before prompting the user.
 
-The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt, 
+The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt,
 `values` is the response object with all values collected so far and `prompt` is the previous prompt object.
 
 **Function example:**
@@ -395,7 +395,7 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | initial | `string` | Default string value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` | 
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
 ### invisible(message, [initial])
@@ -426,7 +426,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 
 
 ### number(message, initial, [max], [min], [style])
-> Prompts user for number input. 
+> Prompts user for number input.
 
 You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrease the value. Only numbers are allowed as input. Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 
@@ -458,7 +458,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | round | `number` | Round `float` values to x decimals. Defaults to `2` |
 | increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` | 
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### confirm(message, [initial])
 > Classic yes/no prompt.
@@ -484,7 +484,7 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 | message | `string` | Prompt message to display |
 | initial | `boolean` | Default value. Default is `false` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` | 
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -608,17 +608,17 @@ By default this prompt returns an `array` containing the **values** of the selec
 | choices | `Array` | Array of choices objects `[{ title, value, [selected] }, ...]` |
 | max | `number` | Max select |
 | hint | `string` | Hint to display user |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` | 
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
 
 
 ### autocomplete(message, choices, [initial], [suggest], [limit], [style])
-> Interactive auto complete prompt. 
+> Interactive auto complete prompt.
 
 The prompt will list options based on user input. Type to filter the list.
-Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Hit <kbd>enter</kbd> to select the highlighted item below the prompt. 
+Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
 
 The default suggests function is sorting based on the `title` property of the choices.
 You can overwrite how choices are being filtered by passing your own suggest function.
@@ -650,8 +650,8 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | suggest | `function` | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise. Filters using `title` by default  |
 | limit | `number` | Max number of results to show. Defaults to `10` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
-| initial | Default initial value | 
-| fallback | Fallback message when no match is found. Defaults to `initial` value if provided | 
+| initial | Default initial value |
+| fallback | Fallback message when no match is found. Defaults to `initial` value if provided |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 Example on what a `suggest` function might look like:

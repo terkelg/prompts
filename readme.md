@@ -175,7 +175,7 @@ Type: `Function`<br>
 Default: `() => {}`
 
 Callback that's invoked after each prompt submission.
-Its signature is `(prompt, answer, answers)` where `prompt` is the current prompt object, `answer` the user answer to the current question and `answers` the user answers so far.
+Its signature is `(prompt, answer, answers)` where `prompt` is the current prompt object, `answer` the user answer to the current question and `answers` the user answers so far. Async functions are supported.
 
 Return `true` to quit the prompt chain and return all collected responses so far, otherwise continue to iterate prompt objects.
 
@@ -192,7 +192,7 @@ Type: `Function`<br>
 Default: `() => {}`
 
 Callback that's invoked when the user cancels/exits the prompt.
-Its signature is `(prompt, answers)` where `prompt` is the current prompt object and `answers` the user answers so far.
+Its signature is `(prompt, answers)` where `prompt` is the current prompt object and `answers` the user answers so far. Async functions are supported.
 
 Return `true` to continue and prevent the prompt loop from aborting.
 On cancel responses collected so far are returned.

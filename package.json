@@ -1,8 +1,8 @@
 {
   "name": "prompts",
-  "version": "0.1.13",
+  "version": "1.1.0",
   "description": "Lightweight, beautiful and user-friendly prompts",
-  "homepage": "https://github.com/terkelg/prompts",
+  "license": "MIT",
   "repository": "terkelg/prompts",
   "main": "index.js",
   "author": {
@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "kleur": "^2.0.1",
-    "sisteransi": "^0.1.1"
+    "sisteransi": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

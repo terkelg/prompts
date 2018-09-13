@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" height="120" />
+  <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" />
 </p>
- 
+
 <h1 align="center">❯ Prompts</h1>
 
 <p align="center">
@@ -14,14 +14,16 @@
   <a href="https://npmjs.org/package/prompts">
     <img src="https://img.shields.io/npm/dm/prompts.svg" alt="downloads" />
   </a>
+  <!---
    <a href="https://packagephobia.now.sh/result?p=prompts">
     <img src="https://packagephobia.now.sh/badge?p=prompts" alt="install size" />
   </a>
+  --->
 </p>
 
 <p align="center">
   <b>Lightweight, beautiful and user-friendly interactive prompts</b></br>
-  <sub>>_ Easy to use CLI prompts to enquire users for information▌<sub> 
+  <sub>>_ Easy to use CLI prompts to enquire users for information▌<sub>
 </p>
 
 <br />
@@ -31,7 +33,7 @@
 * **Promised**: uses promises and `async`/`await`. No callback hell.
 * **Flexible**: all prompts are independent and can be used on their own.
 * **Testable**: provides a way to submit answers programmatically.
-* **Unified**: consistent experience across all prompts. 
+* **Unified**: consistent experience across all prompts.
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -49,7 +51,7 @@ $ npm install --save prompts
 
 ## ❯ Usage
 
-<img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="example prompt" width="499" height="103" />
+<img src="https://github.com/terkelg/prompts/raw/master/media/example.gif" alt="example prompt" width="499" height="103" />
 
 ```js
 const prompts = require('prompts');
@@ -57,10 +59,11 @@ const prompts = require('prompts');
 const response = await prompts({
     type: 'number',
     name: 'value',
-    message: 'How old are you?'
+    message: 'How old are you?',
+    validate: value => value < 18 ? `Nightclub is 18+ only` : true
 });
 
-console.log(response); // => { value: 23 }
+console.log(response); // => { value: 24 }
 ```
 
 > Examples are meant to be illustrative. `await` calls need to be run within an async function. See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js).
@@ -172,7 +175,7 @@ Type: `Function`<br>
 Default: `() => {}`
 
 Callback that's invoked after each prompt submission.
-Its signature is `(prompt, response)` where `prompt` is the current prompt object.
+Its signature is `(prompt, answer, answers)` where `prompt` is the current prompt object, `answer` the user answer to the current question and `answers` the user answers so far. Async functions are supported.
 
 Return `true` to quit the prompt chain and return all collected responses so far, otherwise continue to iterate prompt objects.
 
@@ -189,7 +192,7 @@ Type: `Function`<br>
 Default: `() => {}`
 
 Callback that's invoked when the user cancels/exits the prompt.
-Its signature is `(prompt)` where `prompt` is the current prompt object.
+Its signature is `(prompt, answers)` where `prompt` is the current prompt object and `answers` the user answers so far. Async functions are supported.
 
 Return `true` to continue and prevent the prompt loop from aborting.
 On cancel responses collected so far are returned.
@@ -247,18 +250,18 @@ Almost all prompt objects have the following properties:
 
 ```js
 {
-  type: String || Function,
-  name: String || Function,
-  message: String || Function,
-  initial: String || Function || Async Function
-  format: Function || Async Function,
+  type: String | Function,
+  name: String | Function,
+  message: String | Function,
+  initial: String | Function | Async Function
+  format: Function | Async Function,
   onState: Function
 }
 ```
 
 Each property be of type `function` and will be invoked right before prompting the user.
 
-The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt, 
+The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt,
 `values` is the response object with all values collected so far and `prompt` is the previous prompt object.
 
 **Function example:**
@@ -345,6 +348,8 @@ The state object have two properties `value` and `aborted`. E.g `{ value: 'This 
 ### text(message, [initial], [style])
 > Text prompt for free text input.
 
+Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
+
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/text.gif" alt="text prompt" width="499" height="103" />
 
@@ -352,20 +357,19 @@ The state object have two properties `value` and `aborted`. E.g `{ value: 'This 
 {
   type: 'text',
   name: 'value',
-  message: `What's your twitter handle?`,
-  style: 'default',
-  initial: ''
+  message: `What's your twitter handle?`
 }
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>string</code> | <code>''</code> | Default string value |
-| style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `string` | Default string value |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
 ### password(message, [initial])
@@ -380,18 +384,18 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 {
   type: 'password',
   name: 'value',
-  message: 'Tell me a secret',
-  initial '',
+  message: 'Tell me a secret'
 }
 ```
 
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| initial | <code>string</code> | Default string value |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> | On state change callback | 
+| message | `string` | Prompt message to display |
+| initial | `string` | Default string value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
 ### invisible(message, [initial])
@@ -407,24 +411,24 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 {
   type: 'invisible',
   name: 'value',
-  message: 'Enter password',
-  initial: ''
+  message: 'Enter password'
 }
 ```
 
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| initial | <code>string</code> | Default string value |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> | On state change callback |
+| message | `string` | Prompt message to display |
+| initial | `string` | Default string value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
 ### number(message, initial, [max], [min], [style])
-> Prompts user for number input. 
+> Prompts user for number input.
 
-You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrease the value. Only numbers are allowed as input.
+You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrease the value. Only numbers are allowed as input. Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="number prompt" width="499" height="103" />
@@ -442,15 +446,19 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>number</code> | `null` | Default number value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| max | <code>number</code> | `Infinity` | Max value |
-| min | <code>number</code> | `-infinity` | Min value |
-| style | <code>string</code> | <code>'default'</code> | Render style (`default`, `password`, `invisible`) |
-| onState | <code>function</code> |  | On state change callback | 
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `number` | Default number value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| max | `number` | Max value. Defaults to `Infinity` |
+| min | `number` | Min value. Defaults to `-infinity` |
+| float | `boolean` | Allow floating point inputs. Defaults to `false` |
+| round | `number` | Round `float` values to x decimals. Defaults to `2` |
+| increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### confirm(message, [initial])
 > Classic yes/no prompt.
@@ -471,12 +479,12 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>boolean</code> | <code>false</code> | Default value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| onState | <code>function</code> |  | On state change callback | 
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `boolean` | Default value. Default is `false` |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -497,13 +505,13 @@ string separated by `separator`.
 <img src="https://github.com/terkelg/prompts/raw/master/media/list.gif" alt="list prompt" width="499" height="103" />
 
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>boolean</code> | <code>false</code> | Default value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| separator | <code>string</code> | <code>','</code> | String separator. Will trim all white-spaces from start and end of string |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `boolean` | Default value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| separator | `string` | String separator. Will trim all white-spaces from start and end of string. Defaults to `','`  |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
 ### toggle(message, [initial], [active], [inactive])
@@ -526,14 +534,14 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| initial | <code>boolean</code> | <code>false</code> | Default value |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| active | <code>string</code> | <code>'on'</code> | Text for `active` state |
-| inactive | <code>string</code> | <code>'off'</code> | Text for `inactive` state |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| initial | `boolean` | Default value. Defaults to `false` |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| active | `string` | Text for `active` state. Defaults to `'on'` |
+| inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### select(message, choices, [initial])
 > Interactive select prompt.
@@ -560,11 +568,11 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| initial | <code>number</code> | Index of default value |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| choices | <code>Array</code> | Array of choices objects `[{ title, value }, ...]` |
-| onState | <code>function</code> | On state change callback |
+| message | `string` | Prompt message to display |
+| initial | `number` | Index of default value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| choices | `Array` | Array of choices objects `[{ title, value }, ...]` |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
 ### multiselect(message, choices, [initial], [max], [hint])
@@ -595,22 +603,22 @@ By default this prompt returns an `array` containing the **values** of the selec
 #### Options
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Prompt message to display |
-| format | <code>function</code> | Receive user input. The returned value will be added to the response object |
-| choices | <code>Array</code> | Array of choices objects `[{ title, value, [selected] }, ...]` |
-| max | <code>number</code> | Max select |
-| hint | <code>string</code> | Hint to display user |
-| onState | <code>function</code> | On state change callback | 
+| message | `string` | Prompt message to display |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| choices | `Array` | Array of choices objects `[{ title, value, [selected] }, ...]` |
+| max | `number` | Max select |
+| hint | `string` | Hint to display user |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
 
 
 ### autocomplete(message, choices, [initial], [suggest], [limit], [style])
-> Interactive auto complete prompt. 
+> Interactive auto complete prompt.
 
 The prompt will list options based on user input. Type to filter the list.
-Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Hit <kbd>enter</kbd> to select the highlighted item below the prompt. 
+Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
 
 The default suggests function is sorting based on the `title` property of the choices.
 You can overwrite how choices are being filtered by passing your own suggest function.
@@ -634,15 +642,17 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 ```
 
 #### Options
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | Prompt message to display |
-| format | <code>function</code> |  | Receive user input. The returned value will be added to the response object |
-| choices | <code>Array</code> |  | Array of auto-complete choices objects `[{ title, value }, ...]` |
-| suggest | <code>function</code> | By `title` string | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise |
-| limit | <code>number</code> | <code>10</code> | Max number of results to show |
-| style | <code>string</code> | `'default'` | Render style (`default`, `password`, `invisible`) |
-| onState | <code>function</code> |  | On state change callback |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | `string` | Prompt message to display |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| choices | `Array` | Array of auto-complete choices objects `[{ title, value }, ...]` |
+| suggest | `function` | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise. Filters using `title` by default  |
+| limit | `number` | Max number of results to show. Defaults to `10` |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
+| initial | Default initial value |
+| fallback | Fallback message when no match is found. Defaults to `initial` value if provided |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 Example on what a `suggest` function might look like:
 ```js

@@ -28,7 +28,12 @@
     "prompt",
     "interface",
     "command-line",
-    "input"
+    "input",
+    "command",
+    "stdin",
+    "menu",
+    "ask",
+    "interact"
   ],
   "dependencies": {
     "kleur": "^2.0.1",

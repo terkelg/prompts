@@ -255,11 +255,12 @@ Almost all prompt objects have the following properties:
   message: String | Function,
   initial: String | Function | Async Function
   format: Function | Async Function,
-  onState: Function
+  onState: Function,
+  onKeypress: Function
 }
 ```
 
-Each property be of type `function` and will be invoked right before prompting the user.
+Each property can be of type `function` and will be invoked right before prompting the user.
 
 The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt,
 `values` is the response object with all values collected so far and `prompt` is the previous prompt object.
@@ -339,6 +340,13 @@ Callback for when the state of the current prompt changes.
 The function signature is `(state)` where `state` is an object with a snapshot of the current state.
 The state object have two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
 
+### onKeypress
+
+Type: `Function`
+
+Callback for when a key is pressed.
+The function signature is `(value, key) => boolean` where `value` is the current value and where `key` is an object representing the key pressed.
+If the returned value evaluates to `false` the event will be *consumed*.
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
@@ -369,7 +377,8 @@ Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 
 ### password(message, [initial])
@@ -395,7 +404,8 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | initial | `string` | Default string value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 
 ### invisible(message, [initial])
@@ -422,7 +432,8 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 | initial | `string` | Default string value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 
 ### number(message, initial, [max], [min], [style])
@@ -458,7 +469,8 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | round | `number` | Round `float` values to x decimals. Defaults to `2` |
 | increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 ### confirm(message, [initial])
 > Classic yes/no prompt.
@@ -484,7 +496,8 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 | message | `string` | Prompt message to display |
 | initial | `boolean` | Default value. Default is `false` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -511,7 +524,8 @@ string separated by `separator`.
 | initial | `boolean` | Default value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | separator | `string` | String separator. Will trim all white-spaces from start and end of string. Defaults to `','`  |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 
 ### toggle(message, [initial], [active], [inactive])
@@ -541,7 +555,8 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | active | `string` | Text for `active` state. Defaults to `'on'` |
 | inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 ### select(message, choices, [initial])
 > Interactive select prompt.
@@ -572,7 +587,8 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | initial | `number` | Index of default value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | choices | `Array` | Array of choices objects `[{ title, value }, ...]` |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 
 ### multiselect(message, choices, [initial], [max], [hint])
@@ -608,7 +624,8 @@ By default this prompt returns an `array` containing the **values** of the selec
 | choices | `Array` | Array of choices objects `[{ title, value, [selected] }, ...]` |
 | max | `number` | Max select |
 | hint | `string` | Hint to display user |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
@@ -652,7 +669,8 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
 | initial | Default initial value |
 | fallback | Fallback message when no match is found. Defaults to `initial` value if provided |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onKeypress | `function` | Key pressed callback. Function signature has two arguments: `value` and `key` |
 
 Example on what a `suggest` function might look like:
 ```js

@@ -6,10 +6,17 @@ const { prompt } = require('./');
     const questions = [
         {
             type: 'text',
+            name: 'name',
+            message: `What's your name?`,
+            initial: `terkel`,
+            onKeypress: (value, key) => /[a-z ]*/i.test(value)
+        },
+        {
+            type: 'text',
             name: 'twitter',
             message: `What's your twitter handle?`,
             initial: `terkelg`,
-            format: v => `@${v}`
+            format: v => `@${v}`,
         },
         {
             type: 'number',

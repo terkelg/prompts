@@ -213,32 +213,42 @@ let response = await prompts(questions, { onCancel });
 Type: `Function`<br>
 
 Programmatically inject responses. This enables you to prepare the responses ahead of time.
-If any injected values are found the prompt is immediately resolved with the injected value.
+If any injected value is found the prompt is immediately resolved with the injected value.
 This feature is intended for testing only.
 
 #### values
 
-Type: `Object`
+Type: `Array`
 
-Object with key/values to inject. Resolved values are deleted from the internal inject object.
+Array with values to inject. Resolved values are removed from the internal inject array.
+Each value can be an array of values in order to provide answers for a question asked multiple times.
+If a value is an instance of `Error` it will simulate the user cancelling/exiting the prompt.
 
 **Example:**
 ```js
 const prompts = require('prompts');
 
-prompts.inject({ q1: 'a1', q2: 'q2' });
+prompts.inject([ '@terkelg', ['#ff0000', '#0000ff'] ]);
+
 let response = await prompts({
   type: 'text',
-  name: 'q1',
-  message: 'Question 1'
+  name: 'twitter',
+  message: `What's your twitter handle?`
+},
+{
+  type: 'multiselect',
+  name: 'color',
+  message: 'Pick colors',
+  choices: [
+      { title: 'Red', value: '#ff0000' },
+      { title: 'Green', value: '#00ff00' },
+      { title: 'Blue', value: '#0000ff' }
+    ],
 });
 
-// => { q1: 'a1' }
+// => { twitter: 'terkelg', color: [ '#ff0000', '#0000ff' ] }
 
 ```
-
-> When `q1` resolves it's wiped. `q2` doesn't resolve and is left untouched.
-
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 

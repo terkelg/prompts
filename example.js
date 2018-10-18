@@ -61,7 +61,7 @@ const { prompt } = require('./');
         },
         {
             type: 'autocomplete',
-            name: 'value',
+            name: 'actor',
             message: 'Pick your favorite actor',
             initial: 1,
             choices: [
@@ -71,6 +71,21 @@ const { prompt } = require('./');
                 { title: 'Gibson' },
                 { title: 'Grant' },
             ]
+        },
+        {
+            type: 'number',
+            name: 'prompt',
+            message: 'This will be overridden',
+            onPrompt() {
+                this.no = (this.no || 0) + 1;
+                this.msg = `Enter a number (e.g. ${this.no})`;
+                new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+                    if (!this.closed) {
+                        this.onPrompt();
+                        this.render();
+                    }
+                });
+            }
         }
     ];
 

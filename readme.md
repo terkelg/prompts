@@ -255,6 +255,7 @@ Almost all prompt objects have the following properties:
   message: String | Function,
   initial: String | Function | Async Function
   format: Function | Async Function,
+  onPrompt: Function
   onState: Function
 }
 ```
@@ -331,6 +332,24 @@ The function signature is `(val, values)`, where `val` is the value from the cur
 }
 ```
 
+### onPrompt
+
+Type: `Function`
+
+Callback for when the prompt is rendered for the first time.
+The function receives no argument but `this` refers to the current prompt.
+
+**Example:**
+```js
+{
+  type: 'number',
+  message: 'This message will be overridden',
+  onPrompt() {
+    this.msg = 'Enter a number';
+  }
+}
+```
+
 ### onState
 
 Type: `Function`
@@ -363,12 +382,13 @@ Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `string` | Default string value |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
@@ -390,11 +410,12 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `string` | Default string value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
@@ -417,11 +438,12 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `string` | Default string value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
@@ -447,7 +469,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `number` | Default number value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
@@ -458,6 +480,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | round | `number` | Round `float` values to x decimals. Defaults to `2` |
 | increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### confirm(message, [initial])
@@ -480,10 +503,11 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `boolean` | Default value. Default is `false` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### list(message, [initial])
@@ -506,11 +530,12 @@ string separated by `separator`.
 
 
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `boolean` | Default value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | separator | `string` | String separator. Will trim all white-spaces from start and end of string. Defaults to `','`  |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
@@ -535,12 +560,13 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `boolean` | Default value. Defaults to `false` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | active | `string` | Text for `active` state. Defaults to `'on'` |
 | inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 ### select(message, choices, [initial])
@@ -567,11 +593,12 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `number` | Index of default value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | choices | `Array` | Array of choices objects `[{ title, value }, ...]` |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
@@ -602,12 +629,13 @@ By default this prompt returns an `array` containing the **values** of the selec
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | choices | `Array` | Array of choices objects `[{ title, value, [selected] }, ...]` |
 | max | `number` | Max select |
 | hint | `string` | Hint to display user |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 This is one of the few prompts that don't take a initial value.
@@ -643,7 +671,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 
 #### Options
 | Param | Type | Description |
-| --- | --- | --- |
+| ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | choices | `Array` | Array of auto-complete choices objects `[{ title, value }, ...]` |
@@ -652,6 +680,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
 | initial | Default initial value |
 | fallback | Fallback message when no match is found. Defaults to `initial` value if provided |
+| onPrompt | `function` | On first render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 Example on what a `suggest` function might look like:

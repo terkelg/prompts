@@ -558,7 +558,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
     message: 'Pick a color',
     choices: [
         { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00' },
+        { title: 'Green', value: '#00ff00', disabled: true },
         { title: 'Blue', value: '#0000ff' }
     ],
     initial: 1
@@ -571,7 +571,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | message | `string` | Prompt message to display |
 | initial | `number` | Index of default value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| choices | `Array` | Array of choices objects `[{ title, value }, ...]` |
+| choices | `Array` | Array of choices objects `[{ title, value, disabled }, ...]` |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
@@ -591,7 +591,7 @@ By default this prompt returns an `array` containing the **values** of the selec
     message: 'Pick colors',
     choices: [
         { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00' },
+        { title: 'Green', value: '#00ff00', disabled: true },
         { title: 'Blue', value: '#0000ff', selected: true }
     ],
     initial: 1,
@@ -605,7 +605,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | --- | --- | --- |
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| choices | `Array` | Array of choices objects `[{ title, value, [selected] }, ...]` |
+| choices | `Array` | Array of choices objects `[{ title, value, disabled, [selected] }, ...]` |
 | max | `number` | Max select |
 | hint | `string` | Hint to display user |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |

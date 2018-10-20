@@ -543,7 +543,7 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 | inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
-### select(message, choices, [initial])
+### select(message, choices, [initial], [warn])
 > Interactive select prompt.
 
 Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list.
@@ -558,7 +558,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
     message: 'Pick a color',
     choices: [
         { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00' },
+        { title: 'Green', value: '#00ff00', disabled: true },
         { title: 'Blue', value: '#0000ff' }
     ],
     initial: 1
@@ -571,11 +571,12 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | message | `string` | Prompt message to display |
 | initial | `number` | Index of default value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| choices | `Array` | Array of choices objects `[{ title, value }, ...]` |
+| warn | `string` | Message to display when selecting a disabled option |
+| choices | `Array` | Array of choices objects `[{ title, value, disabled }, ...]` |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 
-### multiselect(message, choices, [initial], [max], [hint])
+### multiselect(message, choices, [initial], [max], [hint], [warn])
 > Interactive multi-select prompt.
 
 Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list. You can also use <kbd>right</kbd> to select and <kbd>left</kbd> to deselect.
@@ -591,7 +592,7 @@ By default this prompt returns an `array` containing the **values** of the selec
     message: 'Pick colors',
     choices: [
         { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00' },
+        { title: 'Green', value: '#00ff00', disabled: true },
         { title: 'Blue', value: '#0000ff', selected: true }
     ],
     max: 2,
@@ -604,9 +605,10 @@ By default this prompt returns an `array` containing the **values** of the selec
 | --- | --- | --- |
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| choices | `Array` | Array of choices objects `[{ title, value, [selected] }, ...]` |
+| choices | `Array` | Array of choices objects `[{ title, value, disabled, [selected] }, ...]` |
 | max | `number` | Max select |
 | hint | `string` | Hint to display user |
+| warn | `string` | Message to display when selecting a disabled option |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
 This is one of the few prompts that don't take a initial value.

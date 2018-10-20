@@ -594,7 +594,6 @@ By default this prompt returns an `array` containing the **values** of the selec
         { title: 'Green', value: '#00ff00' },
         { title: 'Blue', value: '#0000ff', selected: true }
     ],
-    initial: 1,
     max: 2,
     hint: '- Space to select. Return to submit'
 }

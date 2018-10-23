@@ -53,6 +53,7 @@ const { prompt } = require('./');
             choices: [
               { title: 'Red', value: '#ff0000' }, 
               { title: 'Green', value: '#00ff00' },
+              { title: 'Yellow', value: '#ffff00', disabled: true },
               { title: 'Blue', value: '#0000ff' }
             ]
         },
@@ -62,7 +63,8 @@ const { prompt } = require('./');
             message: 'Pick colors',
             choices: [
                 { title: 'Red', value: '#ff0000' },
-                { title: 'Green', value: '#00ff00' },
+                { title: 'Green', value: '#00ff00', disabled: true },
+                { title: 'Yellow', value: '#ffff00' },
                 { title: 'Blue', value: '#0000ff' }
             ]
         },

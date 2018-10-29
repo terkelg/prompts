@@ -78,9 +78,9 @@ const { prompt } = require('./');
             type: 'number',
             name: 'prompt',
             message: 'This will be overridden',
-            onRender() {
+            onRender(color) {
                 this.no = (this.no || 0) + 1;
-                this.msg = `Enter a number (e.g. ${this.no})`;
+                this.msg = `Enter a number (e.g. ${color.cyan(this.no)})`;
                 setTimeout(() => this.render(), 1000);
             }
         }

@@ -81,9 +81,7 @@ const { prompt } = require('./');
             onRender() {
                 this.no = (this.no || 0) + 1;
                 this.msg = `Enter a number (e.g. ${this.no})`;
-                new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-                    if (!this.closed) this.render();
-                });
+                setTimeout(() => this.render(), 1000);
             }
         }
     ];

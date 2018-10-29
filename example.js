@@ -2,6 +2,8 @@
 
 const { prompt } = require('./');
 
+let interval;
+
 (async function(){
     const questions = [
         {
@@ -79,14 +81,21 @@ const { prompt } = require('./');
             name: 'prompt',
             message: 'This will be overridden',
             onRender(color) {
-                this.no = (this.no || 0) + 1;
+                this.no = (this.no || 1);
                 this.msg = `Enter a number (e.g. ${color.cyan(this.no)})`;
-                setTimeout(() => this.render(), 1000);
+                if (!interval) interval = setInterval(() => {
+                    this.no += 1;
+                    this.render();
+                }, 1000);
             }
         }
     ];
 
-    const answers = await prompt(questions);
+    const answers = await prompt(questions, {onCancel:cleanup, onSubmit:cleanup});
     console.log(answers);
-
 })();
+
+function cleanup() {
+    clearInterval(interval);
+}
+

@@ -4,7 +4,7 @@ const { prompt } = require('./');
 
 let interval;
 
-(async function(){
+(async () => {
     const questions = [
         {
             type: 'text',
@@ -98,4 +98,3 @@ let interval;
 function cleanup() {
     clearInterval(interval);
 }
-

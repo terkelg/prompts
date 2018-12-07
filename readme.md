@@ -655,6 +655,32 @@ This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
 
 
+### date(message, [initial], [warn])
+> Interactive date prompt.
+
+Use <kbd>left</kbd>/<kbd>right</kbd> to navigate. Use <kbd>up</kbd>/<kbd>down</kbd> to change date.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/date.gif" alt="date prompt" width="499" height="130" />
+
+```js
+{
+    type: 'date',
+    name: 'value',
+    message: 'Pick a date',
+    initial: new Date(1997, 09, 12)
+}
+```
+
+#### Options
+| Param | Type | Description |
+| ----- | :--: | ----------- |
+| message | `string` | Prompt message to display |
+| initial | `date` | Default date |
+| onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+
+
 ### autocomplete(message, choices, [initial], [suggest], [limit], [style])
 > Interactive auto complete prompt.
 

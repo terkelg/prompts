@@ -14,6 +14,11 @@ let interval;
             format: v => `@${v}`
         },
         {
+            type: 'date',
+            name: 'birthday',
+            message: `What's your birth day?``
+        },
+        {
             type: 'number',
             name: 'age',
             message: 'How old are you?',

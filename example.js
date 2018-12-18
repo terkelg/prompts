@@ -16,7 +16,8 @@ let interval;
         {
             type: 'date',
             name: 'birthday',
-            message: `What's your birth day?``
+            message: `What's your birth day?`,
+            validate: date => date > Date.now() ? `Your birth day can't be in the future` : true
         },
         {
             type: 'number',

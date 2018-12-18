@@ -668,7 +668,8 @@ Use <kbd>left</kbd>/<kbd>right</kbd> to navigate. Use <kbd>up</kbd>/<kbd>down</k
     type: 'date',
     name: 'value',
     message: 'Pick a date',
-    initial: new Date(1997, 09, 12)
+    initial: new Date(1997, 09, 12),
+    validate: date => date > Date.now() ? 'Not in the future' : true
 }
 ```
 
@@ -677,6 +678,7 @@ Use <kbd>left</kbd>/<kbd>right</kbd> to navigate. Use <kbd>up</kbd>/<kbd>down</k
 | ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | initial | `date` | Default date |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
@@ -717,8 +719,8 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | suggest | `function` | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise. Filters using `title` by default  |
 | limit | `number` | Max number of results to show. Defaults to `10` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
-| initial | Default initial value |
-| fallback | Fallback message when no match is found. Defaults to `initial` value if provided |
+| initial |  | Default initial value |
+| fallback |  | Fallback message when no match is found. Defaults to `initial` value if provided |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 

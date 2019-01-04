@@ -581,7 +581,7 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
-### select(message, choices, [initial], [warn])
+### select(message, choices, [initial], [hint], [warn])
 > Interactive select prompt.
 
 Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list.
@@ -609,6 +609,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | message | `string` | Prompt message to display |
 | initial | `number` | Index of default value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
+| hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |
 | choices | `Array` | Array of choices objects `[{ title, value, disabled }, ...]` |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
@@ -646,7 +647,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | choices | `Array` | Array of choices objects `[{ title, value, disabled, [selected] }, ...]` |
 | max | `number` | Max select |
-| hint | `string` | Hint to display user |
+| hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |

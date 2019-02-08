@@ -36,16 +36,16 @@
     "interact"
   ],
   "dependencies": {
-    "kleur": "^3.0.0",
+    "kleur": "^3.0.2",
     "sisteransi": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/preset-env": "^7.3.1",
     "tap-spec": "^5.0.0",
-    "tape": "^4.9.1"
+    "tape": "^4.9.2"
   },
   "engines": {
     "node": ">= 6"

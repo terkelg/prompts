@@ -9,5 +9,5 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{json,yml,md}]
+[*.{js,json,yml,md}]
 indent_style = space

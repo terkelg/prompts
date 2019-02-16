@@ -51,6 +51,6 @@ test('injects', t => {
           t.same(bar, { b:2, c:3 }, 'immediately handles two prompts at once');
           t.same(prompt._injected, [], 'leaves behind empty internal array when exhausted');
           t.end();
-    })
-  })
-})
+        });
+    });
+});

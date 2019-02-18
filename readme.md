@@ -755,7 +755,7 @@ Default locales:
 }
 ```
 
-### Formatting Tokens
+#### Formatting Tokens
 
 <table class="table table-striped table-bordered">
   <tbody>

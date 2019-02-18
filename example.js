@@ -17,6 +17,7 @@ let interval;
             type: 'date',
             name: 'birthday',
             message: `What's your birth day?`,
+            mask: '"Year:" YYYY, "Month:" MM, "Day:" DD \\\\\\\\||// \\Hour: HH, \\Minute: mm, "Seconds:" ss',
             validate: date => date > Date.now() ? `Your birth day can't be in the future` : true
         },
         {

@@ -764,7 +764,7 @@ Default locales:
       <th>Output</th>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Month</u></td>
+      <td colspan="2" align="center"><u>Month</u></td>
     </tr>
     <tr>
       <td>M</td>
@@ -783,7 +783,7 @@ Default locales:
       <td>January February ... November December</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Day of Month</u></td>
+      <td colspan="2" align="center"><u>Day of Month</u></td>
     </tr>
     <tr>
       <td>D</td>
@@ -798,7 +798,7 @@ Default locales:
       <td>01 02 ... 30 31</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Day of Week</u></td>
+      <td colspan="2" align="center"><u>Day of Week</u></td>
     </tr>
     <tr>
       <td>d</td>
@@ -813,7 +813,7 @@ Default locales:
       <td>Sunday Monday ... Friday Saturday</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Year</u></td>
+      <td colspan="2" align="center"><u>Year</u></td>
     </tr>
     <tr>
       <td>YY</td>
@@ -824,7 +824,7 @@ Default locales:
       <td>1970 1971 ... 2029 2030</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>AM/PM</u></td>
+      <td colspan="2" align="center"><u>AM/PM</u></td>
     </tr>
     <tr>
       <td>A</td>
@@ -835,7 +835,7 @@ Default locales:
       <td>am pm</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Hour</u></td>
+      <td colspan="2" align="center"><u>Hour</u></td>
     </tr>
     <tr>
       <td>H</td>
@@ -854,7 +854,7 @@ Default locales:
       <td>01 02 ... 11 12</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Minute</u></td>
+      <td colspan="2" align="center"><u>Minute</u></td>
     </tr>
     <tr>
       <td>m</td>
@@ -865,7 +865,7 @@ Default locales:
       <td>00 01 ... 58 59</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Second</u></td>
+      <td colspan="2" align="center"><u>Second</u></td>
     </tr>
     <tr>
       <td>s</td>
@@ -876,7 +876,7 @@ Default locales:
       <td>00 01 ... 58 59</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align: center"><u>Fractional Second</u></td>
+      <td colspan="2" align="center"><b>Fractional Second</b></td>
     </tr>
     <tr>
       <td>S</td>

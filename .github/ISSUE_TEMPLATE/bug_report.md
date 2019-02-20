@@ -22,7 +22,7 @@ A clear and concise description of what you expected to happen.
 
 ### System
 
-- OS: [e.g. iOS]
+- OS: [e.g. MacOS 10.14.3]
 - Terminal: [e.g. iTerm, PowerShell]
 - Node version: `node -v`
 

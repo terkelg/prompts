@@ -207,6 +207,38 @@ let onCancel = prompt => {
 let response = await prompts(questions, { onCancel });
 ```
 
+### override
+
+Type: `Function`
+
+Preanswer questions by passing an object with answers to `prompts.override`.
+Powerful when combined with arguments of process.
+
+**Example**
+```js
+const prompts = require('prompts');
+prompts.override(require('yargs').argv);
+
+const response = await prompts([
+  {
+    type: 'text',
+    name: 'twitter',
+    message: `What's your twitter handle?`
+  },
+  {
+    type: 'multiselect',
+    name: 'color',
+    message: 'Pick colors',
+    choices: [
+      { title: 'Red', value: '#ff0000' },
+      { title: 'Green', value: '#00ff00' },
+      { title: 'Blue', value: '#0000ff' }
+    ],
+  }
+]);
+
+console.log(response);
+```
 
 ### inject(values)
 

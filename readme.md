@@ -207,6 +207,38 @@ let onCancel = prompt => {
 let response = await prompts(questions, { onCancel });
 ```
 
+### override
+
+Type: `Function`
+
+Preanswer questions by passing an object with answers to `prompts.override`.
+Powerful when combined with arguments of process.
+
+**Example**
+```js
+const prompts = require('prompts');
+prompts.override(require('yargs').argv);
+
+const response = await prompts([
+  {
+    type: 'text',
+    name: 'twitter',
+    message: `What's your twitter handle?`
+  },
+  {
+    type: 'multiselect',
+    name: 'color',
+    message: 'Pick colors',
+    choices: [
+      { title: 'Red', value: '#ff0000' },
+      { title: 'Green', value: '#00ff00' },
+      { title: 'Blue', value: '#0000ff' }
+    ],
+  }
+]);
+
+console.log(response);
+```
 
 ### inject(values)
 
@@ -692,8 +724,8 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | suggest | `function` | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise. Filters using `title` by default  |
 | limit | `number` | Max number of results to show. Defaults to `10` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
-| initial | Default initial value |
-| fallback | Fallback message when no match is found. Defaults to `initial` value if provided |
+| initial | `string | number` | Default initial value |
+| fallback | `function` | Fallback message when no match is found. Defaults to `initial` value if provided |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
 
@@ -703,6 +735,200 @@ const suggestByTitle = (input, choices) =>
   Promise.resolve(choices.filter(i => i.title.slice(0, input.length) === input))
 ```
 
+
+### date(message, [initial], [warn])
+> Interactive date prompt.
+
+Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kbd>/<kbd>down</kbd> to change date.
+
+#### Example
+<img src="https://github.com/terkelg/prompts/raw/master/media/date.gif" alt="date prompt" width="499" height="130" />
+
+```js
+{
+    type: 'date',
+    name: 'value',
+    message: 'Pick a date',
+    initial: new Date(1997, 09, 12),
+    validate: date => date > Date.now() ? 'Not in the future' : true
+}
+```
+
+#### Options
+| Param | Type | Description |
+| ----- | :--: | ----------- |
+| message | `string` | Prompt message to display |
+| initial | `date` | Default date |
+| locales | `object` | Use to define custom locales. See below for an example. |
+| mask | `string` | The format mask of the date. See below for more information.<br />Default: `YYYY-MM-DD HH:mm:ss` |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
+| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+
+Default locales:
+
+```javascript
+{
+    months: [
+		'January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August',
+		'September', 'October', 'November', 'December'
+	],
+    monthsShort: [
+		'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ],
+    weekdays: [
+        'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+        'Thursday', 'Friday', 'Saturday'
+    ],
+    weekdaysShort: [
+    	'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+    ]
+}
+```
+
+#### Formatting Tokens
+
+<table class="table table-striped table-bordered">
+  <tbody>
+    <tr>
+      <th><h3>Token</h3></th>
+      <th><h3>Output</h3></th>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Month</b></td>
+    </tr>
+    <tr>
+      <td>M</td>
+      <td>1 2 ... 11 12</td>
+    </tr>
+    <tr>
+      <td>MM</td>
+      <td>01 02 ... 11 12</td>
+    </tr>
+    <tr>
+      <td>MMM</td>
+      <td>Jan Feb ... Nov Dec</td>
+    </tr>
+    <tr>
+      <td>MMMM</td>
+      <td>January February ... November December</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Day of Month</b></td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>1 2 ... 30 31</td>
+    </tr>
+    <tr>
+      <td>Do</td>
+      <td>1st 2nd ... 30th 31st</td>
+    </tr>
+    <tr>
+      <td>DD</td>
+      <td>01 02 ... 30 31</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Day of Week</b></td>
+    </tr>
+    <tr>
+      <td>d</td>
+      <td>0 1 ... 5 6</td>
+    </tr>
+    <tr>
+      <td>ddd</td>
+      <td>Sun Mon ... Fri Sat</td>
+    </tr>
+    <tr>
+      <td>dddd</td>
+      <td>Sunday Monday ... Friday Saturday</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Year</b></td>
+    </tr>
+    <tr>
+      <td>YY</td>
+      <td>70 71 ... 29 30</td>
+    </tr>
+    <tr>
+      <td>YYYY</td>
+      <td>1970 1971 ... 2029 2030</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>AM/PM</b></td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>AM PM</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>am pm</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Hour</b></td>
+    </tr>
+    <tr>
+      <td>H</td>
+      <td>0 1 ... 22 23</td>
+    </tr>
+    <tr>
+      <td>HH</td>
+      <td>00 01 ... 22 23</td>
+    </tr>
+    <tr>
+      <td>h</td>
+      <td>1 2 ... 11 12</td>
+    </tr>
+    <tr>
+      <td>hh</td>
+      <td>01 02 ... 11 12</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Minute</b></td>
+    </tr>
+    <tr>
+      <td>m</td>
+      <td>0 1 ... 58 59</td>
+    </tr>
+    <tr>
+      <td>mm</td>
+      <td>00 01 ... 58 59</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Second</b></td>
+    </tr>
+    <tr>
+      <td>s</td>
+      <td>0 1 ... 58 59</td>
+    </tr>
+    <tr>
+      <td>ss</td>
+      <td>00 01 ... 58 59</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><b>Fractional Second</b></td>
+    </tr>
+    <tr>
+      <td>S</td>
+      <td>0 1 ... 8 9</td>
+    </tr>
+    <tr>
+      <td>SS</td>
+      <td>0 1 ... 98 99</td>
+    </tr>
+    <tr>
+      <td>SSS</td>
+      <td>0 1 ... 998 999</td>
+    </tr>
+    <tr>
+      <td>SSSS</td>
+      <td>0 1 ... 9998 9999</td>
+    </tr>
+  </tbody>
+</table>
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 

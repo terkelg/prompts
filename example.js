@@ -75,12 +75,16 @@ let interval;
             name: 'actor',
             message: 'Pick your favorite actor',
             initial: 1,
+            limit: 3,
             choices: [
                 { title: 'Cage' },
                 { title: 'Clooney', value: 'silver-fox' },
                 { title: 'Gyllenhaal' },
                 { title: 'Gibson' },
                 { title: 'Grant' },
+                { title: 'Smith' },
+                { title: 'Hanks' },
+                { title: 'Downey Jr.' }
             ]
         },
         {

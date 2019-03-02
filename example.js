@@ -17,7 +17,6 @@ let interval;
             type: 'date',
             name: 'birthday',
             message: `What's your birth day?`,
-            mask: '"Year:" YYYY, "Month:" MM, "Day:" DD \\\\\\\\||// \\Hour: HH, \\Minute: mm, "Seconds:" ss',
             validate: date => date > Date.now() ? `Your birth day can't be in the future` : true
         },
         {
@@ -34,7 +33,7 @@ let interval;
         {
             type: 'confirm',
             name: 'confirmed',
-            message: 'Can you confirm?' 
+            message: 'Can you confirm?'
         },
         {
             type: prev => prev && 'toggle',
@@ -46,14 +45,14 @@ let interval;
         {
             type: 'list',
             name: 'keywords',
-            message: 'Enter keywords' 
+            message: 'Enter keywords'
         },
         {
             type: 'select',
             name: 'color',
             message: 'Pick a color',
             choices: [
-              { title: 'Red', value: '#ff0000' }, 
+              { title: 'Red', value: '#ff0000' },
               { title: 'Green', value: '#00ff00' },
               { title: 'Yellow', value: '#ffff00', disabled: true },
               { title: 'Blue', value: '#0000ff' }

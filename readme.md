@@ -552,7 +552,7 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 | initial | `boolean` | Default value. Default is `false` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -643,10 +643,9 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |
-| choices | `Array` | Array of choices objects `[{ title, value, disabled }, ...]` |
+| choices | `Array` | Array of strings or choices objects `[{ title, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
-
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 ### multiselect(message, choices, [initial], [max], [hint], [warn])
 > Interactive multi-select prompt.
@@ -677,12 +676,12 @@ By default this prompt returns an `array` containing the **values** of the selec
 | ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| choices | `Array` | Array of choices objects `[{ title, value, disabled, [selected] }, ...]` |
+| choices | `Array` | Array of strings or choices objects `[{ title, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
 | max | `number` | Max select |
 | hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.

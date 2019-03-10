@@ -691,7 +691,7 @@ If you want to predefine selected values, give the choice object an `selected` p
 > Interactive auto complete prompt.
 
 The prompt will list options based on user input. Type to filter the list.
-Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Use <kbd>Page Up</kbd>/<kbd>Page Down</kbd> to change page. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
+Use <kbd>⇧</kbd>/<kbd>⇩</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Use <kbd>Page Up</kbd>/<kbd>Page Down</kbd> (on Mac: <kbd>fn</kbd> + <kbd>⇧</kbd> / <kbd>⇩</kbd>) to change page. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
 
 The default suggests function is sorting based on the `title` property of the choices.
 You can overwrite how choices are being filtered by passing your own suggest function.
@@ -709,7 +709,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
         { title: 'Clooney', value: 'silver-fox' },
         { title: 'Gyllenhaal' },
         { title: 'Gibson' },
-        { title: 'Grant' },
+        { title: 'Grant' }
     ]
 }
 ```
@@ -731,7 +731,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 Example on what a `suggest` function might look like:
 ```js
 const suggestByTitle = (input, choices) =>
-  Promise.resolve(choices.filter(i => i.title.slice(0, input.length) === input))
+    Promise.resolve(choices.filter(i => i.title.slice(0, input.length) === input))
 ```
 
 
@@ -769,12 +769,12 @@ Default locales:
 ```javascript
 {
     months: [
-		'January', 'February', 'March', 'April',
+        'January', 'February', 'March', 'April',
         'May', 'June', 'July', 'August',
-		'September', 'October', 'November', 'December'
-	],
+        'September', 'October', 'November', 'December'
+    ],
     monthsShort: [
-		'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ],
     weekdays: [
@@ -782,7 +782,7 @@ Default locales:
         'Thursday', 'Friday', 'Saturday'
     ],
     weekdaysShort: [
-    	'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
     ]
 }
 ```

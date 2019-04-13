@@ -65,10 +65,10 @@ const prompts = require('prompts');
   });
 
   console.log(response); // => { value: 24 }
-})()
+})();
 ```
 
-> Examples are meant to be illustrative. `await` calls need to be run within an async function. See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js).
+> See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js) for more options.
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -83,13 +83,15 @@ Prompt with a single prompt object. Returns object with the response.
 ```js
 const prompts = require('prompts');
 
-let response = await prompts({
-    type: 'text',
-    name: 'meaning',
-    message: 'What is the meaning of life?'
-});
+(async () => {
+  const response = await prompts({
+      type: 'text',
+      name: 'meaning',
+      message: 'What is the meaning of life?'
+  });
 
-console.log(response.meaning);
+  console.log(response.meaning);
+})();
 ```
 
 ### Prompt Chain
@@ -100,7 +102,7 @@ Make sure to give each prompt a unique `name` property to prevent overwriting va
 ```js
 const prompts = require('prompts');
 
-let questions = [
+const questions = [
     {
         type: 'text',
         name: 'username',
@@ -119,9 +121,11 @@ let questions = [
     }
 ];
 
-let response = await prompts(questions);
+(async () => {
+  const response = await prompts(questions);
 
-// => response => { username, age, about }
+  // => response => { username, age, about }
+})();
 ```
 
 ### Dynamic Prompts
@@ -132,7 +136,7 @@ Prompt Objects with `type` set to `falsy` values are skipped.
 ```js
 const prompts = require('prompts');
 
-let questions = [
+const questions = [
     {
         type: 'text',
         name: 'dish',
@@ -145,7 +149,9 @@ let questions = [
     }
 ];
 
-let response = await prompts(questions);
+(async () => {
+  const response = await prompts(questions);
+})();
 ```
 
 
@@ -183,9 +189,11 @@ Return `true` to quit the prompt chain and return all collected responses so far
 
 **Example:**
 ```js
-let questions = [{ ... }];
-let onSubmit = (prompt, response) => console.log(`Thanks I got ${response} from ${prompt.name}`);
-let response = await prompts(questions, { onSubmit });
+(async () => {
+  const questions = [{ ... }];
+  const onSubmit = (prompt, response) => console.log(`Thanks I got ${response} from ${prompt.name}`);
+  const response = await prompts(questions, { onSubmit });
+})();
 ```
 
 #### options.onCancel
@@ -201,12 +209,14 @@ On cancel responses collected so far are returned.
 
 **Example:**
 ```js
-let questions = [{ ... }];
-let onCancel = prompt => {
-  console.log('Never stop prompting!');
-  return true;
-}
-let response = await prompts(questions, { onCancel });
+(async () => {
+  const questions = [{ ... }];
+  const onCancel = prompt => {
+    console.log('Never stop prompting!');
+    return true;
+  }
+  const response = await prompts(questions, { onCancel });
+})();
 ```
 
 ### override
@@ -221,25 +231,27 @@ Powerful when combined with arguments of process.
 const prompts = require('prompts');
 prompts.override(require('yargs').argv);
 
-const response = await prompts([
-  {
-    type: 'text',
-    name: 'twitter',
-    message: `What's your twitter handle?`
-  },
-  {
-    type: 'multiselect',
-    name: 'color',
-    message: 'Pick colors',
-    choices: [
-      { title: 'Red', value: '#ff0000' },
-      { title: 'Green', value: '#00ff00' },
-      { title: 'Blue', value: '#0000ff' }
-    ],
-  }
-]);
+(async () => {
+  const response = await prompts([
+    {
+      type: 'text',
+      name: 'twitter',
+      message: `What's your twitter handle?`
+    },
+    {
+      type: 'multiselect',
+      name: 'color',
+      message: 'Pick colors',
+      choices: [
+        { title: 'Red', value: '#ff0000' },
+        { title: 'Green', value: '#00ff00' },
+        { title: 'Blue', value: '#0000ff' }
+      ],
+    }
+  ]);
 
-console.log(response);
+  console.log(response);
+})();
 ```
 
 ### inject(values)
@@ -264,26 +276,27 @@ const prompts = require('prompts');
 
 prompts.inject([ '@terkelg', ['#ff0000', '#0000ff'] ]);
 
-let response = await prompts([
-  {
-    type: 'text',
-    name: 'twitter',
-    message: `What's your twitter handle?`
-  },
-  {
-    type: 'multiselect',
-    name: 'color',
-    message: 'Pick colors',
-    choices: [
-      { title: 'Red', value: '#ff0000' },
-      { title: 'Green', value: '#00ff00' },
-      { title: 'Blue', value: '#0000ff' }
-    ],
-  }
-]);
+(async () => {
+  const response = await prompts([
+    {
+      type: 'text',
+      name: 'twitter',
+      message: `What's your twitter handle?`
+    },
+    {
+      type: 'multiselect',
+      name: 'color',
+      message: 'Pick colors',
+      choices: [
+        { title: 'Red', value: '#ff0000' },
+        { title: 'Green', value: '#00ff00' },
+        { title: 'Blue', value: '#0000ff' }
+      ],
+    }
+  ]);
 
-// => { twitter: 'terkelg', color: [ '#ff0000', '#0000ff' ] }
-
+  // => { twitter: 'terkelg', color: [ '#ff0000', '#0000ff' ] }
+})();
 ```
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

@@ -56,14 +56,16 @@ $ npm install --save prompts
 ```js
 const prompts = require('prompts');
 
-const response = await prompts({
-    type: 'number',
-    name: 'value',
-    message: 'How old are you?',
-    validate: value => value < 18 ? `Nightclub is 18+ only` : true
-});
+(async () => {
+  const response = await prompts({
+      type: 'number',
+      name: 'value',
+      message: 'How old are you?',
+      validate: value => value < 18 ? `Nightclub is 18+ only` : true
+  });
 
-console.log(response); // => { value: 24 }
+  console.log(response); // => { value: 24 }
+})()
 ```
 
 > Examples are meant to be illustrative. `await` calls need to be run within an async function. See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js).

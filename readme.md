@@ -56,17 +56,19 @@ $ npm install --save prompts
 ```js
 const prompts = require('prompts');
 
-const response = await prompts({
+(async () => {
+  const response = await prompts({
     type: 'number',
     name: 'value',
     message: 'How old are you?',
     validate: value => value < 18 ? `Nightclub is 18+ only` : true
-});
+  });
 
-console.log(response); // => { value: 24 }
+  console.log(response); // => { value: 24 }
+})();
 ```
 
-> Examples are meant to be illustrative. `await` calls need to be run within an async function. See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js).
+> See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js) for more options.
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -81,13 +83,15 @@ Prompt with a single prompt object. Returns object with the response.
 ```js
 const prompts = require('prompts');
 
-let response = await prompts({
+(async () => {
+  const response = await prompts({
     type: 'text',
     name: 'meaning',
     message: 'What is the meaning of life?'
-});
+  });
 
-console.log(response.meaning);
+  console.log(response.meaning);
+})();
 ```
 
 ### Prompt Chain
@@ -98,28 +102,30 @@ Make sure to give each prompt a unique `name` property to prevent overwriting va
 ```js
 const prompts = require('prompts');
 
-let questions = [
-    {
-        type: 'text',
-        name: 'username',
-        message: 'What is your GitHub username?'
-    },
-    {
-        type: 'number',
-        name: 'age',
-        message: 'How old are you?'
-    },
-    {
-        type: 'text',
-        name: 'about',
-        message: 'Tell something about yourself',
-        initial: 'Why should I?'
-    }
+const questions = [
+  {
+    type: 'text',
+    name: 'username',
+    message: 'What is your GitHub username?'
+  },
+  {
+    type: 'number',
+    name: 'age',
+    message: 'How old are you?'
+  },
+  {
+    type: 'text',
+    name: 'about',
+    message: 'Tell something about yourself',
+    initial: 'Why should I?'
+  }
 ];
 
-let response = await prompts(questions);
+(async () => {
+  const response = await prompts(questions);
 
-// => response => { username, age, about }
+  // => response => { username, age, about }
+})();
 ```
 
 ### Dynamic Prompts
@@ -130,20 +136,22 @@ Prompt Objects with `type` set to `falsy` values are skipped.
 ```js
 const prompts = require('prompts');
 
-let questions = [
-    {
-        type: 'text',
-        name: 'dish',
-        message: 'Do you like pizza?'
-    },
-    {
-        type: prev => prev == 'pizza' ? 'text' : null,
-        name: 'topping',
-        message: 'Name a topping'
-    }
+const questions = [
+  {
+    type: 'text',
+    name: 'dish',
+    message: 'Do you like pizza?'
+  },
+  {
+    type: prev => prev == 'pizza' ? 'text' : null,
+    name: 'topping',
+    message: 'Name a topping'
+  }
 ];
 
-let response = await prompts(questions);
+(async () => {
+  const response = await prompts(questions);
+})();
 ```
 
 
@@ -181,9 +189,11 @@ Return `true` to quit the prompt chain and return all collected responses so far
 
 **Example:**
 ```js
-let questions = [{ ... }];
-let onSubmit = (prompt, response) => console.log(`Thanks I got ${response} from ${prompt.name}`);
-let response = await prompts(questions, { onSubmit });
+(async () => {
+  const questions = [{ ... }];
+  const onSubmit = (prompt, response) => console.log(`Thanks I got ${response} from ${prompt.name}`);
+  const response = await prompts(questions, { onSubmit });
+})();
 ```
 
 #### options.onCancel
@@ -199,12 +209,14 @@ On cancel responses collected so far are returned.
 
 **Example:**
 ```js
-let questions = [{ ... }];
-let onCancel = prompt => {
-  console.log('Never stop prompting!');
-  return true;
-}
-let response = await prompts(questions, { onCancel });
+(async () => {
+  const questions = [{ ... }];
+  const onCancel = prompt => {
+    console.log('Never stop prompting!');
+    return true;
+  }
+  const response = await prompts(questions, { onCancel });
+})();
 ```
 
 ### override
@@ -219,25 +231,27 @@ Powerful when combined with arguments of process.
 const prompts = require('prompts');
 prompts.override(require('yargs').argv);
 
-const response = await prompts([
-  {
-    type: 'text',
-    name: 'twitter',
-    message: `What's your twitter handle?`
-  },
-  {
-    type: 'multiselect',
-    name: 'color',
-    message: 'Pick colors',
-    choices: [
-      { title: 'Red', value: '#ff0000' },
-      { title: 'Green', value: '#00ff00' },
-      { title: 'Blue', value: '#0000ff' }
-    ],
-  }
-]);
+(async () => {
+  const response = await prompts([
+    {
+      type: 'text',
+      name: 'twitter',
+      message: `What's your twitter handle?`
+    },
+    {
+      type: 'multiselect',
+      name: 'color',
+      message: 'Pick colors',
+      choices: [
+        { title: 'Red', value: '#ff0000' },
+        { title: 'Green', value: '#00ff00' },
+        { title: 'Blue', value: '#0000ff' }
+      ],
+    }
+  ]);
 
-console.log(response);
+  console.log(response);
+})();
 ```
 
 ### inject(values)
@@ -262,26 +276,27 @@ const prompts = require('prompts');
 
 prompts.inject([ '@terkelg', ['#ff0000', '#0000ff'] ]);
 
-let response = await prompts([
-  {
-    type: 'text',
-    name: 'twitter',
-    message: `What's your twitter handle?`
-  },
-  {
-    type: 'multiselect',
-    name: 'color',
-    message: 'Pick colors',
-    choices: [
-      { title: 'Red', value: '#ff0000' },
-      { title: 'Green', value: '#00ff00' },
-      { title: 'Blue', value: '#0000ff' }
-    ],
-  }
-]);
+(async () => {
+  const response = await prompts([
+    {
+      type: 'text',
+      name: 'twitter',
+      message: `What's your twitter handle?`
+    },
+    {
+      type: 'multiselect',
+      name: 'color',
+      message: 'Pick colors',
+      choices: [
+        { title: 'Red', value: '#ff0000' },
+        { title: 'Green', value: '#00ff00' },
+        { title: 'Blue', value: '#0000ff' }
+      ],
+    }
+  ]);
 
-// => { twitter: 'terkelg', color: [ '#ff0000', '#0000ff' ] }
-
+  // => { twitter: 'terkelg', color: [ '#ff0000', '#0000ff' ] }
+})();
 ```
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -312,9 +327,9 @@ The function signature is `(prev, values, prompt)`, where `prev` is the value fr
 **Function example:**
 ```js
 {
-    type: prev => prev > 3 ? 'confirm' : null,
-    name: 'confirm',
-    message: (prev, values) => `Please confirm that you eat ${values.dish} times ${prev} a day?`
+  type: prev => prev > 3 ? 'confirm' : null,
+  name: 'confirm',
+  message: (prev, values) => `Please confirm that you eat ${values.dish} times ${prev} a day?`
 }
 ```
 
@@ -369,10 +384,10 @@ The function signature is `(val, values)`, where `val` is the value from the cur
 **Example:**
 ```js
 {
-    type: 'number',
-    name: 'price',
-    message: 'Enter price',
-    format: val => Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' }).format(val);
+  type: 'number',
+  name: 'price',
+  message: 'Enter price',
+  format: val => Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' }).format(val);
 }
 ```
 
@@ -623,15 +638,15 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 
 ```js
 {
-    type: 'select',
-    name: 'value',
-    message: 'Pick a color',
-    choices: [
-        { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00', disabled: true },
-        { title: 'Blue', value: '#0000ff' }
-    ],
-    initial: 1
+  type: 'select',
+  name: 'value',
+  message: 'Pick a color',
+  choices: [
+    { title: 'Red', value: '#ff0000' },
+    { title: 'Green', value: '#00ff00', disabled: true },
+    { title: 'Blue', value: '#0000ff' }
+  ],
+  initial: 1
 }
 ```
 
@@ -658,16 +673,16 @@ By default this prompt returns an `array` containing the **values** of the selec
 
 ```js
 {
-    type: 'multiselect',
-    name: 'value',
-    message: 'Pick colors',
-    choices: [
-        { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00', disabled: true },
-        { title: 'Blue', value: '#0000ff', selected: true }
-    ],
-    max: 2,
-    hint: '- Space to select. Return to submit'
+  type: 'multiselect',
+  name: 'value',
+  message: 'Pick colors',
+  choices: [
+    { title: 'Red', value: '#ff0000' },
+    { title: 'Green', value: '#00ff00', disabled: true },
+    { title: 'Blue', value: '#0000ff', selected: true }
+  ],
+  max: 2,
+  hint: '- Space to select. Return to submit'
 }
 ```
 
@@ -701,16 +716,16 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 
 ```js
 {
-    type: 'autocomplete',
-    name: 'value',
-    message: 'Pick your favorite actor',
-    choices: [
-        { title: 'Cage' },
-        { title: 'Clooney', value: 'silver-fox' },
-        { title: 'Gyllenhaal' },
-        { title: 'Gibson' },
-        { title: 'Grant' }
-    ]
+  type: 'autocomplete',
+  name: 'value',
+  message: 'Pick your favorite actor',
+  choices: [
+    { title: 'Cage' },
+    { title: 'Clooney', value: 'silver-fox' },
+    { title: 'Gyllenhaal' },
+    { title: 'Gibson' },
+    { title: 'Grant' }
+  ]
 }
 ```
 
@@ -745,11 +760,11 @@ Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kb
 
 ```js
 {
-    type: 'date',
-    name: 'value',
-    message: 'Pick a date',
-    initial: new Date(1997, 09, 12),
-    validate: date => date > Date.now() ? 'Not in the future' : true
+  type: 'date',
+  name: 'value',
+  message: 'Pick a date',
+  initial: new Date(1997, 09, 12),
+  validate: date => date > Date.now() ? 'Not in the future' : true
 }
 ```
 
@@ -768,22 +783,22 @@ Default locales:
 
 ```javascript
 {
-    months: [
-        'January', 'February', 'March', 'April',
-        'May', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December'
-    ],
-    monthsShort: [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ],
-    weekdays: [
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-        'Thursday', 'Friday', 'Saturday'
-    ],
-    weekdaysShort: [
-        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-    ]
+  months: [
+    'January', 'February', 'March', 'April',
+    'May', 'June', 'July', 'August',
+    'September', 'October', 'November', 'December'
+  ],
+  monthsShort: [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ],
+  weekdays: [
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+    'Thursday', 'Friday', 'Saturday'
+  ],
+  weekdaysShort: [
+    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+  ]
 }
 ```
 >**Formatting**: See full list of formatting options in the [wiki](https://github.com/terkelg/prompts/wiki/Date-Time-Formatting)

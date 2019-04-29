@@ -36,7 +36,6 @@
     "interact"
   ],
   "dependencies": {
-    "figures": "^2.0.0",
     "kleur": "^3.0.2",
     "sisteransi": "^1.0.0"
   },

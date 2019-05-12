@@ -663,7 +663,9 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 ### multiselect(message, choices, [initial], [max], [hint], [warn])
-> Interactive multi-select prompt.
+### autocompleteMultiselect(same)
+> Interactive multi-select prompt.  
+> Autocomplete is a searchable multiselect prompt with the same options. Useful for long lists.
 
 Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list. You can also use <kbd>right</kbd> to select and <kbd>left</kbd> to deselect.
 By default this prompt returns an `array` containing the **values** of the selected items - not their display title.
@@ -692,6 +694,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | choices | `Array` | Array of strings or choices objects `[{ title, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
+| min | `number` | Min select - will display error |
 | max | `number` | Max select |
 | hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |

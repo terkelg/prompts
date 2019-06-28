@@ -693,7 +693,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| instructions | `boolean` | Prompt instructions to display (defautlt: false) |
+| instructions | `string` or `boolean` | Prompt instructions to display |
 | choices | `Array` | Array of strings or choices objects `[{ title, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
 | min | `number` | Min select - will display error |
 | max | `number` | Max select |

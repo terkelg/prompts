@@ -11,3 +11,6 @@ insert_final_newline = true
 
 [*.{js,json,yml,md}]
 indent_style = space
+
+[example.js]
+indent_size = 4

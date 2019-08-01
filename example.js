@@ -52,10 +52,15 @@ let interval;
             name: 'color',
             message: 'Pick a color',
             choices: [
-              { title: 'Red', value: '#ff0000' },
-              { title: 'Green', value: '#00ff00' },
-              { title: 'Yellow', value: '#ffff00', disabled: true },
-              { title: 'Blue', value: '#0000ff' }
+                { title: 'Red', description: 'This option has a description.', value: '#ff0000' },
+                {
+                    title: 'Green',
+                    description: 'This option has a multiline description.\n' +
+                        'This is the second line of the description.',
+                    value: '#00ff00'
+                },
+                { title: 'Yellow', value: '#ffff00', disabled: true },
+                { title: 'Blue', value: '#0000ff' }
             ]
         },
         {
@@ -63,9 +68,14 @@ let interval;
             name: 'multicolor',
             message: 'Pick colors',
             choices: [
-                { title: 'Red', value: '#ff0000' },
-                { title: 'Green', value: '#00ff00', disabled: true },
-                { title: 'Yellow', value: '#ffff00' },
+                { title: 'Red', description: 'This option has a description.', value: '#ff0000' },
+                {
+                    title: 'Green',
+                    description: 'This option has a multiline description.\n' +
+                        'This is the second line of the description.',
+                    value: '#00ff00'
+                },
+                { title: 'Yellow', value: '#ffff00', disabled: true },
                 { title: 'Blue', value: '#0000ff' }
             ]
         },
@@ -80,11 +90,19 @@ let interval;
                 { title: 'Clooney', value: 'silver-fox' },
                 { title: 'Gyllenhaal' },
                 { title: 'Gibson' },
-                { title: 'Grant' },
-                { title: 'Smith' },
+                { title: 'Grant', description: 'This option has a description.' },
+                {
+                    title: 'Smith',
+                    description: 'This option has a multiline description.\n' +
+                        'This is the second line of the description.'
+                },
                 { title: 'Hanks' },
                 { title: 'Downey Jr.' }
-            ]
+            ],
+            fallback: {
+                title: `This is the fallback. Its value is 'fallback'`,
+                value: 'fallback'
+            }
         },
         {
             type: 'number',

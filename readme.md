@@ -695,6 +695,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | instructions | `string` or `boolean` | Prompt instructions to display |
 | choices | `Array` | Array of strings or choices objects `[{ title, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
+| optionsPerPage | `number` | Number of options displayed per page (default: 10) |
 | min | `number` | Min select - will display error |
 | max | `number` | Max select |
 | hint | `string` | Hint to display to the user |

@@ -191,7 +191,7 @@ Return `true` to quit the prompt chain and return all collected responses so far
 ```js
 (async () => {
   const questions = [{ ... }];
-  const onSubmit = (prompt, response) => console.log(`Thanks I got ${response} from ${prompt.name}`);
+  const onSubmit = (prompt, answer) => console.log(`Thanks I got ${answer} from ${prompt.name}`);
   const response = await prompts(questions, { onSubmit });
 })();
 ```

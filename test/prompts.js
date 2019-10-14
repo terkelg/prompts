@@ -56,3 +56,24 @@ test('injects', t => {
         });
     });
 });
+
+test('cancel', t => {
+  let onCancelCalled = false;
+  prompt([
+    {
+      type: 'select',
+      name: 'quiz',
+      message: `What's the capital of Canada?`,
+      choices: [
+        { title: 'Ottawa' },
+        { title: 'Vancouver' },
+        { title: 'Toronto' }
+      ],
+      onCancel: () => onCancelCalled = true
+    }
+  ]);
+
+  prompt.cancelMostRecent();
+  t.true(onCancelCalled, 'prompt is cancelled');
+  t.end();
+});

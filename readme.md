@@ -299,6 +299,35 @@ prompts.inject([ '@terkelg', ['#ff0000', '#0000ff'] ]);
 })();
 ```
 
+### cancelMostRecent
+
+Type: `Function`
+
+Programmatically cancel the most recent prompt. This can be useful if, say, the prompt has timed out or been superseded by a more important one.
+
+**Example:**
+```js
+const prompts = require('prompts');
+
+(async () => {
+  const response = await prompts([
+    {
+      type: 'select',
+      name: 'quiz',
+      message: `What's the capital of Canada?`,
+      choices: [
+        { title: 'Ottawa' },
+        { title: 'Vancouver' },
+        { title: 'Toronto' }
+      ],
+    }
+  ]);
+})();
+
+// Only 10 seconds to answer
+setTimeout(() => prompts.cancelMostRecent(), 10000);
+```
+
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 

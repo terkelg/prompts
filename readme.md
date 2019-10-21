@@ -664,7 +664,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 
 ### multiselect(message, choices, [initial], [max], [hint], [warn])
 ### autocompleteMultiselect(same)
-> Interactive multi-select prompt.  
+> Interactive multi-select prompt.
 > Autocomplete is a searchable multiselect prompt with the same options. Useful for long lists.
 
 Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list. You can also use <kbd>right</kbd> to select and <kbd>left</kbd> to deselect.
@@ -739,6 +739,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | ----- | :--: | ----------- |
 | message | `string` | Prompt message to display |
 | format | `function` | Receive user input. The returned value will be added to the response object |
+| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message
 | choices | `Array` | Array of auto-complete choices objects `[{ title, value }, ...]` |
 | suggest | `function` | Filter function. Defaults to sort by `title` property. `suggest` should always return a promise. Filters using `title` by default  |
 | limit | `number` | Max number of results to show. Defaults to `10` |

@@ -29,7 +29,7 @@
 <br />
 
 * **Simple**: prompts has [no big dependencies](http://npm.anvaka.com/#/view/2d/prompts) nor is it broken into a [dozen](http://npm.anvaka.com/#/view/2d/inquirer) tiny modules that only work well together.
-* **User friendly**: prompt uses layout and colors to create beautiful cli interfaces.
+* ** User-friendly**: prompt uses layout and colours to create beautiful client interfaces.
 * **Promised**: uses promises and `async`/`await`. No callback hell.
 * **Flexible**: all prompts are independent and can be used on their own.
 * **Testable**: provides a way to submit answers programmatically.
@@ -96,7 +96,7 @@ const prompts = require('prompts');
 
 ### Prompt Chain
 
-Prompt with a list of prompt objects. Returns object with response.
+Prompt with a list of prompt objects. Returns object with a response.
 Make sure to give each prompt a unique `name` property to prevent overwriting values.
 
 ```js
@@ -185,7 +185,7 @@ Default: `() => {}`
 Callback that's invoked after each prompt submission.
 Its signature is `(prompt, answer, answers)` where `prompt` is the current prompt object, `answer` the user answer to the current question and `answers` the user answers so far. Async functions are supported.
 
-Return `true` to quit the prompt chain and return all collected responses so far, otherwise continue to iterate prompt objects.
+Return `true` to quit the prompt chain and return all collected responses so far, otherwise, continue to iterate prompt objects.
 
 **Example:**
 ```js
@@ -223,7 +223,7 @@ On cancel responses collected so far are returned.
 
 Type: `Function`
 
-Preanswer questions by passing an object with answers to `prompts.override`.
+Answer questions by passing an object with answers to `prompts.override`.
 Powerful when combined with arguments of process.
 
 **Example**
@@ -267,7 +267,7 @@ This feature is intended for testing only.
 Type: `Array`
 
 Array with values to inject. Resolved values are removed from the internal inject array.
-Each value can be an array of values in order to provide answers for a question asked multiple times.
+Each value can be an array of values to provide answers for a question asked multiple times.
 If a value is an instance of `Error` it will simulate the user cancelling/exiting the prompt.
 
 **Example:**
@@ -319,7 +319,7 @@ Almost all prompt objects have the following properties:
 }
 ```
 
-Each property be of type `function` and will be invoked right before prompting the user.
+Each property is of type `function` and will be invoked right before prompting the user.
 
 The function signature is `(prev, values, prompt)`, where `prev` is the value from the previous prompt,
 `values` is the response object with all values collected so far and `prompt` is the previous prompt object.
@@ -415,7 +415,7 @@ Type: `Function`
 
 Callback for when the state of the current prompt changes.
 The function signature is `(state)` where `state` is an object with a snapshot of the current state.
-The state object have two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
+The state object has two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -660,15 +660,15 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | warn | `string` | Message to display when selecting a disabled option |
 | choices | `Array` | Array of strings or choices objects `[{ title, description, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| on state | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 ### multiselect(message, choices, [initial], [max], [hint], [warn])
 ### autocompleteMultiselect(same)
-> Interactive multi-select prompt.  
+> Interactive multi-select prompt.
 > Autocomplete is a searchable multiselect prompt with the same options. Useful for long lists.
 
 Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list. You can also use <kbd>right</kbd> to select and <kbd>left</kbd> to deselect.
-By default this prompt returns an `array` containing the **values** of the selected items - not their display title.
+By default, this prompt returns an `array` containing the **values** of the selected items - not their display title.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/multiselect.gif" alt="multiselect prompt" width="499" height="130" />
@@ -703,8 +703,8 @@ By default this prompt returns an `array` containing the **values** of the selec
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
-This is one of the few prompts that don't take a initial value.
-If you want to predefine selected values, give the choice object an `selected` property of `true`.
+This is one of the few prompts that don't take an initial value.
+If you want to predefine selected values, give the choice object a `selected` property of `true`.
 
 
 ### autocomplete(message, choices, [initial], [suggest], [limit], [style])
@@ -714,7 +714,7 @@ The prompt will list options based on user input. Type to filter the list.
 Use <kbd>⇧</kbd>/<kbd>⇩</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Use <kbd>Page Up</kbd>/<kbd>Page Down</kbd> (on Mac: <kbd>fn</kbd> + <kbd>⇧</kbd> / <kbd>⇩</kbd>) to change page. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
 
 The default suggests function is sorting based on the `title` property of the choices.
-You can overwrite how choices are being filtered by passing your own suggest function.
+You can overwrite how choices are being filtered bypassing your own suggest function.
 
 #### Example
 <img src="https://github.com/terkelg/prompts/raw/master/media/autocomplete.gif" alt="auto complete prompt" width="499" height="163" />

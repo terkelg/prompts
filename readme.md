@@ -33,7 +33,7 @@
 * **Promised**: uses promises and `async`/`await`. No callback hell.
 * **Flexible**: all prompts are independent and can be used on their own.
 * **Testable**: provides a way to submit answers programmatically.
-* **Unified**: consistent experience across all prompts.
+* **Unified**: consistent experience across all [prompts](#-types).
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
@@ -423,6 +423,21 @@ The state object have two properties `value` and `aborted`. E.g `{ value: 'This 
 
 ## ❯ Types
 
+* [text](#textmessage-initial-style)
+* [password](#passwordmessage-initial)
+* [invisible](#invisiblemessage-initial)
+* [number](#numbermessage-initial-max-min-style)
+* [confirm](#confirmmessage-initial)
+* [list](#listmessage-initial)
+* [toggle](#togglemessage-initial-active-inactive)
+* [select](#selectmessage-choices-initial-hint-warn)
+* [multiselect](#multiselectmessage-choices-initial-max-hint-warn)
+* [autocompleteMultiselect](#multiselectmessage-choices-initial-max-hint-warn)
+* [autocomplete](#autocompletemessage-choices-initial-suggest-limit-style)
+* [date](#datemessage-initial-warn)
+
+***
+
 ### text(message, [initial], [style])
 > Text prompt for free text input.
 
@@ -450,6 +465,9 @@ Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### password(message, [initial])
 > Password prompt with masked input.
@@ -477,6 +495,9 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### invisible(message, [initial])
 > Prompts user for invisible text input.
@@ -505,6 +526,9 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### number(message, initial, [max], [min], [style])
 > Prompts user for number input.
@@ -542,6 +566,10 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
+**↑ back to:** [Prompt types](#-types)
+
+***
+
 ### confirm(message, [initial])
 > Classic yes/no prompt.
 
@@ -568,6 +596,10 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### list(message, [initial])
 > List prompt that return an array.
@@ -597,6 +629,9 @@ string separated by `separator`.
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### toggle(message, [initial], [active], [inactive])
 > Interactive toggle/switch prompt.
@@ -627,6 +662,10 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 | inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### select(message, choices, [initial], [hint], [warn])
 > Interactive select prompt.
@@ -661,6 +700,10 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | choices | `Array` | Array of strings or choices objects `[{ title, description, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### multiselect(message, choices, [initial], [max], [hint], [warn])
 ### autocompleteMultiselect(same)
@@ -706,6 +749,9 @@ By default this prompt returns an `array` containing the **values** of the selec
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
 
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### autocomplete(message, choices, [initial], [suggest], [limit], [style])
 > Interactive auto complete prompt.
@@ -754,6 +800,9 @@ const suggestByTitle = (input, choices) =>
     Promise.resolve(choices.filter(i => i.title.slice(0, input.length) === input))
 ```
 
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ### date(message, [initial], [warn])
 > Interactive date prompt.
@@ -810,6 +859,9 @@ Default locales:
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
+**↑ back to:** [Prompt types](#-types)
+
+***
 
 ## ❯ Credit
 Many of the prompts are based on the work of [derhuerst](https://github.com/derhuerst).

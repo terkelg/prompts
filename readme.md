@@ -448,7 +448,7 @@ Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 
 ### password(message, [initial])
@@ -475,7 +475,7 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 
 ### invisible(message, [initial])
@@ -503,7 +503,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 
 ### number(message, initial, [max], [min], [style])
@@ -540,7 +540,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 ### confirm(message, [initial])
 > Classic yes/no prompt.
@@ -595,7 +595,7 @@ string separated by `separator`.
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | separator | `string` | String separator. Will trim all white-spaces from start and end of string. Defaults to `','`  |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 
 ### toggle(message, [initial], [active], [inactive])
@@ -626,7 +626,7 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 | active | `string` | Text for `active` state. Defaults to `'on'` |
 | inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 ### select(message, choices, [initial], [hint], [warn])
 > Interactive select prompt.
@@ -746,7 +746,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | initial | `string \| number` | Default initial value |
 | fallback | `string` | Fallback message when no match is found. Defaults to `initial` value if provided |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 Example on what a `suggest` function might look like:
 ```js
@@ -782,7 +782,7 @@ Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kb
 | mask | `string` | The format mask of the date. See below for more information.<br />Default: `YYYY-MM-DD HH:mm:ss` |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two propetires: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
 Default locales:
 

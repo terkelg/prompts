@@ -78,7 +78,7 @@ const prompts = require('prompts');
 
 ### Single Prompt
 
-Prompt with a single prompt object. Returns object with the response.
+Prompt with a single prompt object. Returns an object with the response.
 
 ```js
 const prompts = require('prompts');
@@ -96,7 +96,7 @@ const prompts = require('prompts');
 
 ### Prompt Chain
 
-Prompt with a list of prompt objects. Returns object with response.
+Prompt with a list of prompt objects. Returns an object with the responses.
 Make sure to give each prompt a unique `name` property to prevent overwriting values.
 
 ```js

@@ -415,7 +415,7 @@ Type: `Function`
 
 Callback for when the state of the current prompt changes.
 The function signature is `(state)` where `state` is an object with a snapshot of the current state.
-The state object have two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
+The state object has two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

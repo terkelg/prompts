@@ -53,12 +53,7 @@ let interval;
             message: 'Pick a color',
             choices: [
                 { title: 'Red', description: 'This option has a description.', value: '#ff0000' },
-                {
-                    title: 'Green',
-                    description: 'This option has a multiline description.\n' +
-                        'This is the second line of the description.',
-                    value: '#00ff00'
-                },
+                { title: 'Green', value: '#00ff00' },
                 { title: 'Yellow', value: '#ffff00', disabled: true },
                 { title: 'Blue', value: '#0000ff' }
             ]
@@ -69,12 +64,7 @@ let interval;
             message: 'Pick colors',
             choices: [
                 { title: 'Red', description: 'This option has a description.', value: '#ff0000' },
-                {
-                    title: 'Green',
-                    description: 'This option has a multiline description.\n' +
-                        'This is the second line of the description.',
-                    value: '#00ff00'
-                },
+                { title: 'Green', value: '#00ff00' },
                 { title: 'Yellow', value: '#ffff00', disabled: true },
                 { title: 'Blue', value: '#0000ff' }
             ]
@@ -91,11 +81,6 @@ let interval;
                 { title: 'Gyllenhaal' },
                 { title: 'Gibson' },
                 { title: 'Grant', description: 'This option has a description.' },
-                {
-                    title: 'Smith',
-                    description: 'This option has a multiline description.\n' +
-                        'This is the second line of the description.'
-                },
                 { title: 'Hanks' },
                 { title: 'Downey Jr.' }
             ],

@@ -75,6 +75,7 @@ let interval;
             message: 'Pick your favorite actor',
             initial: 1,
             limit: 3,
+            suggest: (input, choices) => choices.filter(i => i.title.toLowerCase().includes(input.toLowerCase())),
             choices: [
                 { title: 'Cage' },
                 { title: 'Clooney', value: 'silver-fox' },

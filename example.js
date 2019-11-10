@@ -14,12 +14,6 @@ let interval;
             format: v => `@${v}`
         },
         {
-            type: 'date',
-            name: 'birthday',
-            message: `What's your birth day?`,
-            validate: date => date > Date.now() ? `Your birth day can't be in the future` : true
-        },
-        {
             type: 'number',
             name: 'age',
             message: 'How old are you?',
@@ -62,6 +56,7 @@ let interval;
             type: 'multiselect',
             name: 'multicolor',
             message: 'Pick colors',
+            hint: false,
             choices: [
                 { title: 'Red', description: 'This option has a description.', value: '#ff0000' },
                 { title: 'Green', value: '#00ff00' },
@@ -89,6 +84,12 @@ let interval;
                 title: `This is the fallback. Its value is 'fallback'`,
                 value: 'fallback'
             }
+        },
+        {
+            type: 'date',
+            name: 'birthday',
+            message: `What's your birthday?`,
+            validate: date => date > Date.now() ? `Your birth day can't be in the future` : true
         },
         {
             type: 'number',

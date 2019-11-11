@@ -21,7 +21,13 @@ prompts([
         handle() {
           return {command: 'abort'};
         },
-        instruction: 'Abort' 
+        instruction: 'Abort'
+      },
+      e: {
+        handle() {
+          return {answers: {Green: true, Blue: true}, command: 'submit'}
+        },
+        instruction: 'Select Green and Blue, and move on the to the next question'
       }
     }
   }

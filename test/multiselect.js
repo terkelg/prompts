@@ -93,3 +93,18 @@ test('multiselect hotkey that aborts', t => {
     t.end();
   });
 })
+
+test('multiselect hotkey that chooses answers and submits', t => {
+  t.plan(2);
+  spawn(['e']).then(({response, stdout}) => {
+    t.ok(
+      stdout.includes('e: Select Green and Blue, and move on the to the next question'), 
+      `Stdout includes hotkey instructions`
+    );
+
+    t.deepEqual(response, {
+      color: ['#00ff00', '#0000ff']
+    }, 'pressing hotkey chooses answers and submits');
+    t.end();
+  });
+})

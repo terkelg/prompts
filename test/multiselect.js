@@ -19,8 +19,13 @@ const awaitOutput = (pipe, output) => new Promise((resolve) => {
 const spawn = (inputs) => {
   const childProcess = child_process.spawn('node', [multiselectFixture]);
   const {stdout, stderr, stdin} = childProcess;
-  // stdout.pipe(process.stdout);
-  // process.stdin.pipe(stdin);
+
+  // Pass this env var to get some visibility into what the subproc is doing, and also kinda break the tests.
+  // But maybe it'll help you. :)
+  if (process.env.DEBUG) {
+    stdout.pipe(process.stdout);
+    process.stdin.pipe(stdin);
+  }
 
   childProcess.on('error', (err) => {
     console.log('Spawn error:', err);

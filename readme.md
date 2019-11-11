@@ -727,6 +727,17 @@ By default this prompt returns an `array` containing the **values** of the selec
     { title: 'Blue', value: '#0000ff', selected: true }
   ],
   max: 2,
+  hotkeys: {
+    d: {
+      handle() {
+        return {
+          answer: {Red: true, Green: false},
+          command: 'submit'
+        }
+      },
+      instruction: 'Enable red, disable green, and submit the answer.'
+    }
+  }
   hint: '- Space to select. Return to submit'
 }
 ```
@@ -745,9 +756,32 @@ By default this prompt returns an `array` containing the **values** of the selec
 | warn | `string` | Message to display when selecting a disabled option |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| hotkeys | `{[hotkeyCharacter]: hotkeyDescriptor}` |  |
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
+
+The type of `hotkeyDescriptor` is:
+
+```ts
+{
+  handle: () => {
+    // Pass "submit" to have this question be submitted when the user presses the hotkey.
+    // Pass "abort" to have the question be aborted (as if the user had hit control+c).
+    command?: 'submit' | 'abort',
+
+    answers: {
+      // The key in this object is the `title` field in the `choices` array passed above.
+      // The value is whether this choice will be selected after the hotkey is pressed.
+      // Pass true to select the choice. False deselects the choice. Undefined leaves the choice as-is.
+      [answerTitle]: boolean
+    } 
+  }, 
+  instruction: string
+}
+```
+
+See the [multiselect test fixture](./test/fixtures/multiselect.js) for more examples of using hotkeys.
 
 **↑ back to:** [Prompt types](#-types)
 

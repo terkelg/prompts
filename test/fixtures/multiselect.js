@@ -13,7 +13,7 @@ prompts([
     hotkeys: {
       r: {
         handle() {
-          return {answers: ['Red', 'Green']};
+          return {answers: {Red: true, Green: true}};
         },
         instruction: 'Choose Red and Green' 
       }

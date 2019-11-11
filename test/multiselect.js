@@ -6,15 +6,12 @@ const test = require('tape');
 
 const awaitOutput = (pipe, output) => new Promise((resolve) => {
   let allDataFromPipe = '';
-  const handleDataFromPipe = dataFromPipe => {
+  pipe.on('data', dataFromPipe => {
     allDataFromPipe += dataFromPipe;
     if (allDataFromPipe.toString().includes(output)) {
-      pipe.removeListener('data', handleDataFromPipe);
       resolve(allDataFromPipe);
     }
-  };
-
-  pipe.on('data', handleDataFromPipe);
+  });
 });
 
 const spawn = (inputs) => {
@@ -23,14 +20,9 @@ const spawn = (inputs) => {
   // stdout.pipe(process.stdout);
   // process.stdin.pipe(stdin);
 
-  // TODO: see if we can remove some of this stream closing.
-
-  childProcess.on('exit', () => {
-    console.log('exit');
-  })
   childProcess.on('error', (err) => {
-    console.log('error', err);
-  })
+    console.log('Spawn error:', err);
+  });
 
   const readlineInstance = readline.createInterface({output: stdin, input: stdin, terminal: true });
 
@@ -38,7 +30,6 @@ const spawn = (inputs) => {
     try {
       stderr.on('data', data => {
         childProcess.kill();
-        readlineInstance.close();
         stdout.unpipe(process.stdout);
         // I hope the JSON output always comes as a single data event.
         resolve(JSON.parse(data.toString()));
@@ -82,7 +73,7 @@ test('multiselect "a"', t => {
 test('multiselect hotkey that selects multiple answers', t => {
   t.plan(2);
   spawn(['r', {name: 'enter'}]).then(({response, stdout}) => {
-    t.ok(stdout.includes('r: Choose Red and Green'), `"${stdout}" includes hotkey instructions`);
+    t.ok(stdout.includes('r: Choose Red and Green'), `Stdout includes hotkey instructions`);
 
     t.deepEqual(response, {
       color: ['#ff0000', '#00ff00']

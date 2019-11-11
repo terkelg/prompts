@@ -10,5 +10,13 @@ prompts([
       { title: 'Green', value: '#00ff00' },
       { title: 'Blue', value: '#0000ff' }
     ],
+    hotkeys: {
+      r: {
+        handle() {
+          return {answers: ['Red', 'Green']};
+        },
+        instruction: 'Choose Red and Green' 
+      }
+    }
   }
 ]).then(response => console.error(JSON.stringify(response, null, 2)));

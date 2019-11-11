@@ -28,6 +28,12 @@ prompts([
           return {answers: {Green: true, Blue: true}, command: 'submit'}
         },
         instruction: 'Select Green and Blue, and move on the to the next question'
+      },
+      f: {
+        handle() {
+          return {answers: {Red: false, Blue: true}, command: 'submit'}
+        },
+        instruction: 'Pay respect. Also, enable Blue and disable Red.'
       }
     }
   }

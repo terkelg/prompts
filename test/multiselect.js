@@ -4,6 +4,8 @@ const readline = require('readline');
 
 const test = require('tape');
 
+// Running these tests will make your terminal cursor disappear. Sorry. Run `reset` to fix it.
+
 const awaitOutput = (pipe, output) => new Promise((resolve) => {
   let allDataFromPipe = '';
   pipe.on('data', dataFromPipe => {
@@ -78,6 +80,16 @@ test('multiselect hotkey that selects multiple answers', t => {
     t.deepEqual(response, {
       color: ['#ff0000', '#00ff00']
     }, 'pressing hotkey selects the right answers');
+    t.end();
+  });
+})
+
+test('multiselect hotkey that aborts', t => {
+  t.plan(2);
+  spawn(['d']).then(({response, stdout}) => {
+    t.ok(stdout.includes('d: Abort'), `Stdout includes hotkey instructions`);
+
+    t.deepEqual(response, {}, 'pressing hotkey aborts the process');
     t.end();
   });
 })

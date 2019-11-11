@@ -16,6 +16,12 @@ prompts([
           return {answers: {Red: true, Green: true}};
         },
         instruction: 'Choose Red and Green' 
+      },
+      d: {
+        handle() {
+          return {command: 'abort'};
+        },
+        instruction: 'Abort' 
       }
     }
   }

@@ -1,49 +1,71 @@
 const child_process = require('child_process');
 const multiselectFixture = require.resolve('./fixtures/multiselect');
 const readline = require('readline');
-const {Readable} = require('stream');
 
 const test = require('tape');
 
 const awaitOutput = (pipe, output) => new Promise((resolve) => {
-  pipe.on('data', data => {
+  const handleData = data => {
     if (data.toString().includes(output)) {
+      pipe.removeListener('data', handleData);
       resolve();
     }
-  })
+  };
+
+  pipe.on('data', handleData);
 });
 
-class EmptyStream extends Readable {
-  _read() {
-    return '';
-  }
+const spawn = (inputs) => {
+  const childProcess = child_process.spawn('node', [multiselectFixture]);
+  const {stdout, stderr, stdin} = childProcess;
+  // stdout.pipe(process.stdout);
+  // process.stdin.pipe(stdin);
+
+  childProcess.on('exit', () => {
+    console.log('exit');
+  })
+  childProcess.on('error', (err) => {
+    console.log('error', err);
+  })
+
+  const readlineInstance = readline.createInterface({output: stdin, input: stdin, terminal: true });
+
+  return new Promise((resolve, reject) => {
+    try {
+      stderr.on('data', data => {
+        childProcess.kill();
+        readlineInstance.close();
+        stdout.unpipe(process.stdout);
+        // I hope the JSON output always comes as a single data event.
+        resolve(JSON.parse(data.toString()));
+      })
+  
+      awaitOutput(stdout, 'Blue').then(() => {
+        inputs.forEach(input => {
+          if (typeof input === 'string') {
+            readlineInstance.write(input);
+          } else if (typeof input === 'object') {
+            readlineInstance.write(undefined, input);
+          } else {
+            throw new Error(
+              'Argument error: every element of spawn()s input array should be a string or an object, ' +
+                `but "${input}" was passed.`);
+          }
+        })
+      }, reject);
+    } catch (e) {
+      reject(e);
+    }
+  }) 
+
 }
 
 test('multiselect', t => {
-  const {stdout, stdin} = child_process.spawn('node', [multiselectFixture]);
-  stdout.pipe(process.stdout);
-  process.stdin.pipe(stdin);
-
-  const readlineInstance = readline.createInterface({output: stdin, input: stdin, terminal: true });
-  readlineInstance.write('a\n');
-  
-  // awaitOutput(stdout, 'Blue').then(() => {
-    
-    
-  //   console.log('writing');
-  //   // process.stdin.write('a\n');
-  //   // readlineInstance.write(undefined, {name: 'a', ctrl: true});
-  //   // readlineInstance.write('a\n');
-  //   readlineInstance.write(undefined, {name: 'enter'});
-  //   readlineInstance.write('\n');
-
-  //   t.end();
-  // })
+  t.plan(1);
+  spawn(['a', {name: 'enter'}]).then(response => {
+    t.deepEqual(response, {
+      color: ['#ff0000', '#00ff00', '#0000ff']
+    }, 'pressing "a" selects all options');
+    t.end();
+  });
 })
-
-
-// const {stdout, stdin} = child_process.spawn('node', [multiselectFixture]);
-// stdout.pipe(process.stdout);
-
-// const readlineInstance = readline.createInterface({output: stdin, input: stdin, terminal: true });
-// readlineInstance.write('af');

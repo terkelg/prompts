@@ -16,7 +16,7 @@ const awaitOutput = (pipe, output) => new Promise((resolve) => {
   });
 });
 
-const spawn = (inputs) => {
+const spawn = async (inputs) => {
   const childProcess = child_process.spawn('node', [multiselectFixture]);
   const {stdout, stderr, stdin} = childProcess;
 
@@ -61,70 +61,67 @@ const spawn = (inputs) => {
     return allDataFromPipe;
   });
   
-  return Promise.all([stderrPromise, stdoutPromise]).then(([childProcessResponse, childProcessStdout]) => ({
+
+  const [childProcessResponse, childProcessStdout] = await Promise.all([stderrPromise, stdoutPromise]);
+  return {
     response: childProcessResponse,
     stdout: childProcessStdout
-  }));
+  };
 }
 
-test('multiselect "a"', t => {
+test('multiselect "a"', async t => {
   t.plan(1);
-  spawn(['a', {name: 'enter'}]).then(({response}) => {
-    t.deepEqual(response, {
-      color: ['#ff0000', '#00ff00', '#0000ff']
-    }, 'pressing "a" selects all options');
-    t.end();
-  });
+  const {response} = await spawn(['a', {name: 'enter'}])
+  t.deepEqual(response, {
+    color: ['#ff0000', '#00ff00', '#0000ff']
+  }, 'pressing "a" selects all options');
+  t.end();
 })
 
-test('multiselect hotkey that selects multiple answers', t => {
+test('multiselect hotkey that selects multiple answers', async t => {
   t.plan(2);
-  spawn(['r', {name: 'enter'}]).then(({response, stdout}) => {
-    t.ok(stdout.includes('r: Choose Red and Green'), `Stdout includes hotkey instructions`);
+  const {response, stdout} = await spawn(['r', {name: 'enter'}])
+  t.ok(stdout.includes('r: Choose Red and Green'), `Stdout includes hotkey instructions`);
 
-    t.deepEqual(response, {
-      color: ['#ff0000', '#00ff00']
-    }, 'pressing hotkey selects the right answers');
-    t.end();
-  });
+  t.deepEqual(response, {
+    color: ['#ff0000', '#00ff00']
+  }, 'pressing hotkey selects the right answers');
+  t.end();
 })
 
-test('multiselect hotkey that aborts', t => {
+test('multiselect hotkey that aborts', async t => {
   t.plan(2);
-  spawn(['d']).then(({response, stdout}) => {
-    t.ok(stdout.includes('d: Abort'), `Stdout includes hotkey instructions`);
+  const {response, stdout} = await spawn(['d'])
+  t.ok(stdout.includes('d: Abort'), `Stdout includes hotkey instructions`);
 
-    t.deepEqual(response, {}, 'pressing hotkey aborts the process');
-    t.end();
-  });
+  t.deepEqual(response, {}, 'pressing hotkey aborts the process');
+  t.end();
 })
 
-test('multiselect hotkey that chooses answers and submits', t => {
+test('multiselect hotkey that chooses answers and submits', async t => {
   t.plan(2);
-  spawn(['e']).then(({response, stdout}) => {
-    t.ok(
-      stdout.includes('e: Select Green and Blue, and move on the to the next question'), 
-      `Stdout includes hotkey instructions`
-    );
+  const {response, stdout} = await spawn(['e'])
+  t.ok(
+    stdout.includes('e: Select Green and Blue, and move on the to the next question'), 
+    `Stdout includes hotkey instructions`
+  );
 
-    t.deepEqual(response, {
-      color: ['#00ff00', '#0000ff']
-    }, 'pressing hotkey chooses answers and submits');
-    t.end();
-  });
+  t.deepEqual(response, {
+    color: ['#00ff00', '#0000ff']
+  }, 'pressing hotkey chooses answers and submits');
+  t.end();
 })
 
-test('multiselect hotkey that chooses answers and submits', t => {
+test('multiselect hotkey that chooses answers and submits', async t => {
   t.plan(2);
-  spawn(['a', 'f']).then(({response, stdout}) => {
-    t.ok(
-      stdout.includes('f: Pay respect. Also, enable Blue and disable Red.'), 
-      `Stdout includes hotkey instructions`
-    );
+  const {response, stdout} = await spawn(['a', 'f'])
+  t.ok(
+    stdout.includes('f: Pay respect. Also, enable Blue and disable Red.'), 
+    `Stdout includes hotkey instructions`
+  );
 
-    t.deepEqual(response, {
-      color: ['#00ff00', '#0000ff']
-    }, 'pressing hotkey chooses answers and submits');
-    t.end();
-  });
+  t.deepEqual(response, {
+    color: ['#00ff00', '#0000ff']
+  }, 'pressing hotkey chooses answers and submits');
+  t.end();
 })

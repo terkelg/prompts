@@ -5,3 +5,4 @@ script:
 node_js:
   - "stable"
   - "8"
+  - "6"

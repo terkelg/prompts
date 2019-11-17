@@ -1,6 +1,6 @@
 {
   "name": "prompts",
-  "version": "2.3.0",
+  "version": "2.2.1",
   "description": "Lightweight, beautiful and user-friendly prompts",
   "license": "MIT",
   "repository": "terkelg/prompts",
@@ -48,6 +48,6 @@
     "tape": "^4.11.0"
   },
   "engines": {
-    "node": ">= 7"
+    "node": ">= 6"
   }
 }

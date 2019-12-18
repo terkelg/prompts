@@ -38,6 +38,9 @@
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
+## ❯ Docs
+
+* [中文文档](https://chinabigpan.github.io/prompts_docs_cn/)
 
 ## ❯ Install
 

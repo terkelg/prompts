@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "kleur": "^3.0.3",
-    "sisteransi": "^1.0.4"
+    "sisteransi": "^1.0.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

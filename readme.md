@@ -316,6 +316,8 @@ Almost all prompt objects have the following properties:
   format: Function | Async Function,
   onRender: Function
   onState: Function
+  stdin: Readable
+  stdout: Writeable
 }
 ```
 
@@ -416,6 +418,13 @@ Type: `Function`
 Callback for when the state of the current prompt changes.
 The function signature is `(state)` where `state` is an object with a snapshot of the current state.
 The state object has two properties `value` and `aborted`. E.g `{ value: 'This is ', aborted: false }`
+
+### stdin and stdout
+
+Type: `Stream`
+
+By default, prompts uses `process.stdin` for receiving input and `process.stdout` for writing output.
+If you need to use different streams, for instance `process.stderr`, you can set these with the `stdin` and `stdout` properties.
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

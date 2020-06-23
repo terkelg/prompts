@@ -444,6 +444,7 @@ If you need to use different streams, for instance `process.stderr`, you can set
 * [autocompleteMultiselect](#multiselectmessage-choices-initial-max-hint-warn)
 * [autocomplete](#autocompletemessage-choices-initial-suggest-limit-style)
 * [date](#datemessage-initial-warn)
+* [message](#messagemessage)
 
 ***
 
@@ -866,11 +867,30 @@ Default locales:
 ```
 >**Formatting**: See full list of formatting options in the [wiki](https://github.com/terkelg/prompts/wiki/Date-Time-Formatting)
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
-
 **↑ back to:** [Prompt types](#-types)
 
 ***
+
+### message(message)
+> Displays an informative message to the user.
+
+#### Example
+
+```js
+{
+  type: 'message',
+  message: `Welcome to this prompt, we are going to ask you a few questions`
+}
+```
+
+#### Options
+| Param | Type | Description |
+| ----- | :--: | ----------- |
+| message | `string` | Message to display |
+
+**↑ back to:** [Prompt types](#-types)
+
+![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 ## ❯ Credit
 Many of the prompts are based on the work of [derhuerst](https://github.com/derhuerst).

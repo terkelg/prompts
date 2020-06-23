@@ -13,8 +13,6 @@ test('basics', t => {
 });
 
 test('prompts', t => {
-  t.plan(25);
-
   const types = [
     'text',
     'password',
@@ -27,8 +25,12 @@ test('prompts', t => {
     'multiselect',
     'autocompleteMultiselect',
     'autocomplete',
-    'date'
+    'date',
+    'message'
   ];
+
+  // There are two tests for each prompt type, plus one final test
+  t.plan(types.length * 2 + 1);
 
   types.forEach(p => {
     t.true(p in prompts, `${prompts[p].name} exists`);

@@ -22,8 +22,8 @@
 </p>
 
 <p align="center">
-  <b>Lightweight, beautiful and user-friendly interactive prompts</b></br>
-  <sub>>_ Easy to use CLI prompts to enquire users for information▌<sub>
+  <b>Lightweight, beautiful and user-friendly interactive prompts</b><br />
+  <sub>>_ Easy to use CLI prompts to enquire users for information▌</sub>
 </p>
 
 <br />

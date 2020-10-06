@@ -802,7 +802,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | clearFirst | `boolean` | The first ESCAPE keypress will clear the input |
 | fallback | `string` | Fallback message when no match is found. Defaults to `initial` value if provided |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
-| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| onState | `function` | On state change callback. Function signature is an `object` with three properties: `value`, `aborted` and `exited` |
 
 Example on what a `suggest` function might look like:
 ```js

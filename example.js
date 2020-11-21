@@ -109,7 +109,7 @@ let interval;
             name: 'searchResult',
             message: 'Search for your favourite color:',
             searching: 'Searching...',
-            search: (input) => !input
+            search: (input, limit) => !input
                 ? Promise.resolve([])
                 : new Promise(r => setTimeout(() => {
                     r([

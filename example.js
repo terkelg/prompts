@@ -4,7 +4,7 @@ const { prompt } = require('./');
 
 let interval;
 
-(async function(){
+(async function () {
     const questions = [
         {
             type: 'text',
@@ -103,10 +103,30 @@ let interval;
                     this.render();
                 }, 1000);
             }
+        },
+        {
+            type: 'search',
+            name: 'searchResult',
+            message: 'Search for your favourite color:',
+            searching: 'Searching...',
+            search: (input) => !input
+                ? Promise.resolve([])
+                : new Promise(r => setTimeout(() => {
+                    r([
+                        'red',
+                        'green',
+                        'blue',
+                        'yellow',
+                        'purple'
+                    ].filter(color => color.includes(input)).map(color => ({
+                        value: color,
+                        title: color
+                    })));
+                }, 150))
         }
     ];
 
-    const answers = await prompt(questions, {onCancel:cleanup, onSubmit:cleanup});
+    const answers = await prompt(questions, { onCancel: cleanup, onSubmit: cleanup });
     console.log(answers);
 })();
 

@@ -814,6 +814,71 @@ const suggestByTitle = (input, choices) =>
 
 ***
 
+
+### asyncAutocomplete
+> Interactive auto complete prompt that fetches choices dynamically based on user input.
+
+The prompt will list options based on user input. Type to filter the list.
+Use <kbd>⇧</kbd>/<kbd>⇩</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Use <kbd>Page Up</kbd>/<kbd>Page Down</kbd> (on Mac: <kbd>fn</kbd> + <kbd>⇧</kbd> / <kbd>⇩</kbd>) to change page. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
+
+#### Example
+
+```js
+{
+  type: 'asyncAutocomplete',
+  name: 'instance',
+  message: 'Select an AWS EC2 Instance',
+  suggest: async (input, cancelationToken) => {
+    const Filters = [];
+    if (input) Filters.push({
+      Name: 'tag:Name',
+      Values: [`${input}*`],
+    });
+    const args = { MaxResults: 100 };
+    if (Filters.length) args.Filters = Filters;
+    const request = ec2.describeInstances(args);
+    cancelationToken.on('canceled', () => request.abort());
+
+    if (cancelationToken.canceled) return [];
+
+    const results = [];
+    const { Reservations } = await request.promise();
+    for (const { Instances } of Reservations || []) {
+      for (const Instance of Instances || []) {
+        const { InstanceId, Tags = [] } = Instance;
+        const name = (Tags.find(t => t.Key === 'Name') || {}).Value;
+        results.push({
+          title: `${InstanceId} ${name || ''}`,
+          value: Instance,
+          initial: !results.length,
+        });
+      }
+    }
+
+    if (!results.length) {
+      results.push({ title: 'No matching EC2 Instances found' });
+    }
+
+    return results;
+  },
+}
+```
+
+#### Options
+| Param | Type | Description |
+| ----- | :--: | ----------- |
+| message | `string` | Prompt message to display |
+| suggest | `function` | Function to fetch choices |
+| limit | `number` | Max number of results to show. Defaults to `10` |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
+| clearFirst | `boolean` | The first ESCAPE keypress will clear the input |
+| onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
+| onState | `function` | On state change callback. Function signature is an `object` with three properties: `value`, `aborted` and `exited` |
+
+**↑ back to:** [Prompt types](#-types)
+
+***
+
 ### date(message, [initial], [warn])
 > Interactive date prompt.
 

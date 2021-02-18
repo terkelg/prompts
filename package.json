@@ -37,7 +37,10 @@
   ],
   "dependencies": {
     "kleur": "^3.0.3",
-    "sisteransi": "^1.0.5"
+    "mute-stream": "0.0.8",
+    "sisteransi": "^1.0.5",
+    "string-width": "^4.2.0",
+    "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

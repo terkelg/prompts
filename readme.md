@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/terkelg/prompts/raw/master/prompts.png" alt="Prompts" width="500" />
+  <img src="./prompts.png" alt="Prompts" width="500" />
 </p>
 
 <h1 align="center">❯ Prompts</h1>
@@ -36,7 +36,7 @@
 * **Unified**: consistent experience across all [prompts](#-types).
 
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+![split](./media/split.png)
 
 
 ## ❯ Install
@@ -47,11 +47,11 @@ $ npm install --save prompts
 
 > This package supports Node 6 and above
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+![split](./media/split.png)
 
 ## ❯ Usage
 
-<img src="https://github.com/terkelg/prompts/raw/master/media/example.gif" alt="example prompt" width="499" height="103" />
+<img src="./media/example.gif" alt="example prompt" width="499" height="103" />
 
 ```js
 const prompts = require('prompts');
@@ -71,7 +71,7 @@ const prompts = require('prompts');
 > See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js) for more options.
 
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+![split](./media/split.png)
 
 
 ## ❯ Examples
@@ -155,7 +155,7 @@ const questions = [
 ```
 
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+![split](./media/split.png)
 
 
 ## ❯ API
@@ -299,7 +299,7 @@ prompts.inject([ '@terkelg', ['#ff0000', '#0000ff'] ]);
 })();
 ```
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+![split](./media/split.png)
 
 
 ## ❯ Prompt Objects
@@ -427,7 +427,7 @@ By default, prompts uses `process.stdin` for receiving input and `process.stdout
 If you need to use different streams, for instance `process.stderr`, you can set these with the `stdin` and `stdout` properties.
 
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+![split](./media/split.png)
 
 
 ## ❯ Types
@@ -453,7 +453,7 @@ If you need to use different streams, for instance `process.stderr`, you can set
 Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/text.gif" alt="text prompt" width="499" height="103" />
+<img src="./media/text.gif" alt="text prompt" width="499" height="103" />
 
 ```js
 {
@@ -484,7 +484,7 @@ Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 This prompt is a similar to a prompt of type `'text'` with `style` set to `'password'`.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/password.gif" alt="password prompt" width="499" height="103" />
+<img src="./media/password.gif" alt="password prompt" width="499" height="103" />
 
 ```js
 {
@@ -515,7 +515,7 @@ This prompt is working like `sudo` where the input is invisible.
 This prompt is a similar to a prompt of type `'text'` with style set to `'invisible'`.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/invisible.gif" alt="invisible prompt" width="499" height="103" />
+<img src="./media/invisible.gif" alt="invisible prompt" width="499" height="103" />
 
 ```js
 {
@@ -545,7 +545,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrease the value. Only numbers are allowed as input. Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/number.gif" alt="number prompt" width="499" height="103" />
+<img src="./media/number.gif" alt="number prompt" width="499" height="103" />
 
 ```js
 {
@@ -585,7 +585,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/confirm.gif" alt="confirm prompt" width="499" height="103" />
+<img src="./media/confirm.gif" alt="confirm prompt" width="499" height="103" />
 
 ```js
 {
@@ -626,7 +626,7 @@ string separated by `separator`.
 }
 ```
 
-<img src="https://github.com/terkelg/prompts/raw/master/media/list.gif" alt="list prompt" width="499" height="103" />
+<img src="./media/list.gif" alt="list prompt" width="499" height="103" />
 
 
 | Param | Type | Description |
@@ -648,7 +648,7 @@ string separated by `separator`.
 Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch between options.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/toggle.gif" alt="toggle prompt" width="499" height="103" />
+<img src="./media/toggle.gif" alt="toggle prompt" width="499" height="103" />
 
 ```js
 {
@@ -682,7 +682,7 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the list.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/select.gif" alt="select prompt" width="499" height="130" />
+<img src="./media/select.gif" alt="select prompt" width="499" height="130" />
 
 ```js
 {
@@ -723,7 +723,7 @@ Use <kbd>space</kbd> to toggle select/unselect and <kbd>up</kbd>/<kbd>down</kbd>
 By default this prompt returns an `array` containing the **values** of the selected items - not their display title.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/multiselect.gif" alt="multiselect prompt" width="499" height="130" />
+<img src="./media/multiselect.gif" alt="multiselect prompt" width="499" height="130" />
 
 ```js
 {
@@ -736,6 +736,17 @@ By default this prompt returns an `array` containing the **values** of the selec
     { title: 'Blue', value: '#0000ff', selected: true }
   ],
   max: 2,
+  hotkeys: {
+    d: {
+      handle() {
+        return {
+          answer: {Red: true, Green: false},
+          command: 'submit'
+        }
+      },
+      instruction: 'Enable red, disable green, and submit the answer.'
+    }
+  }
   hint: '- Space to select. Return to submit'
 }
 ```
@@ -754,9 +765,34 @@ By default this prompt returns an `array` containing the **values** of the selec
 | warn | `string` | Message to display when selecting a disabled option |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+| hotkeys | `{[hotkeyCharacter]: hotkeyDescriptor}` | Define hotkeys that can select multiple answers at once. |
 
 This is one of the few prompts that don't take a initial value.
 If you want to predefine selected values, give the choice object an `selected` property of `true`.
+
+The type of `hotkeyDescriptor` is:
+
+```ts
+{
+  // You can do whatever you want in this function (e.g. trigger a side effect). You can also customize the choices object.
+  handle: () => {
+
+    // Pass "submit" to have this question be submitted when the user presses the hotkey.
+    // Pass "abort" to have the question be aborted (as if the user had hit control+c).
+    command?: 'submit' | 'abort',
+
+    answers: {
+      // The key in this object is the `title` field in the `choices` array passed above.
+      // The value is whether this choice will be selected after the hotkey is pressed.
+      // Pass true to select the choice. False deselects the choice. Undefined leaves the choice as-is.
+      [answerTitle]: boolean
+    } 
+  }, 
+  instruction: string
+}
+```
+
+See the [multiselect test fixture](./test/fixtures/multiselect.js) for more examples of using hotkeys.
 
 **↑ back to:** [Prompt types](#-types)
 
@@ -772,7 +808,7 @@ The default suggests function is sorting based on the `title` property of the ch
 You can overwrite how choices are being filtered by passing your own suggest function.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/autocomplete.gif" alt="auto complete prompt" width="499" height="163" />
+<img src="./media/autocomplete.gif" alt="auto complete prompt" width="499" height="163" />
 
 ```js
 {
@@ -820,7 +856,7 @@ const suggestByTitle = (input, choices) =>
 Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kbd>/<kbd>down</kbd> to change date.
 
 #### Example
-<img src="https://github.com/terkelg/prompts/raw/master/media/date.gif" alt="date prompt" width="499" height="103" />
+<img src="./media/date.gif" alt="date prompt" width="499" height="103" />
 
 ```js
 {
@@ -845,7 +881,7 @@ Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kb
 
 Default locales:
 
-```javascript
+```js
 {
   months: [
     'January', 'February', 'March', 'April',
@@ -867,7 +903,7 @@ Default locales:
 ```
 >**Formatting**: See full list of formatting options in the [wiki](https://github.com/terkelg/prompts/wiki/Date-Time-Formatting)
 
-![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
+![split](./media/split.png)
 
 **↑ back to:** [Prompt types](#-types)
 

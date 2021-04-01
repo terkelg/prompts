@@ -814,6 +814,62 @@ const suggestByTitle = (input, choices) =>
 
 ***
 
+### search(message, choices, [initial], [suggest], [limit], [style])
+> Interactive search prompt.
+
+The prompt will list options based on user input. Type to filter the list.
+Use <kbd>⇧</kbd>/<kbd>⇩</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Use <kbd>Page Up</kbd>/<kbd>Page Down</kbd> (on Mac: <kbd>fn</kbd> + <kbd>⇧</kbd> / <kbd>⇩</kbd>) to change page. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
+
+The default search function is sorting based on the `title` property of the choices.
+
+#### Example
+
+```js
+{
+  type: 'search',
+  name: 'searchResult',
+  message: 'Search for your favourite color:',
+  searching: 'Searching...',
+  search: (input, limit) => Promise.resolve([])
+}
+```
+
+#### Options
+| Param | Type | Description |
+| ----- | :--: | ----------- |
+| message | `string` | Prompt message to display |
+| message | `string` | Message to display when searching |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| search | `function` | Search function. Defaults to sort by `title` property. `search` should always return a promise.  |
+| limit | `number` | Max number of results to show. Defaults to `10` |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
+| clearFirst | `boolean` | The first ESCAPE keypress will clear the input |
+| fallback | `string` | Fallback message when no match is found. Defaults to `initial` value if provided |
+| onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
+| onState | `function` | On state change callback. Function signature is an `object` with three properties: `value`, `aborted` and `exited` |
+
+Example on what a `search` function might look like:
+```js
+const searchColors = (input, limit) => !input
+  ? Promise.resolve([])
+  : new Promise(resolve => setTimeout(() => {
+    resolve([
+      'red',
+      'green',
+      'blue',
+      'yellow',
+      'purple'
+    ].filter(color => color.includes(input)).map(color => ({
+      value: color,
+      title: color
+    })));
+  }, 150))
+```
+
+**↑ back to:** [Prompt types](#-types)
+
+***
+
 ### date(message, [initial], [warn])
 > Interactive date prompt.
 

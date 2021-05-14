@@ -4,4 +4,3 @@ script:
  - npm test
 node_js:
   - "8"
-  - "6"

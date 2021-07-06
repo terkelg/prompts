@@ -3,7 +3,7 @@
   "version": "2.4.1",
   "description": "Lightweight, beautiful and user-friendly prompts",
   "license": "MIT",
-  "repository": "terkelg/prompts",
+  "repository": "https://github.com/terkelg/prompts",
   "main": "index.js",
   "author": {
     "name": "Terkel Gjervig",

@@ -44,7 +44,7 @@
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
-    "tap-spec": "^5.0.0",
+    "tap-spec": "^2.2.2",
     "tape": "^4.13.3"
   },
   "engines": {

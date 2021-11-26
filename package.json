@@ -36,7 +36,7 @@
     "interact"
   ],
   "dependencies": {
-    "kleur": "^3.0.3",
+    "kleur": "^4.0.1",
     "sisteransi": "^1.0.5"
   },
   "devDependencies": {

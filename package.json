@@ -19,7 +19,7 @@
     "start": "node lib/index.js",
     "build": "babel lib -d dist",
     "prepublishOnly": "npm run build",
-    "test": "tape test/*.js | tap-spec"
+    "test": "npm run build && tape test/*.js | tap-spec"
   },
   "keywords": [
     "ui",

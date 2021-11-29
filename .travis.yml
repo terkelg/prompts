@@ -3,5 +3,6 @@ script:
  - npm run build
  - npm test
 node_js:
+  - "stable"
   - "8"
   - "6"

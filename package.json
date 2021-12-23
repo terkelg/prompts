@@ -1,6 +1,6 @@
 {
   "name": "prompts",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Lightweight, beautiful and user-friendly prompts",
   "license": "MIT",
   "repository": "terkelg/prompts",
@@ -36,7 +36,7 @@
     "interact"
   ],
   "dependencies": {
-    "kleur": "^3.0.3",
+    "kleur": "^4.0.1",
     "sisteransi": "^1.0.5"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
-    "tap-spec": "^5.0.0",
+    "tap-spec": "^2.2.2",
     "tape": "^4.13.3"
   },
   "engines": {

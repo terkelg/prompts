@@ -37,7 +37,7 @@
     "sisteransi": "^1.0.5"
   },
   "devDependencies": {
-    "tap-spec": "^2.2.2",
+    "tap-spec": "^5.0.0",
     "tape": "^4.13.3"
   },
   "engines": {

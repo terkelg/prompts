@@ -1,9 +1,0 @@
-language: node_js
-script:
- - npm test
-node_js:
-  - "20"
-  - "19"
-  - "18"
-  - "16"
-  - "14"

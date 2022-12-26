@@ -318,6 +318,7 @@ Almost all prompt objects have the following properties:
   onState: Function
   stdin: Readable
   stdout: Writeable
+  removeInputListenerManually: boolean
 }
 ```
 
@@ -425,6 +426,12 @@ Type: `Stream`
 
 By default, prompts uses `process.stdin` for receiving input and `process.stdout` for writing output.
 If you need to use different streams, for instance `process.stderr`, you can set these with the `stdin` and `stdout` properties.
+
+### removeInputListenerManually
+
+Type: `boolean`
+
+By default, prompts closes `process.stdin` when the prompts end. In nodejs there is a [bug](https://github.com/nodejs/node/issues/38663) what this property fixing. If this property is set to `true` you need to call `removeInputListener()` manually. This means the prompts will not handle the key event when it's end. Only when it truly waiting for the keypress. *The solution*: prompts is not remove the keypress listener, and the new prompts will not lose any keystroke during the main program. **This error only occurs on Windows!**
 
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

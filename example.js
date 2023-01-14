@@ -103,6 +103,17 @@ let interval;
                     this.render();
                 }, 1000);
             }
+        },
+        {
+            type: 'buttons',
+            name: 'action',
+            message: 'Do you want to proceed?',
+            choices: [
+                { title: 'Yes', description: 'This option has a description.', value: 'confirmed' },
+                { title: 'No', value: 'rejected' },
+                { title: 'Disabled', value: '-', disabled: true },
+                { title: 'Abort', value: 'aborted' }
+            ]
         }
     ];
 
@@ -113,4 +124,3 @@ let interval;
 function cleanup() {
     clearInterval(interval);
 }
-

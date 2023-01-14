@@ -13,7 +13,7 @@ test('basics', t => {
 });
 
 test('prompts', t => {
-  t.plan(25);
+  t.plan(27);
 
   const types = [
     'text',
@@ -24,6 +24,7 @@ test('prompts', t => {
     'list',
     'toggle',
     'select',
+    'buttons',
     'multiselect',
     'autocompleteMultiselect',
     'autocomplete',

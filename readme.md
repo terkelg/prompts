@@ -444,6 +444,7 @@ If you need to use different streams, for instance `process.stderr`, you can set
 * [autocompleteMultiselect](#multiselectmessage-choices-initial-max-hint-warn)
 * [autocomplete](#autocompletemessage-choices-initial-suggest-limit-style)
 * [date](#datemessage-initial-warn)
+* [buttons](#buttons)
 
 ***
 
@@ -870,6 +871,43 @@ Default locales:
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)
 
 **↑ back to:** [Prompt types](#-types)
+
+### buttons(message, choices, [initial], [hint], [warn])
+> Horizontal list of buttons.
+
+Use <kbd>left</kbd>/<kbd>right</kbd> to navigate. Use <kbd>tab</kbd> to cycle.
+
+#### Example
+
+```js
+{
+  type: 'buttons',
+  name: 'action',
+  message: 'Do you want to proceed?',
+  choices: [
+    { title: 'Yes', description: 'This option has a description.', value: 'confirmed' },
+    { title: 'No', value: 'rejected' },
+    { title: 'Disabled', value: '-', disabled: true },
+    { title: 'Abort', value: 'aborted' }
+  ],
+  initial: 1
+}
+```
+
+#### Options
+| Param | Type | Description |
+| ----- | :--: | ----------- |
+| message | `string` | Prompt message to display |
+| initial | `number` | Index of default value |
+| format | `function` | Receive user input. The returned value will be added to the response object |
+| hint | `string` | Hint to display to the user |
+| warn | `string` | Message to display when selecting a disabled option |
+| choices | `Array` | Array of strings or choices objects `[{ title, description, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
+| onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
+| onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
+
+**↑ back to:** [Prompt types](#-types)
+
 
 ***
 

@@ -57,6 +57,8 @@ declare namespace prompts {
 		function text(args: PromptObject): void;
 
 		function toggle(args: PromptObject): void;
+
+		function buttons(args: PromptObject): void;
 	}
 
 	// Based upon: https://github.com/terkelg/prompts/blob/d7d2c37a0009e3235b2e88a7d5cdbb114ac271b2/lib/elements/select.js#L29
@@ -112,7 +114,7 @@ declare namespace prompts {
 
 	type Falsy = false | null | undefined;
 
-	type PromptType = "text" | "password" | "invisible" | "number" | "confirm" | "list" | "toggle" | "select" | "multiselect" | "autocomplete" | "date" | "autocompleteMultiselect";
+	type PromptType = "text" | "password" | "invisible" | "number" | "confirm" | "list" | "toggle" | "select" | "multiselect" | "autocomplete" | "date" | "autocompleteMultiselect" | "buttons";
 
 	type ValueOrFunc<T extends string> = T | PrevCaller<T>;
 

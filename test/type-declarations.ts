@@ -70,6 +70,29 @@ type HasProperty<T, K> = K extends keyof T ? true : false;
 			],
 			warn: 'Warning, option is disabled'
 		},
+		{
+			type: 'buttons',
+			name: 'so-many-buttons',
+			message: 'buttons, buttons!!',
+			choices: [
+				{
+					title: 'A',
+					value: 'A',
+				},
+				{
+					title: 'B',
+					value: { foo: 'bar' },
+				},
+				{
+					title: 'C',
+					value: 'C',
+					disabled: false,
+					selected: false,
+					description: 'a description',
+				},
+			],
+			warn: 'Warning, option is disabled'
+		},
 	]);
 })();
 

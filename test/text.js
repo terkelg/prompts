@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('tape');
-const TextPrompt = require('../lib/elements/text');
+import test from 'tape';
+import TextPrompt from '../lib/elements/text.js';
 
 test('move', (t) => {
   t.plan(6);

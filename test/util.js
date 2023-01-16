@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('tape');
-const { entriesToDisplay } = require('../lib/util');
+import test from 'tape';
+import { entriesToDisplay } from '../lib/util/index.js';
 
 test('entriesToDisplay', t => {
   t.plan(11);

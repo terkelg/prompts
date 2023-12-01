@@ -61,7 +61,7 @@ const prompts = require('prompts');
     type: 'number',
     name: 'value',
     message: 'How old are you?',
-    validate: value => value < 18 ? `Nightclub is 18+ only` : true
+    validator: value => value < 18 ? `Nightclub is 18+ only` : true
   });
 
   console.log(response); // => { value: 24 }
@@ -470,7 +470,7 @@ Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 | initial | `string` | Default string value |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| validator | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -500,7 +500,7 @@ This prompt is a similar to a prompt of type `'text'` with `style` set to `'pass
 | message | `string` | Prompt message to display |
 | initial | `string` | Default string value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| validator | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -531,7 +531,7 @@ This prompt is a similar to a prompt of type `'text'` with style set to `'invisi
 | message | `string` | Prompt message to display |
 | initial | `string` | Default string value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| validator | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -565,7 +565,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | message | `string` | Prompt message to display |
 | initial | `number` | Default number value |
 | format | `function` | Receive user input. The returned value will be added to the response object |
-| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| validator | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | max | `number` | Max value. Defaults to `Infinity` |
 | min | `number` | Min value. Defaults to `-infinity` |
 | float | `boolean` | Allow floating point inputs. Defaults to `false` |
@@ -828,7 +828,7 @@ Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kb
   name: 'value',
   message: 'Pick a date',
   initial: new Date(1997, 09, 12),
-  validate: date => date > Date.now() ? 'Not in the future' : true
+  validator: date => date > Date.now() ? 'Not in the future' : true
 }
 ```
 
@@ -839,7 +839,7 @@ Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kb
 | initial | `date` | Default date |
 | locales | `object` | Use to define custom locales. See below for an example. |
 | mask | `string` | The format mask of the date. See below for more information.<br />Default: `YYYY-MM-DD HH:mm:ss` |
-| validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| validator | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 

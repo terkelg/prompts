@@ -1,7 +1,6 @@
-'use strict';
+import test from 'tape';
+import prompt from '../index.js';
 
-const test = require('tape');
-const prompt = require('../');
 const { prompts } = prompt;
 
 test('basics', t => {

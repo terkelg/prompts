@@ -57,18 +57,16 @@ $ npm install --save prompts
 <img src="https://github.com/terkelg/prompts/raw/master/media/example.gif" alt="example prompt" width="499" height="103" />
 
 ```js
-const prompts = require('prompts');
+import prompts from 'prompts';
 
-(async () => {
-  const response = await prompts({
-    type: 'number',
-    name: 'value',
-    message: 'How old are you?',
-    validate: value => value < 18 ? `Nightclub is 18+ only` : true
-  });
+const response = await prompts({
+  type: 'number',
+  name: 'value',
+  message: 'How old are you?',
+  validate: value => value < 18 ? `Nightclub is 18+ only` : true
+});
 
-  console.log(response); // => { value: 24 }
-})();
+console.log(response); // => { value: 24 }
 ```
 
 > See [`example.js`](https://github.com/terkelg/prompts/blob/master/example.js) for more options.
@@ -84,17 +82,15 @@ const prompts = require('prompts');
 Prompt with a single prompt object. Returns an object with the response.
 
 ```js
-const prompts = require('prompts');
+import prompts from 'prompts';
 
-(async () => {
-  const response = await prompts({
-    type: 'text',
-    name: 'meaning',
-    message: 'What is the meaning of life?'
-  });
+const response = await prompts({
+  type: 'text',
+  name: 'meaning',
+  message: 'What is the meaning of life?'
+});
 
-  console.log(response.meaning);
-})();
+console.log(response.meaning);
 ```
 
 ### Prompt Chain
@@ -103,7 +99,7 @@ Prompt with a list of prompt objects. Returns an object with the responses.
 Make sure to give each prompt a unique `name` property to prevent overwriting values.
 
 ```js
-const prompts = require('prompts');
+import prompts from 'prompts';
 
 const questions = [
   {
@@ -124,11 +120,9 @@ const questions = [
   }
 ];
 
-(async () => {
-  const response = await prompts(questions);
+const response = await prompts(questions);
 
-  // => response => { username, age, about }
-})();
+// => response => { username, age, about }
 ```
 
 ### Dynamic Prompts
@@ -137,7 +131,7 @@ Prompt properties can be functions too.
 Prompt Objects with `type` set to `falsy` values are skipped.
 
 ```js
-const prompts = require('prompts');
+import prompts from 'prompts';
 
 const questions = [
   {
@@ -152,9 +146,7 @@ const questions = [
   }
 ];
 
-(async () => {
-  const response = await prompts(questions);
-})();
+const response = await prompts(questions);
 ```
 
 
@@ -192,11 +184,9 @@ Return `true` to quit the prompt chain and return all collected responses so far
 
 **Example:**
 ```js
-(async () => {
-  const questions = [{ ... }];
-  const onSubmit = (prompt, answer) => console.log(`Thanks I got ${answer} from ${prompt.name}`);
-  const response = await prompts(questions, { onSubmit });
-})();
+const questions = [{ ... }];
+const onSubmit = (prompt, answer) => console.log(`Thanks I got ${answer} from ${prompt.name}`);
+const response = await prompts(questions, { onSubmit });
 ```
 
 #### options.onCancel
@@ -212,14 +202,12 @@ On cancel responses collected so far are returned.
 
 **Example:**
 ```js
-(async () => {
-  const questions = [{ ... }];
-  const onCancel = prompt => {
-    console.log('Never stop prompting!');
-    return true;
-  }
-  const response = await prompts(questions, { onCancel });
-})();
+const questions = [{ ... }];
+const onCancel = prompt => {
+  console.log('Never stop prompting!');
+  return true;
+}
+const response = await prompts(questions, { onCancel });
 ```
 
 ### override
@@ -231,30 +219,29 @@ Powerful when combined with arguments of process.
 
 **Example**
 ```js
-const prompts = require('prompts');
-prompts.override(require('yargs').argv);
+import prompts from 'prompts';
+import yargs from 'yargs';
+prompts.override(yargs.argv);
 
-(async () => {
-  const response = await prompts([
-    {
-      type: 'text',
-      name: 'twitter',
-      message: `What's your twitter handle?`
-    },
-    {
-      type: 'multiselect',
-      name: 'color',
-      message: 'Pick colors',
-      choices: [
-        { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00' },
-        { title: 'Blue', value: '#0000ff' }
-      ],
-    }
-  ]);
+const response = await prompts([
+  {
+    type: 'text',
+    name: 'twitter',
+    message: `What's your twitter handle?`
+  },
+  {
+    type: 'multiselect',
+    name: 'color',
+    message: 'Pick colors',
+    choices: [
+      { title: 'Red', value: '#ff0000' },
+      { title: 'Green', value: '#00ff00' },
+      { title: 'Blue', value: '#0000ff' }
+    ],
+  }
+]);
 
-  console.log(response);
-})();
+console.log(response);
 ```
 
 ### inject(values)
@@ -275,31 +262,29 @@ If a value is an instance of `Error` it will simulate the user cancelling/exitin
 
 **Example:**
 ```js
-const prompts = require('prompts');
+import prompts from 'prompts';
 
 prompts.inject([ '@terkelg', ['#ff0000', '#0000ff'] ]);
 
-(async () => {
-  const response = await prompts([
-    {
-      type: 'text',
-      name: 'twitter',
-      message: `What's your twitter handle?`
-    },
-    {
-      type: 'multiselect',
-      name: 'color',
-      message: 'Pick colors',
-      choices: [
-        { title: 'Red', value: '#ff0000' },
-        { title: 'Green', value: '#00ff00' },
-        { title: 'Blue', value: '#0000ff' }
-      ],
-    }
-  ]);
+const response = await prompts([
+  {
+    type: 'text',
+    name: 'twitter',
+    message: `What's your twitter handle?`
+  },
+  {
+    type: 'multiselect',
+    name: 'color',
+    message: 'Pick colors',
+    choices: [
+      { title: 'Red', value: '#ff0000' },
+      { title: 'Green', value: '#00ff00' },
+      { title: 'Blue', value: '#0000ff' }
+    ],
+  }
+]);
 
-  // => { twitter: 'terkelg', color: [ '#ff0000', '#0000ff' ] }
-})();
+// => { twitter: 'terkelg', color: [ '#ff0000', '#0000ff' ] }
 ```
 
 ![split](https://github.com/terkelg/prompts/raw/master/media/split.png)

@@ -1,10 +1,18 @@
 {
   "name": "prompts",
+  "type": "module",
   "version": "2.4.2",
   "description": "Lightweight, beautiful and user-friendly prompts",
   "license": "MIT",
   "repository": "terkelg/prompts",
   "main": "index.js",
+  "exports": {
+    ".": {
+      "require": "./index.cjs",
+      "default": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "author": {
     "name": "Terkel Gjervig",
     "email": "terkel@terkel.com",
@@ -12,10 +20,15 @@
   },
   "files": [
     "lib",
-    "index.js"
+    "dist",
+    "index.js",
+    "index.cjs"
   ],
   "scripts": {
     "start": "node lib/index.js",
+    "prebuild": "rm -rf dist",
+    "build": "tsc -p ./tsconfig.cjs.json && tsconfig-to-dual-package ./tsconfig.cjs.json",
+    "prepublishOnly": "npm run build && npm run test",
     "test": "tape test/*.js | tap-spec",
     "test-types": "tsc --noEmit test/type-declarations.ts"
   },
@@ -40,10 +53,11 @@
   "devDependencies": {
     "@types/node": "^18.11.17",
     "tap-spec": "^5.0.0",
-    "tape": "^4.13.3",
+    "tape": "^5.6.3",
+    "tsconfig-to-dual-package": "^1.1.0",
     "typescript": "^4.9.4"
   },
   "engines": {
-    "node": ">= 14"
+    "node": ">= 14.16"
   }
 }

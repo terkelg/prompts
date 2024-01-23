@@ -14,6 +14,9 @@
   <a href="https://npmjs.org/package/prompts">
     <img src="https://img.shields.io/npm/dm/prompts.svg" alt="downloads" />
   </a>
+  <a href="https://licenses.dev/npm/prompts">
+    <img src="https://licenses.dev/b/npm/prompts" alt="licenses" />
+  </a>
   <!---
    <a href="https://packagephobia.now.sh/result?p=prompts">
     <img src="https://packagephobia.now.sh/badge?p=prompts" alt="install size" />

@@ -5,6 +5,7 @@
   "license": "MIT",
   "repository": "terkelg/prompts",
   "main": "index.js",
+  "types": "index.d.ts",
   "author": {
     "name": "Terkel Gjervig",
     "email": "terkel@terkel.com",
@@ -12,6 +13,7 @@
   },
   "files": [
     "lib",
+    "index.d.ts",
     "index.js"
   ],
   "scripts": {

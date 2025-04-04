@@ -50,6 +50,8 @@ declare namespace prompts {
 
 		function number(args: PromptObject): void;
 
+		function codeNumber(args: PromptObject): void;
+
 		function password(args: PromptObject): any;
 
 		function select(args: PromptObject): void;
@@ -112,7 +114,7 @@ declare namespace prompts {
 
 	type Falsy = false | null | undefined;
 
-	type PromptType = "text" | "password" | "invisible" | "number" | "confirm" | "list" | "toggle" | "select" | "multiselect" | "autocomplete" | "date" | "autocompleteMultiselect";
+	type PromptType = "text" | "password" | "invisible" | "number" | "codeNumber" | "confirm" | "list" | "toggle" | "select" | "multiselect" | "autocomplete" | "date" | "autocompleteMultiselect";
 
 	type ValueOrFunc<T extends string> = T | PrevCaller<T>;
 

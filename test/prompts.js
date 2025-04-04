@@ -20,6 +20,7 @@ test('prompts', t => {
     'password',
     'invisible',
     'number',
+    'codeNumber',
     'confirm',
     'list',
     'toggle',

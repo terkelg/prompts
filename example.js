@@ -86,6 +86,20 @@ let interval;
             }
         },
         {
+            type: 'autocompleteMultiselect',
+            name: 'actors',
+            message: 'Pick your favorite actors',
+            choices: [
+                { title: 'Cage', value: 'cage' },
+                { title: 'Clooney', value: 'clooney' },
+                { title: 'Gyllenhaal', value: 'gyllenhaal' },
+                { title: 'Gibson', value: 'gibson' },
+                { title: 'Grant', value: 'grant' },
+                { title: 'Hanks', value: 'hanks' },
+                { title: 'Downey Jr.', value: 'downey' }
+            ]
+        },
+        {
             type: 'date',
             name: 'birthday',
             message: `What's your birthday?`,

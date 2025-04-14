@@ -446,6 +446,7 @@ If you need to use different streams, for instance `process.stderr`, you can set
 * [multiselect](#multiselectmessage-choices-initial-max-hint-warn)
 * [autocompleteMultiselect](#multiselectmessage-choices-initial-max-hint-warn)
 * [autocomplete](#autocompletemessage-choices-initial-suggest-limit-style)
+* [asyncAutocomplete](#asyncautocomplete)
 * [date](#datemessage-initial-warn)
 
 ***
@@ -812,6 +813,82 @@ Example on what a `suggest` function might look like:
 const suggestByTitle = (input, choices) =>
     Promise.resolve(choices.filter(i => i.title.slice(0, input.length) === input))
 ```
+
+**↑ back to:** [Prompt types](#-types)
+
+***
+
+
+### asyncAutocomplete
+> Interactive auto complete prompt that fetches choices dynamically based on user input.
+
+The prompt will list options based on user input. Type to filter the list.
+Use <kbd>⇧</kbd>/<kbd>⇩</kbd> to navigate. Use <kbd>tab</kbd> to cycle the result. Use <kbd>Page Up</kbd>/<kbd>Page Down</kbd> (on Mac: <kbd>fn</kbd> + <kbd>⇧</kbd> / <kbd>⇩</kbd>) to change page. Hit <kbd>enter</kbd> to select the highlighted item below the prompt.
+
+The `suggest` function will be called with:
+* The user input (a string, may be empty)
+* A `cancelationToken`.  This is an `EventEmitter` that will event `'canceled'` when the user input has changed.
+  It also has a `canceled` property that is initially `false` and becomes `true` when the user input has changed.
+  You must handle the `'canceled'` event if you want choices for the latest user input to load ASAP.
+* A `yield` function you can call with an array of choices objects `[{ title, value }, ...]`.  You can also return the final choices, but calling this function
+  allows you to change the choices even if the user input remains the same.  For example, you might want to save what the user has recently selected to a local
+  file, and show the recent selections immediately while waiting to load other choices from the server.
+
+#### Example
+
+```js
+{
+  type: 'asyncAutocomplete',
+  name: 'instance',
+  message: 'Select an AWS EC2 Instance',
+  suggest: async (input, cancelationToken, yield) => {
+    if (!input) yield(await getRecentSelectedInstances());
+
+    const Filters = [];
+    if (input) Filters.push({
+      Name: 'tag:Name',
+      Values: [`*${input}*`],
+    });
+    const args = { MaxResults: 100 };
+    if (Filters.length) args.Filters = Filters;
+    const request = ec2.describeInstances(args);
+    cancelationToken.on('canceled', () => request.abort());
+
+    if (cancelationToken.canceled) return [];
+
+    const results = [];
+    const { Reservations } = await request.promise();
+    for (const { Instances } of Reservations || []) {
+      for (const Instance of Instances || []) {
+        const { InstanceId, Tags = [] } = Instance;
+        const name = (Tags.find(t => t.Key === 'Name') || {}).Value;
+        results.push({
+          title: `${InstanceId} ${name || ''}`,
+          value: Instance,
+          initial: !results.length,
+        });
+      }
+    }
+
+    if (!results.length) {
+      results.push({ title: `No matching EC2 Instances found${input ? ` with name starting with ${input}` : '' }`);
+    }
+
+    return results;
+  },
+}
+```
+
+#### Options
+| Param | Type | Description |
+| ----- | :--: | ----------- |
+| message | `string` | Prompt message to display |
+| suggest | `function` | Function to fetch choices |
+| limit | `number` | Max number of results to show. Defaults to `10` |
+| style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `'default'` |
+| clearFirst | `boolean` | The first ESCAPE keypress will clear the input |
+| onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
+| onState | `function` | On state change callback. Function signature is an `object` with three properties: `value`, `aborted` and `exited` |
 
 **↑ back to:** [Prompt types](#-types)
 

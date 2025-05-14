@@ -710,6 +710,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |
 | choices | `Array` | Array of strings or choices objects `[{ title, description, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
+| optionsPerPage | `number` | Number of options displayed per page (default: 10) |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 

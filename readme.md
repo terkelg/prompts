@@ -574,6 +574,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | float | `boolean` | Allow floating point inputs. Defaults to `false` |
 | round | `number` | Round `float` values to x decimals. Defaults to `2` |
 | increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
+| resetDelay | `number` | Milliseconds to wait before the input is automatically reset. Defaults to `0` (disabled)
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |

@@ -474,6 +474,7 @@ Hit <kbd>tab</kbd> to autocomplete to `initial` value when provided.
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, value) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -575,6 +576,7 @@ You can type in numbers and use <kbd>up</kbd>/<kbd>down</kbd> to increase/decrea
 | round | `number` | Round `float` values to x decimals. Defaults to `2` |
 | increment | `number` | Increment step when using <kbd>arrow</kbd> keys. Defaults to `1` |
 | style | `string` | Render style (`default`, `password`, `invisible`, `emoji`). Defaults to `default` |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, value) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -606,6 +608,7 @@ Hit <kbd>y</kbd> or <kbd>n</kbd> to confirm/reject.
 | message | `string` | Prompt message to display |
 | initial | `boolean` | Default value. Default is `false` |
 | format | `function` | Receive user input. The returned value will be added to the response object |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, value) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -672,6 +675,7 @@ Use tab or <kbd>arrow keys</kbd>/<kbd>tab</kbd>/<kbd>space</kbd> to switch betwe
 | format | `function` | Receive user input. The returned value will be added to the response object |
 | active | `string` | Text for `active` state. Defaults to `'on'` |
 | inactive | `string` | Text for `inactive` state. Defaults to `'off'` |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, value) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -710,6 +714,7 @@ Use <kbd>up</kbd>/<kbd>down</kbd> to navigate. Use <kbd>tab</kbd> to cycle the l
 | hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |
 | choices | `Array` | Array of strings or choices objects `[{ title, description, value, disabled }, ...]`. The choice's index in the array will be used as its value if it is not specified. |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, selection) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -755,6 +760,7 @@ By default this prompt returns an `array` containing the **values** of the selec
 | max | `number` | Max select |
 | hint | `string` | Hint to display to the user |
 | warn | `string` | Message to display when selecting a disabled option |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, filteredOptions) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 
@@ -804,6 +810,7 @@ You can overwrite how choices are being filtered by passing your own suggest fun
 | initial | `string \| number` | Default initial value |
 | clearFirst | `boolean` | The first ESCAPE keypress will clear the input |
 | fallback | `string` | Fallback message when no match is found. Defaults to `initial` value if provided |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, select) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with three properties: `value`, `aborted` and `exited` |
 
@@ -843,6 +850,7 @@ Use <kbd>left</kbd>/<kbd>right</kbd>/<kbd>tab</kbd> to navigate. Use <kbd>up</kb
 | locales | `object` | Use to define custom locales. See below for an example. |
 | mask | `string` | The format mask of the date. See below for more information.<br />Default: `YYYY-MM-DD HH:mm:ss` |
 | validate | `function` | Receive user input. Should return `true` if the value is valid, and an error message `String` otherwise. If `false` is returned, a default error message is shown |
+| symbol | `function => function` | Symbol rendered before each prompt. Function signature is () => (done, aborted, exited, parts) => string. Default is "?" if waiting, "✓" if done, and "✖" if aborted. |
 | onRender | `function` | On render callback. Keyword `this` refers to the current prompt |
 | onState | `function` | On state change callback. Function signature is an `object` with two properties: `value` and `aborted` |
 

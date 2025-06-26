@@ -13,7 +13,7 @@ test('basics', t => {
 });
 
 test('prompts', t => {
-  t.plan(25);
+  t.plan(27);
 
   const types = [
     'text',
@@ -27,12 +27,13 @@ test('prompts', t => {
     'multiselect',
     'autocompleteMultiselect',
     'autocomplete',
-    'date'
+    'date',
+    'search'
   ];
 
   types.forEach(p => {
-    t.true(p in prompts, `${prompts[p].name} exists`);
-    t.equal(typeof prompts[p], 'function', `${prompts[p].name} is typeof function`);
+    t.true(p in prompts, `${p} exists`);
+    t.equal(typeof prompts[p], 'function', `${p} is typeof function`);
   });
 
   t.equal(Object.keys(prompts).length, types.length, 'all prompts are exported');

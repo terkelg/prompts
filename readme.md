@@ -262,15 +262,18 @@ prompts.override(require('yargs').argv);
 Type: `Function`<br>
 
 Programmatically inject responses. This enables you to prepare the responses ahead of time.
-If any injected value is found the prompt is immediately resolved with the injected value.
+The prompt uses the next injected response instead of reading from the terminal.
+If the question has a validator, rejected responses are discarded and the next injected response is tried for the same question.
+If validation fails and there are no more responses, the prompt is canceled as if an `Error` had been injected.
 This feature is intended for testing only.
 
 #### values
 
 Type: `Array`
 
-Array with values to inject. Resolved values are removed from the internal inject array.
-Each value can be an array of values in order to provide answers for a question asked multiple times.
+Array with values to inject. Values are removed from the internal inject array as they are tried.
+Each array entry is one response, including array responses for prompts such as multiselect.
+An `undefined` entry uses the question's initial value, as does an already empty injection queue.
 If a value is an instance of `Error` it will simulate the user cancelling/exiting the prompt.
 
 **Example:**
